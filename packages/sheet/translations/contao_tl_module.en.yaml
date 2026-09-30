@@ -1,0 +1,15 @@
+tl_module:
+  nw_sheet_legend: Dialog / Sheet
+  nwSheetOptions:
+    bottom: "Bottom"
+    start: "Left (start)"
+    end: "Right (end)"
+    center: "Centered"
+    show-modal: "Open"
+    close: "Close"
+  nwSheetNavigation:
+    - "Navigation module"
+    - "Include an existing core navigation module."
+  nwSheetPresentation:
+    - "Presentation"
+    - "Side drawers follow the writing direction."

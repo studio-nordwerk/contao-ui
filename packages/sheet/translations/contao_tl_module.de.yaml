@@ -1,0 +1,15 @@
+tl_module:
+  nw_sheet_legend: Dialog / Sheet
+  nwSheetOptions:
+    bottom: "Von unten"
+    start: "Links (Anfang)"
+    end: "Rechts (Ende)"
+    center: "Zentriert"
+    show-modal: "Öffnen"
+    close: "Schließen"
+  nwSheetNavigation:
+    - "Navigationsmodul"
+    - "Ein vorhandenes Kern-Navigationsmodul einbinden."
+  nwSheetPresentation:
+    - "Darstellung"
+    - "Die Seitenleisten folgen der Schreibrichtung."

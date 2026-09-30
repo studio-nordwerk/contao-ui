@@ -1,0 +1,10 @@
+{% extends '@Contao/frontend_module/_base.html.twig' %}
+
+{% block content %}
+    <button type="button" commandfor="nw-navigation-{{ data.id }}" command="show-modal" aria-haspopup="dialog">
+        <span aria-hidden="true">☰</span> {{ 'nw.sheet.menu'|trans }}
+    </button>
+    {% embed '@Contao/component/_nw_sheet.html.twig' with {sheet_id: 'nw-navigation-' ~ data.id, sheet_label: 'nw.sheet.navigation'|trans, sheet_options: sheet} %}
+        {% block sheet_body %}{{ frontend_module(navigation_id) }}{% endblock %}
+    {% endembed %}
+{% endblock %}

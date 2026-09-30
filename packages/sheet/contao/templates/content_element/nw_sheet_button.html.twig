@@ -1,0 +1,5 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+
+{% block content %}
+    <button type="button" commandfor="{{ sheet_id }}" command="{{ sheet_command }}">{{ data.nwSheetButtonLabel }}</button>
+{% endblock %}

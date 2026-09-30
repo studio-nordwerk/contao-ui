@@ -1,0 +1,36 @@
+tl_content:
+  nw_sheet_legend: Dialog / Sheet
+  nwSheetOptions:
+    bottom: "Bottom"
+    start: "Left (start)"
+    end: "Right (end)"
+    center: "Centered"
+    show-modal: "Open"
+    close: "Close"
+  nwSheetLabel:
+    - "Dialog title"
+    - "Names the dialog for all users."
+  nwSheetPresentation:
+    - "Presentation"
+    - "Side drawers follow the writing direction."
+  nwSheetSnapPoints:
+    - "Snap points (%)"
+    - "Comma-separated viewport heights from 5 to 95, e.g. 50,75. Bottom sheets only."
+  nwSheetDismissible:
+    - "Allow dismissal"
+    - "Close button, Escape, swipe and backdrop tap. Explicit completion buttons can always close."
+  nwSheetDrag:
+    - "Drag with a mouse"
+    - "Native touch interaction remains available."
+  nwSheetHistory:
+    - "Back button closes"
+    - "Adds a browser history entry per open sheet."
+  nwSheetTarget:
+    - "Target dialog"
+    - "The dialog must be included on the same page."
+  nwSheetAction:
+    - "Action"
+    - "Open or explicitly close."
+  nwSheetButtonLabel:
+    - "Button text"
+    - "Visible descriptive text."

@@ -1,0 +1,14 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+
+{% block content %}
+    {% if as_editor_view %}
+        <strong>{{ data.nwSheetLabel }}</strong>
+        {% for fragment in nested_fragments %}{{ content_element(fragment) }}{% endfor %}
+    {% else %}
+        {% embed '@Contao/component/_nw_sheet.html.twig' with {sheet_id: 'nw-sheet-' ~ data.id, sheet_label: data.nwSheetLabel, sheet_options: sheet} %}
+            {% block sheet_body %}
+                {% for fragment in nested_fragments %}{{ content_element(fragment) }}{% endfor %}
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+{% endblock %}

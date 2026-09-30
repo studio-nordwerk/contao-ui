@@ -24,10 +24,10 @@ Alle Anforderungen aus `brief-2026-09-30-contao-ui-welle1.md` gelten. Qualität 
 
 ## 3 · Sheet
 
-- [ ] Dialog / Sheet mit Kind-Elementen; unten, links, rechts, zentriert, Einrastpunkte, schließbar ja/nein.
-- [ ] Button-Inhaltselement mit `commandfor`, ohne JS funktionsfähig.
-- [ ] Offcanvas-Navigationsmodul mit Kern-Navigation und History-Plugin.
-- [ ] E2E: Öffnen ohne JS, Escape, Hintergrund, Fokus-Rückgabe, mobile Navigation, Axe.
+- [x] Dialog / Sheet mit Kind-Elementen; unten, links, rechts, zentriert, Einrastpunkte, schließbar ja/nein.
+- [x] Button-Inhaltselement mit `commandfor`, ohne JS funktionsfähig.
+- [x] Offcanvas-Navigationsmodul mit Kern-Navigation und History-Plugin.
+- [x] E2E: Öffnen ohne JS, Escape, Hintergrund, Fokus-Rückgabe, mobile Navigation, Axe.
 
 ## 4 · Gallery
 

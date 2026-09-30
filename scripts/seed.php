@@ -53,6 +53,21 @@ try {
         $pageId = $save('tl_page', ['pid' => $rootId, 'sorting' => ('home' === $alias ? 128 : ('carousel' === $alias ? 256 : ('sheet' === $alias ? 384 : 512))), 'tstamp' => $now, 'title' => $title, 'type' => 'regular', 'alias' => $alias, 'published' => 1]);
         $articleId = $save('tl_article', ['pid' => $pageId, 'tstamp' => $now, 'title' => $title, 'alias' => $alias, 'inColumn' => 'main', 'published' => 1]);
         $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 128, 'type' => 'html', 'html' => '<nav aria-label="Demos"><a href="/home.html">Übersicht</a><a href="/carousel.html">Carousel</a><a href="/sheet.html">Sheet</a><a href="/gallery.html">Galerie</a></nav><p class="demo-kicker">Studio Nordwerk · Contao UI</p><h1>'.$title.'</h1><p>Kein Swiper. Kein jQuery. Native Browser-Technik, mit wenigen kB JavaScript verbessert.</p>']);
+        if ('sheet' === $alias) {
+            foreach (['bottom' => 'Sheet von unten', 'start' => 'Seitenleiste links', 'end' => 'Seitenleiste rechts', 'center' => 'Zentrierter Dialog'] as $presentation => $label) {
+                $sheetId = $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 512, 'type' => 'nw_sheet', 'nwSheetLabel' => $label, 'nwSheetPresentation' => $presentation, 'nwSheetSnapPoints' => '50,75', 'nwSheetDrag' => 1]);
+                $save('tl_content', ['pid' => $sheetId, 'ptable' => 'tl_content', 'tstamp' => $now, 'sorting' => 128, 'type' => 'html', 'html' => '<p>Ein natives Dialog-Element mit Contao-Inhalten. Escape schließt, und der Fokus kehrt zum Auslöser zurück.</p><p><a href="/carousel.html">Zum Carousel</a></p>']);
+                $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 256, 'type' => 'nw_sheet_button', 'nwSheetTarget' => $sheetId, 'nwSheetButtonLabel' => $label.' öffnen']);
+            }
+            $lockedId = $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 512, 'type' => 'nw_sheet', 'nwSheetLabel' => 'Bewusst schließen', 'nwSheetPresentation' => 'center', 'nwSheetDismissible' => 0]);
+            $save('tl_content', ['pid' => $lockedId, 'ptable' => 'tl_content', 'tstamp' => $now, 'sorting' => 128, 'type' => 'html', 'html' => '<p>Dieser Dialog bleibt bei Escape und Hintergrund-Tipp offen. Der Abschluss-Button schließt ausdrücklich.</p>']);
+            $save('tl_content', ['pid' => $lockedId, 'ptable' => 'tl_content', 'tstamp' => $now, 'sorting' => 256, 'type' => 'nw_sheet_button', 'nwSheetTarget' => $lockedId, 'nwSheetAction' => 'close', 'nwSheetButtonLabel' => 'Abschließen']);
+            $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 256, 'type' => 'nw_sheet_button', 'nwSheetTarget' => $lockedId, 'nwSheetButtonLabel' => 'Bewusst schließen öffnen']);
+            $navigationId = $save('tl_module', ['pid' => $themeId, 'tstamp' => $now, 'name' => 'Kern-Navigation', 'type' => 'navigation', 'levelOffset' => 0, 'showLevel' => 0]);
+            $offcanvasId = $save('tl_module', ['pid' => $themeId, 'tstamp' => $now, 'name' => 'Offcanvas-Navigation', 'type' => 'nw_offcanvas_navigation', 'nwSheetNavigation' => $navigationId, 'nwSheetPresentation' => 'end']);
+            $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 384, 'type' => 'module', 'module' => $offcanvasId]);
+        }
+
         if ('carousel' === $alias) {
             $coreId = $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 768, 'type' => 'swiper', 'headline' => serialize(['value' => 'Kern-Swiper ohne Swiper', 'unit' => 'h2']), 'sliderContinuous' => 1]);
 

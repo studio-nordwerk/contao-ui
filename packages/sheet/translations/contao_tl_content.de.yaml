@@ -1,0 +1,36 @@
+tl_content:
+  nw_sheet_legend: Dialog / Sheet
+  nwSheetOptions:
+    bottom: "Von unten"
+    start: "Links (Anfang)"
+    end: "Rechts (Ende)"
+    center: "Zentriert"
+    show-modal: "Öffnen"
+    close: "Schließen"
+  nwSheetLabel:
+    - "Dialogtitel"
+    - "Benannt den Dialog für alle Nutzer."
+  nwSheetPresentation:
+    - "Darstellung"
+    - "Die Seitenleisten folgen der Schreibrichtung."
+  nwSheetSnapPoints:
+    - "Einrastpunkte (%)"
+    - "Kommagetrennte Viewport-Höhen von 5 bis 95, z. B. 50,75. Nur für Bottom-Sheets."
+  nwSheetDismissible:
+    - "Schließen erlauben"
+    - "Schließen-Taste, Escape, Wischen und Hintergrund-Tipp. Explizite Abschluss-Buttons dürfen immer schließen."
+  nwSheetDrag:
+    - "Mit der Maus ziehen"
+    - "Die native Touch-Bedienung bleibt verfügbar."
+  nwSheetHistory:
+    - "Zurück-Taste schließt"
+    - "Ergänzt einen Browser-History-Eintrag pro geöffnetem Sheet."
+  nwSheetTarget:
+    - "Ziel-Dialog"
+    - "Der Dialog muss auf derselben Seite eingebunden sein."
+  nwSheetAction:
+    - "Aktion"
+    - "Öffnen oder ausdrücklich schließen."
+  nwSheetButtonLabel:
+    - "Buttontext"
+    - "Sichtbarer, aussagekräftiger Text."

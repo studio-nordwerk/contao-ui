@@ -1,0 +1,12 @@
+CTE:
+  nordwerk_ui: Nordwerk UI
+  nw_sheet:
+    - Dialog / Sheet
+    - Dialog mit beliebigen Kind-Elementen.
+  nw_sheet_button:
+    - Dialog-Button
+    - Öffnet oder schließt einen Dialog ohne JavaScript.
+FMD:
+  nw_offcanvas_navigation:
+    - Offcanvas-Navigation
+    - Native Seitenleiste mit Kern-Navigation.

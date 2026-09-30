@@ -29,3 +29,13 @@ Der optionale Schalter unter System → Einstellungen ersetzt native Kern-Swiper
 Validierung nach frischem Reset: gesamte Check-Kette grün, 4 PHPUnit-Tests / 20 Assertions, 11 Playwright-Tests. Geprüft: drei veröffentlichte Kinder, Pfeile, Punkte, Home/End/ArrowRight, echtes CDP-Touch-Wischen, native Wheel-Bedienung ohne JS, responsive Container-Werte, Reduced-Motion-Autoplay mit Play/Pause, assetfreie Übersichtsseite, Kern-Swiper-Ersatz, Axe und keine Swiper-/jQuery-Requests. Der Ersatz-Controller hat zusätzlich Tests für den ausgeschalteten Schalter und eigene Templates.
 
 Keine offenen Produktfragen. Contao-6-Interaktionsprüfung folgt zur finalen Matrix-Abnahme.
+
+## Phase 3 · Sheet (2026-09-30)
+
+Bottom-Sheet, linke/rechte Seitenleiste und zentrierter Dialog mit nativen Kind-Elementen umgesetzt. Einrastpunkte werden als geordnete, eindeutige Viewport-Prozentwerte von 5–95 gerendert. Eigenes Dialog-Button-Element erzeugt `commandfor` für Öffnen oder bewusstes Schließen. Die Option „Schließen erlauben“ steuert Standard-Schließtaste, Escape, Hintergrund und Wisch-Dismissal; ein expliziter Abschluss-Button darf auch einen nicht wegklickbaren Dialog schließen. Das native `closedby` schützt diesen Dialog zusätzlich ohne JS.
+
+Offcanvas-Modul bettet ein vorhandenes **Kern-Navigationsmodul** ein (keine eigene Menürekursion), mit Burger-Button, Original-History-Plugin und Fokus-Rückgabe. Alle sichtbaren Labels deutsch / englisch übersetzt; Backend verwendet ausschließlich native Contao-Widgets. Original-Sheet-JS/CSS bleiben unverändert, Plugins laden nur nach Bedarf.
+
+Validierung: vollständiges `make check` grün, 5 PHPUnit-Tests / 23 Assertions und 19 Playwright-Tests. Alle vier Darstellungen öffnen, schließen mit Escape, geben Fokus zurück und bestehen Axe. Hintergrund-Tipp, Invoker Commands ohne JS, nicht wegklickbarer Dialog mit Abschluss-Button sowie mobile Kern-Navigation mit Zurück-Taste und Linknavigation sind geprüft. Demo wurde für die Phase frisch aufgebaut.
+
+Browser ohne Invoker Commands benötigen die progressive JS-Ergänzung; dokumentierte Browsergrenzen der OSS-Komponente gelten. Keine offenen Produktfragen.

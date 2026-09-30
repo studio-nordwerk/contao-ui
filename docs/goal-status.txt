@@ -1,1 +1,1 @@
-NEXT: Dialog / Sheet mit Kind-Elementen, nativen Buttons und Offcanvas-Navigation implementieren.
+NEXT: Galerie über Contao FigureBuilder mit drei Layouts und nativer Sheet-Lightbox implementieren.
