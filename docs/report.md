@@ -15,3 +15,7 @@ Validierung: Datenbank mit `make reset` frisch erstellt, anschließend `make che
 Seed verwendet Contao-Modelle und dieselbe Datenbankverbindung wie der Kern, damit Transaktionen und virtuelle Felder unterstützt werden. Symfony-Debug-Toolbar in der Demo deaktiviert (deren Status-Badge hatte einen schweren Axe-Kontrastbefund). Kein Mailversand erforderlich, deshalb kein Mailpit; 8121 bleibt frei.
 
 Noch offen: reale 6.0-Installation und sämtliche Funktionsphasen. Keine Produktentscheidung von Arne erforderlich.
+
+### Ergänzung · Contao 6
+
+Auch das unveränderte Gerüst unter Contao 6.0.2 / PHP 8.4.26 installiert, migriert und mit der gesamten Check-Kette inklusive vier Axe-/Playwright-Seitenprüfungen grün geprüft. Die erzeugte Composer-Anforderung verwendet die normalisierte Form `~6.0.0`. Twig-CS-Cache aus Git entfernt und ignoriert. Danach Entwicklung wieder auf 5.7 zurückgesetzt.

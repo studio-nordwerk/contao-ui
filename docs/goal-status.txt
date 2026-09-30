@@ -1,1 +1,1 @@
-NEXT: Contao-6.0-Gerüst prüfen, dann Carousel mit nativen Kind-Elementen implementieren.
+NEXT: Carousel mit nativen Kind-Elementen, Optionsfeldern und Interaktions-E2E implementieren.
