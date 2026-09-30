@@ -1,0 +1,8 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Nordwerk\CarouselBundle\:
+    resource: ../src/
+    exclude: ../src/{ContaoManager,DependencyInjection,NordwerkCarouselBundle.php}

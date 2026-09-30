@@ -1,0 +1,59 @@
+{
+    "name": "nordwerk/contao-ui-demo",
+    "description": "Local Contao UI bundle development installation",
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": "^8.3",
+        "contao/managed-edition": "~5.7.0",
+        "nordwerk/contao-carousel-bundle": "0.1.x-dev",
+        "nordwerk/contao-gallery-bundle": "0.1.x-dev",
+        "nordwerk/contao-sheet-bundle": "0.1.x-dev"
+    },
+    "require-dev": {
+        "contao/easy-coding-standard": "^7.1",
+        "ergebnis/composer-normalize": "^2.0",
+        "phpstan/phpstan": "^2.0",
+        "phpunit/phpunit": "^11.0",
+        "vincentlanglet/twig-cs-fixer": "^3.0"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../packages/*",
+            "options": {
+                "reference": "none",
+                "symlink": true,
+                "versions": {
+                    "nordwerk/contao-carousel-bundle": "0.1.x-dev",
+                    "nordwerk/contao-gallery-bundle": "0.1.x-dev",
+                    "nordwerk/contao-sheet-bundle": "0.1.x-dev"
+                }
+            }
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload-dev": {
+        "psr-4": {
+            "Nordwerk\\ContaoUi\\Tests\\": "../tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "contao-components/installer": true,
+            "contao/manager-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@php vendor/bin/contao-setup"
+        ],
+        "post-update-cmd": [
+            "@php vendor/bin/contao-setup"
+        ]
+    }
+}

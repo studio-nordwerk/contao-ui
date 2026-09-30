@@ -1,0 +1,8 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Nordwerk\SheetBundle\:
+    resource: ../src/
+    exclude: ../src/{ContaoManager,DependencyInjection,NordwerkSheetBundle.php}

@@ -1,0 +1,21 @@
+{
+  "name": "nordwerk/contao-gallery-bundle",
+  "description": "Native, dependency-free gallery content elements for Contao",
+  "license": "MIT",
+  "type": "contao-bundle",
+  "require": {
+    "php": "^8.3",
+    "contao/core-bundle": "^5.7 || ^6.0",
+    "contao/manager-plugin": "^2.0",
+    "nordwerk/contao-carousel-bundle": "^0.1",
+    "nordwerk/contao-sheet-bundle": "^0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Nordwerk\\GalleryBundle\\": "src/"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "Nordwerk\\GalleryBundle\\ContaoManager\\Plugin"
+  }
+}

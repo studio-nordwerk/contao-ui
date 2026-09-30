@@ -1,0 +1,4 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    mailer:
+        dsn: '%env(MAILER_DSN)%'

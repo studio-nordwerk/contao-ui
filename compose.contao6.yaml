@@ -1,0 +1,9 @@
+services:
+  php:
+    build:
+      args:
+        PHP_VERSION: "8.4"
+    working_dir: /workspace/app6
+  caddy:
+    environment:
+      APP_DIR: /workspace/app6

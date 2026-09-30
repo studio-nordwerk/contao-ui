@@ -1,0 +1,8 @@
+parameters:
+    level: 8
+    paths:
+        - packages
+        - tests
+    excludePaths:
+        analyse:
+            - packages/*/contao

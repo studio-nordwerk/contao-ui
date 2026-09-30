@@ -1,0 +1,35 @@
+{
+  "carousel": {
+    "name": "@nordwerk/scroll-carousel",
+    "version": "0.1.5",
+    "tarball": "https://registry.npmjs.org/@nordwerk/scroll-carousel/-/scroll-carousel-0.1.5.tgz",
+    "integrity": "sha512-1Ymp5SX8MvpQkgAusjezU1Ps8o7/qVQwNlB34vPdD/euX4vqVf2giJdqXpJPx4vlb67hh93+bop9P+65rPyWcQ==",
+    "files": {
+      "LICENSE": "c6020fc46954b46d5659ed8f9c6760752ce5a37d4eb17e031950cbcbeb906304",
+      "autoplay.js": "ab79ac02aac52ab0b49a0d191d5c0fc4913ddce0e9490ac1cdcbeb9cdbd5499a",
+      "carousel.css": "f6a9ce58e13523085cb62baf00f067260a19c0dc81c4168fc5b4966ed0308d1b",
+      "drag.js": "1e4de2f70be7c82d02f7e0a351d5260dd8a9376dcfe5994949e7405a4b382098",
+      "index.js": "3d5c723fc74fff75956ea684a99fb0b48a9ef9c531b628f4253c51c4b1e8d9f6",
+      "markup.js": "9a66155de284d2114fd115922ead319a6b3d1f164d78390e28453368cb885c73",
+      "shared/adapter-DhmQTrqX.js": "1275613aa21985aa59e7a567d70c0c97fd3ebeccd4925b2ab5e7d2d5f5dfce30",
+      "shared/math-DhvRXjtu.js": "1e6d9497693011d9fecb0f0d86d5280b1144f8ff6d3d643aed7f27a299968728"
+    }
+  },
+  "sheet": {
+    "name": "@nordwerk/scroll-sheet",
+    "version": "0.5.0",
+    "tarball": "https://registry.npmjs.org/@nordwerk/scroll-sheet/-/scroll-sheet-0.5.0.tgz",
+    "integrity": "sha512-pFj5OerG64Zi1mOuVK5LOwWEpNU9q2LmO/NjL05I11dRhfL0k8RUNP43ulRDIcg87GuAfPQfVjMfpbXikHZSaA==",
+    "files": {
+      "LICENSE": "c6020fc46954b46d5659ed8f9c6760752ce5a37d4eb17e031950cbcbeb906304",
+      "drag.js": "4c57f4e92f14ae03a8742dfd53f1792b6fa8b918ee02cf8bce953c126477757f",
+      "history.js": "342dcf0662bd3432dcd523cfc932584ca0aeab325ea65ce872a80b967992f0b0",
+      "index.js": "a1df39c23879deb1ada1181c6ad550f092f025ce573db40e41316d36fc271aef",
+      "keyboard.js": "6bc58c76ec8053a0a79df2322c3a04235efbedb1afac12e9c94a1a981d866259",
+      "options.css": "519d5eff412d12842d36b814b655e6285c081d0c92793df93aebc75394f67e95",
+      "shared/adapter-CykkxqrU.js": "6e5ccd119cfa347be8e025a709f911db880dac75e973222125bf2c75a5e6d439",
+      "sheet.css": "17336ef93fe946ae69a6fa78d35878187ad75ab3b657a7fc36c34f9118421d50",
+      "swipe-area.js": "2c02958e75a1350e5e9cf50834629588adf26dbc4d04e6ec74c869772c4e8620"
+    }
+  }
+}

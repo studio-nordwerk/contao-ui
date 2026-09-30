@@ -1,0 +1,48 @@
+name: nordwerk-contao-ui
+services:
+  php:
+    build:
+      context: ./docker/php
+      args:
+        PHP_VERSION: "8.3"
+    working_dir: /workspace/app
+    volumes:
+      - .:/workspace
+      - composer-cache:/tmp/composer-cache
+    environment:
+      APP_ENV: dev
+      APP_SECRET: local-contao-ui-demo-only
+      DATABASE_URL: mysql://contao:contao@db:3306/contao?serverVersion=mariadb-11.8.9&charset=utf8mb4
+      MAILER_DSN: "null://null"
+      COMPOSER_CACHE_DIR: /tmp/composer-cache
+      COMPOSER_ALLOW_SUPERUSER: 1
+    depends_on:
+      db:
+        condition: service_healthy
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "8101:80"
+    environment:
+      APP_DIR: /workspace/app
+    volumes:
+      - .:/workspace:ro
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on:
+      - php
+  db:
+    image: mariadb:11.8.9
+    environment:
+      MARIADB_DATABASE: contao
+      MARIADB_USER: contao
+      MARIADB_PASSWORD: contao
+      MARIADB_ROOT_PASSWORD: local-only
+    tmpfs:
+      - /var/lib/mysql:size=512m
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+volumes:
+  composer-cache:
