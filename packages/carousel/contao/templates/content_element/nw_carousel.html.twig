@@ -1,0 +1,15 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+
+{% block content %}
+    {% embed '@Contao/component/_nw_carousel.html.twig' with {
+        carousel_id: 'nw-carousel-' ~ data.id,
+        carousel_label: data.nwCarouselLabel|default(headline.text|default('Carousel')),
+        carousel_options: carousel,
+    } %}
+        {% block carousel_slides %}
+            {% for fragment in nested_fragments %}
+                <div class="nw-carousel-slide">{{ content_element(fragment) }}</div>
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

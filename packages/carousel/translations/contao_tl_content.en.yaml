@@ -1,0 +1,26 @@
+tl_content:
+  nw_carousel_legend: Carousel
+  nwCarouselLabel:
+    - "Accessible name"
+    - "A short name describes this sequence."
+  nwCarouselSmall:
+    - "Slides · small"
+    - "Count below 600 px container width; fractions allowed."
+  nwCarouselMedium:
+    - "Slides · medium"
+    - "Count from 600 px container width."
+  nwCarouselLarge:
+    - "Slides · large"
+    - "Count from 960 px container width."
+  nwCarouselArrows:
+    - "Show arrows"
+    - "Previous and next."
+  nwCarouselDots:
+    - "Show dots"
+    - "One dot per page."
+  nwCarouselDrag:
+    - "Drag with a mouse"
+    - "Native touch swiping also works without this enhancement."
+  nwCarouselAutoplay:
+    - "Autoplay (ms)"
+    - "0 disables it. Minimum 1000 ms, maximum 60000 ms. A pause button is added."

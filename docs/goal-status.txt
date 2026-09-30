@@ -1,1 +1,1 @@
-NEXT: Carousel mit nativen Kind-Elementen, Optionsfeldern und Interaktions-E2E implementieren.
+NEXT: Dialog / Sheet mit Kind-Elementen, nativen Buttons und Offcanvas-Navigation implementieren.

@@ -19,3 +19,13 @@ Noch offen: reale 6.0-Installation und sämtliche Funktionsphasen. Keine Produkt
 ### Ergänzung · Contao 6
 
 Auch das unveränderte Gerüst unter Contao 6.0.2 / PHP 8.4.26 installiert, migriert und mit der gesamten Check-Kette inklusive vier Axe-/Playwright-Seitenprüfungen grün geprüft. Die erzeugte Composer-Anforderung verwendet die normalisierte Form `~6.0.0`. Twig-CS-Cache aus Git entfernt und ignoriert. Danach Entwicklung wieder auf 5.7 zurückgesetzt.
+
+## Phase 2 · Carousel (2026-09-30)
+
+Native Kind-Elemente, drei Container-Breakpoints (unter 600 / ab 600 / ab 960 px), dezimale Slides pro Ansicht, Pfeile, Punkte, Autoplay mit Pause und Mausziehen umgesetzt. Layout und Verhalten stammen aus den unveränderten npm-Dateien; eigenes JS bindet ausschließlich die Original-API und Plugins an. Twig fügt Styles und Module nur auf verwendenden Seiten hinzu und dedupliziert sie. Ausgeblendete Kinder werden vom Kern herausgefiltert.
+
+Der optionale Schalter unter System → Einstellungen ersetzt native Kern-Swiper mit unverändertem Standard-Twig-Template. Standardmäßig aus; in der Demo bewusst an. Eigene Templates und alte Slider-Start-/Stop-Paare bleiben beim Kern. Rücksprung statt geklonter Endlosschleife; Scroll-Geschwindigkeit bestimmt der Browser. Layoutskripte, die ein Betreiber manuell eingebunden hat, werden nicht entfernt.
+
+Validierung nach frischem Reset: gesamte Check-Kette grün, 4 PHPUnit-Tests / 20 Assertions, 11 Playwright-Tests. Geprüft: drei veröffentlichte Kinder, Pfeile, Punkte, Home/End/ArrowRight, echtes CDP-Touch-Wischen, native Wheel-Bedienung ohne JS, responsive Container-Werte, Reduced-Motion-Autoplay mit Play/Pause, assetfreie Übersichtsseite, Kern-Swiper-Ersatz, Axe und keine Swiper-/jQuery-Requests. Der Ersatz-Controller hat zusätzlich Tests für den ausgeschalteten Schalter und eigene Templates.
+
+Keine offenen Produktfragen. Contao-6-Interaktionsprüfung folgt zur finalen Matrix-Abnahme.

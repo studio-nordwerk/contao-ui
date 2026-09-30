@@ -1,0 +1,7 @@
+nw.carousel.prev: "Previous"
+nw.carousel.next: "Next"
+nw.carousel.page: "Page {n} of {count}"
+nw.carousel.status: "Items {first} to {last} of {count}"
+nw.carousel.status_single: "Item {first} of {count}"
+nw.carousel.play: "Start automatic scrolling"
+nw.carousel.pause: "Pause automatic scrolling"

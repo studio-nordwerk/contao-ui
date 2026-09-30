@@ -1,0 +1,26 @@
+tl_content:
+  nw_carousel_legend: Carousel
+  nwCarouselLabel:
+    - "Name für Hilfstechnologien"
+    - "Ein kurzer Name beschreibt diese Bild- oder Inhaltsfolge."
+  nwCarouselSmall:
+    - "Slides · schmal"
+    - "Anzahl bis 599 px Containerbreite, auch Dezimalzahlen."
+  nwCarouselMedium:
+    - "Slides · mittel"
+    - "Anzahl ab 600 px Containerbreite."
+  nwCarouselLarge:
+    - "Slides · breit"
+    - "Anzahl ab 960 px Containerbreite."
+  nwCarouselArrows:
+    - "Pfeile anzeigen"
+    - "Zurück und Weiter."
+  nwCarouselDots:
+    - "Punkte anzeigen"
+    - "Ein Punkt pro Seite."
+  nwCarouselDrag:
+    - "Mit der Maus ziehen"
+    - "Touch-Wischen funktioniert auch ohne diese Verbesserung."
+  nwCarouselAutoplay:
+    - "Automatisch blättern (ms)"
+    - "0 deaktiviert. Minimum 1000 ms, Maximum 60000 ms. Eine Pausentaste wird ergänzt."

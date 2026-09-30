@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Contao\Config;
 use Contao\ManagerBundle\HttpKernel\ContaoKernel;
 use Contao\Model;
 
@@ -29,6 +30,7 @@ if (0 < (int) $db->fetchOne('SELECT COUNT(*) FROM tl_page')) {
     exit(0);
 }
 
+Config::persist('nwCarouselReplaceSwiper', true);
 $now = time();
 $db->beginTransaction();
 
@@ -51,6 +53,22 @@ try {
         $pageId = $save('tl_page', ['pid' => $rootId, 'sorting' => ('home' === $alias ? 128 : ('carousel' === $alias ? 256 : ('sheet' === $alias ? 384 : 512))), 'tstamp' => $now, 'title' => $title, 'type' => 'regular', 'alias' => $alias, 'published' => 1]);
         $articleId = $save('tl_article', ['pid' => $pageId, 'tstamp' => $now, 'title' => $title, 'alias' => $alias, 'inColumn' => 'main', 'published' => 1]);
         $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 128, 'type' => 'html', 'html' => '<nav aria-label="Demos"><a href="/home.html">Übersicht</a><a href="/carousel.html">Carousel</a><a href="/sheet.html">Sheet</a><a href="/gallery.html">Galerie</a></nav><p class="demo-kicker">Studio Nordwerk · Contao UI</p><h1>'.$title.'</h1><p>Kein Swiper. Kein jQuery. Native Browser-Technik, mit wenigen kB JavaScript verbessert.</p>']);
+        if ('carousel' === $alias) {
+            $coreId = $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 768, 'type' => 'swiper', 'headline' => serialize(['value' => 'Kern-Swiper ohne Swiper', 'unit' => 'h2']), 'sliderContinuous' => 1]);
+
+            for ($slide = 1; $slide <= 3; ++$slide) {
+                $save('tl_content', ['pid' => $coreId, 'ptable' => 'tl_content', 'tstamp' => $now, 'sorting' => $slide * 128, 'type' => 'html', 'html' => '<section class="demo-card"><h3>Kern-Inhalt '.$slide.'</h3><p>Dieses Element bleibt im Backend ein Kern-Swiper.</p></section>']);
+            }
+
+            foreach ([['Inhalte zum Blättern', 0, 1], ['Responsive Ansichten', 0, 3], ['Automatisch mit Pause', 1500, 1]] as $index => [$label, $delay, $views]) {
+                $parentId = $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 256 + $index * 128, 'type' => 'nw_carousel', 'headline' => serialize(['value' => $label, 'unit' => 'h2']), 'nwCarouselLabel' => $label, 'nwCarouselSmall' => 1, 'nwCarouselMedium' => 1 === $views ? 1 : 2, 'nwCarouselLarge' => $views, 'nwCarouselArrows' => 1, 'nwCarouselDots' => 1, 'nwCarouselDrag' => 1, 'nwCarouselAutoplay' => $delay]);
+
+                for ($slide = 1; $slide <= (1 === $views ? 3 : 5); ++$slide) {
+                    $save('tl_content', ['pid' => $parentId, 'ptable' => 'tl_content', 'tstamp' => $now, 'sorting' => $slide * 128, 'type' => 'html', 'html' => '<section class="demo-card"><h3>Inhalt '.$slide.'</h3><p>Ein natives Contao-Kind-Element. Texte, Bilder und Links bleiben bedienbar.</p><a href="/sheet.html">Zum Sheet</a></section>']);
+                }
+                $save('tl_content', ['pid' => $parentId, 'ptable' => 'tl_content', 'tstamp' => $now, 'sorting' => 1024, 'type' => 'html', 'invisible' => 1, 'html' => '<p>Hidden child must not render.</p>']);
+            }
+        }
     }
 
     $db->commit();

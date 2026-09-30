@@ -1,0 +1,5 @@
+tl_settings:
+  nw_carousel_legend: Nordwerk Carousel
+  nwCarouselReplaceSwiper:
+    - Kern-Swiper mit Nordwerk Carousel rendern
+    - Nur native Swiper-Elemente mit dem unveränderten Standard-Twig-Template. Eigene Templates und alte Start-/Stop-Slider bleiben erhalten. Endlosschleifen werden durch Rücksprung ersetzt, die Geschwindigkeit bestimmt der Browser.

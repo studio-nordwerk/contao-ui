@@ -1,0 +1,7 @@
+nw.carousel.prev: "Zurück"
+nw.carousel.next: "Weiter"
+nw.carousel.page: "Seite {n} von {count}"
+nw.carousel.status: "Elemente {first} bis {last} von {count}"
+nw.carousel.status_single: "Element {first} von {count}"
+nw.carousel.play: "Automatisches Blättern starten"
+nw.carousel.pause: "Automatisches Blättern pausieren"

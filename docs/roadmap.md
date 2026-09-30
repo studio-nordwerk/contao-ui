@@ -17,10 +17,10 @@ Alle Anforderungen aus `brief-2026-09-30-contao-ui-welle1.md` gelten. Qualität 
 
 ## 2 · Carousel
 
-- [ ] Verschachtelte beliebige Inhalte; Slides pro Ansicht je Breakpoint, Pfeile, Punkte, Autoplay mit Pause / Reduced Motion, Mausziehen.
-- [ ] Assets nur auf verwendenden Seiten.
-- [ ] Optionaler globaler Schalter für Kern-Swiper oder begründete Zurückstellung.
-- [ ] E2E: drei Inhalte, Pfeile, Tastatur, Wischen, ohne JS scrollbar, Axe, keine Swiper-/jQuery-Requests.
+- [x] Verschachtelte beliebige Inhalte; Slides pro Ansicht je Breakpoint, Pfeile, Punkte, Autoplay mit Pause / Reduced Motion, Mausziehen.
+- [x] Assets nur auf verwendenden Seiten.
+- [x] Optionaler globaler Schalter für Kern-Swiper oder begründete Zurückstellung.
+- [x] E2E: drei Inhalte, Pfeile, Tastatur, Wischen, ohne JS scrollbar, Axe, keine Swiper-/jQuery-Requests.
 
 ## 3 · Sheet
 

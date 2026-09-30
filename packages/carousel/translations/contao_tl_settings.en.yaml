@@ -1,0 +1,5 @@
+tl_settings:
+  nw_carousel_legend: Nordwerk Carousel
+  nwCarouselReplaceSwiper:
+    - Render core Swiper with Nordwerk Carousel
+    - Only native Swiper elements using the unmodified default Twig template. Custom templates and legacy wrappers are preserved. Infinite loops become rewind; scrolling speed is controlled by the browser.
