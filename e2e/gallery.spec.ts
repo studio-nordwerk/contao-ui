@@ -62,6 +62,31 @@ test("a later image opens directly and reopening resets the chosen position", as
   }
 });
 
+test("lightbox navigation leaves modified keyboard shortcuts to the browser", async ({ page }) => {
+  await page.goto("/gallery.html");
+  const gallery = page.locator("[data-nw-gallery]").first();
+  await expect(gallery).toHaveAttribute("data-nw-gallery-ready", "");
+  const trigger = gallery.locator("[data-nw-gallery-open]").nth(4);
+  const alt = await trigger.locator("img").getAttribute("alt");
+  await trigger.click();
+  const dialog = gallery.locator("dialog");
+  await dialog.getByRole("button", { name: "Schließen", exact: true }).focus();
+  const prevented = await dialog.evaluate((element) => {
+    const event = new KeyboardEvent("keydown", {
+      key: "Home",
+      ctrlKey: true,
+      bubbles: true,
+      cancelable: true,
+    });
+    element.dispatchEvent(event);
+    return event.defaultPrevented;
+  });
+  expect(prevented).toBe(false);
+  await expect(dialog.getByRole("img")).toHaveAttribute("alt", alt!);
+  await page.keyboard.press("Home");
+  await expect(dialog.getByRole("img")).not.toHaveAttribute("alt", alt!);
+});
+
 test("the mobile lightbox swipes through images and fits the viewport", async ({ browser }) => {
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },

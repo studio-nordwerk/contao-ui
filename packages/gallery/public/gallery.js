@@ -23,6 +23,8 @@ for (const gallery of document.querySelectorAll("[data-nw-gallery]")) {
   };
   root.addEventListener("sc:change", revealCurrent);
   dialog.addEventListener("keydown", (event) => {
+    if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey)
+      return;
     if (event.target.closest("input, textarea, select, [contenteditable]")) return;
     if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
     // The original carousel already handles events from its track.
