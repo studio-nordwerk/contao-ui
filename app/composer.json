@@ -48,6 +48,9 @@
         },
         "sort-packages": true
     },
+    "extra": {
+        "contao-component-dir": "assets"
+    },
     "scripts": {
         "post-install-cmd": [
             "@php vendor/bin/contao-setup"

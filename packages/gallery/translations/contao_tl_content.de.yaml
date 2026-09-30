@@ -1,7 +1,8 @@
-nw_gallery_legend: Galerie
-nwGalleryLabel: [Galeriebezeichnung, Zugänglicher Name der Galerie und Lightbox.]
-nwGalleryLayout: [Layout, Raster oder wechselnde Formate oder horizontale Leiste.]
-nwGalleryOptions:
-  grid: Raster
-  mosaic: Wechselnde Formate
-  rail: Leiste
+tl_content:
+  nw_gallery_legend: Galerie
+  nwGalleryLabel: [Galeriebezeichnung, Zugänglicher Name der Galerie und Lightbox.]
+  nwGalleryLayout: [Layout, Raster oder wechselnde Formate oder horizontale Leiste.]
+  nwGalleryOptions:
+    grid: Raster
+    mosaic: Wechselnde Formate
+    rail: Leiste

@@ -22,3 +22,5 @@
 /.cache-*.log
 /.cache-*
 .twig-cs-fixer.cache
+
+__pycache__/

@@ -1,2 +1,5 @@
+imports:
+    - { resource: config.yaml }
+
 web_profiler:
     toolbar: false

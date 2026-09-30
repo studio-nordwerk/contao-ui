@@ -1,4 +1,5 @@
 framework:
     secret: '%env(APP_SECRET)%'
+    lock: 'flock://%kernel.project_dir%/var/locks'
     mailer:
         dsn: '%env(MAILER_DSN)%'

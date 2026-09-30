@@ -1,0 +1,63 @@
+name: Check and Manager ZIPs
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        contao: ["5.7", "6.0"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install Vite Plus
+        run: npm install --global vite-plus@1.0.0
+      - name: Start Contao 5.7 / PHP 8.3
+        if: matrix.contao == '5.7'
+        run: make up
+      - name: Start Contao 6.0 / PHP 8.4
+        if: matrix.contao == '6.0'
+        run: make up6
+      - name: Install browser system libraries
+        run: vp exec playwright install --with-deps chromium
+      - name: Check Contao 5.7
+        if: matrix.contao == '5.7'
+        run: make check
+      - name: Check Contao 6.0
+        if: matrix.contao == '6.0'
+        run: make check DC="docker compose -f compose.yaml -f compose.contao6.yaml" APP_DIR=app6
+      - name: Upload failed browser checks
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-contao-${{ matrix.contao }}
+          path: test-results/
+          if-no-files-found: ignore
+      - name: Stop demo
+        if: always()
+        run: docker compose down
+  artifacts:
+    needs: check
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and inspect Manager ZIPs
+        run: |
+          python3 scripts/check-artifacts.py
+          version=0.1.0-dev
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then version="${GITHUB_REF_NAME#v}"; fi
+          python3 scripts/build-artifacts.py "$version" dist
+          sha256sum dist/*.zip > dist/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: contao-manager-bundles
+          path: dist/
+          if-no-files-found: error

@@ -1,5 +1,6 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
 
 {% block content %}
+    {% if as_editor_view %}{{ include('@Contao/component/_nw_sheet_icon.html.twig') }}{% endif %}
     <button type="button" commandfor="{{ sheet_id }}" command="{{ sheet_command }}">{{ data.nwSheetButtonLabel }}</button>
 {% endblock %}

@@ -39,15 +39,15 @@ Alle Anforderungen aus `brief-2026-09-30-contao-ui-welle1.md` gelten. Qualität 
 
 ## 5 · Release-fähig
 
-- [ ] Paket-READMEs mit Installation, Positionierung, gzip-Tabelle, E2E-Screenshots, OSS-Quellen.
-- [ ] GitHub Actions Matrix 5.7 / 6.0, Manager-ZIPs je Paket.
-- [ ] Split-Vorbereitung dokumentiert; `.gitattributes` export-ignore.
-- [ ] Backend Hell/Dunkel nativ; Smoke-Test Contao 6.0; finale Reset- und Check-Abnahme.
+- [x] Paket-READMEs mit Installation, Positionierung, gzip-Tabelle, E2E-Screenshots, OSS-Quellen.
+- [x] GitHub Actions Matrix 5.7 / 6.0, Manager-ZIPs je Paket.
+- [x] Split-Vorbereitung dokumentiert; `.gitattributes` export-ignore.
+- [x] Backend Hell/Dunkel nativ; Smoke-Test Contao 6.0; finale Reset- und Check-Abnahme.
 
 ## Laufabschluss
 
-- [ ] `docs/report.md` je Phase mit Abweichungen und offenen Fragen für Arne.
-- [ ] `docs/goal-status.txt`: `DONE` nur wenn alle Phasen grün, sonst `NEXT: <nächster Schritt>`; mitcommitten.
+- [x] `docs/report.md` je Phase mit Abweichungen und offenen Fragen für Arne.
+- [x] `docs/goal-status.txt`: `DONE` nur wenn alle Phasen grün, sonst `NEXT: <nächster Schritt>`; mitcommitten.
 
 ### Entscheidung: globaler Kern-Lightbox-Ersatz
 

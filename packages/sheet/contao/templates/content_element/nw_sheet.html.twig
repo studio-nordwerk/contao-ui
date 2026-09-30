@@ -2,6 +2,7 @@
 
 {% block content %}
     {% if as_editor_view %}
+        {{ include('@Contao/component/_nw_sheet_icon.html.twig') }}
         <strong>{{ data.nwSheetLabel }}</strong>
         {% for fragment in nested_fragments %}{{ content_element(fragment) }}{% endfor %}
     {% else %}

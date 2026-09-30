@@ -1,6 +1,9 @@
 {% add 'nw_sheet_css' to stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/nordwerksheet/vendor/sheet.css') }}">
 {% endadd %}
+{% add 'nw_sheet_theme_css' to stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/nordwerksheet/theme.css') }}">
+{% endadd %}
 {% if not dismissible %}
     {% add 'nw_sheet_options_css' to stylesheets %}
         <link rel="stylesheet" href="{{ asset('bundles/nordwerksheet/vendor/options.css') }}">

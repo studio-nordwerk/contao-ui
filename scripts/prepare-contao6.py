@@ -10,4 +10,8 @@ shutil.copytree(root / 'app/config', app / 'config', dirs_exist_ok=True)
 config = json.loads((root / 'app/composer.json').read_text())
 config['require']['php'] = '^8.4'
 config['require']['contao/managed-edition'] = '~6.0.0'
-(app / 'composer.json').write_text(json.dumps(config, indent=2) + '\n')
+manifest = app / 'composer.json'
+if manifest.exists() and json.loads(manifest.read_text()) != config:
+    # Only this ignored, generated demo lock is discarded when its requirements change.
+    (app / 'composer.lock').unlink(missing_ok=True)
+manifest.write_text(json.dumps(config, indent=2) + '\n')
