@@ -12,7 +12,25 @@ export async function enhanceCarousels(scope = document) {
         (element) => element.closest("[data-nw-carousel]") === root,
       ) ?? document.createElement("span");
     const plugins = [];
-    if (options.drag) plugins.push((await import("./vendor/drag.js")).drag());
+    if (options.drag) {
+      const { drag } = await import("./vendor/drag.js");
+      plugins.push((context) =>
+        drag()({
+          ...context,
+          listen: (target, type, handler, settings) =>
+            context.listen(
+              target,
+              type,
+              (event) => {
+                if (type === "pointerdown" && event.target.closest("[data-nw-carousel]") !== root)
+                  return;
+                handler(event);
+              },
+              settings,
+            ),
+        }),
+      );
+    }
     if (options.autoplay) {
       const { autoplay } = await import("./vendor/autoplay.js");
       plugins.push(

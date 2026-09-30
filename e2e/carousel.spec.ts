@@ -155,3 +155,31 @@ test("nested carousels keep their own arrows, dots and status", async ({ page })
   await outer.locator(":scope > [data-sc-next]").click();
   await expect.poll(() => outerTrack.evaluate((node) => node.scrollLeft)).toBeGreaterThan(100);
 });
+
+test("dragging a nested carousel leaves its parent in place", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/carousel.html");
+  const outer = page.locator(selector).first();
+  await expect(outer).toHaveAttribute("data-sc-ready", "");
+  await outer.evaluate(async (root) => {
+    const base = "/bundles/nordwerkcarousel/";
+    const { getCarousel } = await import(base + "vendor/index.js");
+    getCarousel(root).destroy();
+    const inner = root.cloneNode(true) as HTMLElement;
+    inner.id = "nested-carousel";
+    root.querySelector(".nw-carousel-slide")!.replaceChildren(inner);
+    const { enhanceCarousels } = await import(base + "carousel.js");
+    await enhanceCarousels();
+  });
+  const innerTrack = page.locator("#nested-carousel > [data-sc-track]");
+  await innerTrack.scrollIntoViewIfNeeded();
+  const box = (await innerTrack.boundingBox())!;
+  await page.mouse.move(box.x + box.width * 0.8, box.y + box.height * 0.5);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width * 0.2, box.y + box.height * 0.5, { steps: 12 });
+  await page.mouse.up();
+  await expect.poll(() => innerTrack.evaluate((node) => node.scrollLeft)).toBeGreaterThan(100);
+  await expect
+    .poll(() => outer.locator(":scope > [data-sc-track]").evaluate((node) => node.scrollLeft))
+    .toBeLessThan(2);
+});
