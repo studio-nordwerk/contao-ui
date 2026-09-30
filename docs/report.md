@@ -61,3 +61,7 @@ Finale Validierung: vollständiges `make check6` unter Contao 6.0.2/PHP 8.4.26 g
 Die Backend-Abnahme deckte zwei Demo-Stack-Probleme auf: `contao-component-dir` fehlte für die Installation der Kern-Backend-Assets, und die Dev-Konfiguration importierte die gemeinsame Konfiguration nicht. Beide sind korrigiert. Symfony-Locks liegen jetzt in `var/locks`, Runtime-Verzeichnisse sind für PHP-FPM beschreibbar. `make check6` stellt auch nach einem Fehler die 5.7-Installation wieder her.
 
 Abweichungen bleiben die in Phase 4 begründete Raster-Variante und der zurückgestellte optionale Kern-Lightbox-Ersatz. Die Pakete sind lokal release-fähig, noch nicht auf Packagist veröffentlicht. Manager-ZIPs wurden strukturell geprüft; die Demo enthält keine Manager-Upload-UI. Keine offenen Produktfragen für Arne. Alle Welle-1-Phasen abgeschlossen; Entwicklungsdemo läuft wieder auf 5.7 unter Port 8101.
+
+## Audit und Nachbesserung · 30.09.2026
+
+Das anschließende [Audit](audit.md) dokumentiert fünf mit Regressionstests behobene Fehler: Rechte der Zielauswahl, öffentliche Bindung der lokalen Demo, Steuerelemente und Mausziehen verschachtelter Carousels sowie kombinierte Tastenkürzel in der Galerie. Zusätzliche Tests prüfen Cache-Trennung, HTML-artige Beschriftungen, manipulierte Backend-Anfragen, Template Studio und alle Dialogdarstellungen ohne JavaScript. Die abschließende Matrix, vollständige Prüfausgaben und neu aufgeworfene Fragen an Arne stehen im Audit; die frühere Aussage zu offenen Produktfragen gilt damit nur für die Welle-1-Abnahme.

@@ -35,7 +35,7 @@ Einzeln gzip-komprimierte Dateien (Bytes; Original-ESM, ohne nachträgliche Mini
 
 | Teil                            | gzip, Bytes |
 | ------------------------------- | ----------: |
-| JavaScript mit Contao-Anbindung |        7558 |
+| JavaScript mit Contao-Anbindung |        7899 |
 | CSS                             |        2611 |
 | Mausziehen zusätzlich           |        1132 |
 | Autoplay zusätzlich             |         994 |

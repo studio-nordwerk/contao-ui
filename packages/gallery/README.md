@@ -33,9 +33,9 @@ Einzeln gzip-komprimierte Dateien (Bytes; Original-ESM, ohne nachträgliche Mini
 
 | Teil                                                        | gzip, Bytes |
 | ----------------------------------------------------------- | ----------: |
-| Eigene JavaScript-Anbindung                                 |         947 |
+| Eigene JavaScript-Anbindung                                 |         971 |
 | Eigenes Layout-CSS                                          |         670 |
-| Leiste/Lightbox: JS inklusive beider Bundles und Mausziehen |       14165 |
+| Leiste/Lightbox: JS inklusive beider Bundles und Mausziehen |       14530 |
 | Leiste/Lightbox: CSS inklusive beider Bundles               |        7998 |
 
 ## Screenshots aus Playwright

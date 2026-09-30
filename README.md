@@ -10,7 +10,7 @@ Demo-Backend: `admin@example.test` / `contao-ui-local-demo` (nur lokal).
 
 `make check6` baut dieselbe Demo mit Contao 6.0 / PHP 8.4 in `app6`, führt Checks aus und stellt danach wieder 5.7 bereit. Kein Mailpit nötig; der Stack versendet keine E-Mails. Port 8121 bleibt reserviert.
 
-[Twig-Integration](docs/integration.md) · [Release und Split](docs/releasing.md) · [Roadmap](docs/roadmap.md) · [Markt und Kern](docs/landscape.md) · [Berichte](docs/report.md)
+[Twig-Integration](docs/integration.md) · [Release und Split](docs/releasing.md) · [Roadmap](docs/roadmap.md) · [Markt und Kern](docs/landscape.md) · [Berichte](docs/report.md) · [Audit](docs/audit.md)
 
 `make artifacts` erzeugt drei versionierte Contao-Manager-ZIPs aus `HEAD`. Die CI-Datei bereitet Checks für 5.7/6.0 und ZIPs als Workflow-Artefakte vor.
 
