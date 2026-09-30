@@ -89,18 +89,20 @@ test("a mounted editor cannot select or submit a foreign sheet", async ({ page }
   await page.reload();
   await expect(target).toHaveValue(String(fixture.sheetId));
 
-  await page.locator('[name="nwSheetButtonLabel"]').fill("CSRF must not save");
-  await page
-    .locator('#tl_content input[name="REQUEST_TOKEN"]')
-    .evaluate((input: HTMLInputElement) => {
-      input.value = "invalid-audit-token";
-    });
-  const rejected = page.waitForResponse((response) => response.request().method() === "POST");
-  await page.getByRole("button", { name: "Speichern", exact: true }).click();
-  expect((await rejected).status()).toBe(400);
-  await page.goto(`/contao?do=article&table=tl_content&id=${fixture.articleId}`);
-  await page
-    .getByRole("link", { name: `Inhaltselement ID ${fixture.buttonId} bearbeiten`, exact: true })
-    .click();
+  const form = await page
+    .locator("#tl_content")
+    .evaluate((element: HTMLFormElement) =>
+      Object.fromEntries([...new FormData(element)].map(([name, value]) => [name, String(value)])),
+    );
+  const rejected = await page.request.post(page.url(), {
+    form: {
+      ...form,
+      REQUEST_TOKEN: "invalid-audit-token",
+      nwSheetButtonLabel: "CSRF must not save",
+      save: "Speichern",
+    },
+  });
+  expect(rejected.status()).toBe(400);
+  await page.reload();
   await expect(page.locator('[name="nwSheetButtonLabel"]')).toHaveValue("Audit open");
 });
