@@ -2,6 +2,7 @@
 set -eu
 APP_DIR=${APP_DIR:-app}
 DC=${DC:-docker compose}
+python3 scripts/check-demo.py
 python3 scripts/vendor-assets.py --check
 python3 scripts/check-artifacts.py --ref "${ARTIFACT_REF:-HEAD}"
 $DC exec -T php vendor/bin/ecs check --config=/workspace/ecs.php --no-progress-bar
