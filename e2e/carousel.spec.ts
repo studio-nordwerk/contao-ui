@@ -127,3 +127,31 @@ test("the opt-in core Swiper keeps its children and renders without Swiper", asy
     .toBeGreaterThan(100);
   expect(dependencies).toEqual([]);
 });
+
+test("nested carousels keep their own arrows, dots and status", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/carousel.html");
+  const outer = page.locator(selector).first();
+  await expect(outer).toHaveAttribute("data-sc-ready", "");
+  await outer.evaluate(async (root) => {
+    const base = "/bundles/nordwerkcarousel/";
+    const { getCarousel } = await import(base + "vendor/index.js");
+    getCarousel(root).destroy();
+    const inner = root.cloneNode(true) as HTMLElement;
+    inner.id = "nested-carousel";
+    root.querySelector(".nw-carousel-slide")!.replaceChildren(inner);
+    const { enhanceCarousels } = await import(base + "carousel.js");
+    await enhanceCarousels();
+  });
+  const inner = page.locator("#nested-carousel");
+  const outerTrack = outer.locator(":scope > [data-sc-track]");
+  const innerTrack = inner.locator(":scope > [data-sc-track]");
+  await expect(outer.locator(":scope > [data-sc-dots] > button")).toHaveCount(3);
+  await inner.locator(":scope > [data-sc-next]").click();
+  await expect.poll(() => innerTrack.evaluate((node) => node.scrollLeft)).toBeGreaterThan(100);
+  await expect.poll(() => outerTrack.evaluate((node) => node.scrollLeft)).toBeLessThan(2);
+  await expect(inner.locator(":scope > [data-sc-status]")).toContainText("2");
+  await expect(outer.locator(":scope > [data-sc-status]")).not.toContainText("2");
+  await outer.locator(":scope > [data-sc-next]").click();
+  await expect.poll(() => outerTrack.evaluate((node) => node.scrollLeft)).toBeGreaterThan(100);
+});
