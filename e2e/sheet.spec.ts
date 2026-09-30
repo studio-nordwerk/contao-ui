@@ -43,16 +43,36 @@ test("native invoker commands open and close without JavaScript", async ({ brows
   const context = await browser.newContext({ javaScriptEnabled: false, reducedMotion: "reduce" });
   const page = await context.newPage();
   await page.goto("/sheet.html");
-  const trigger = page.getByRole("button", { name: "Zentrierter Dialog öffnen", exact: true });
-  await trigger.click();
-  const dialog = page.getByRole("dialog", { name: "Zentrierter Dialog", exact: true });
-  await expect(dialog).toBeVisible();
-  await dialog.getByRole("button", { name: "Schließen", exact: true }).click();
-  await expect(dialog).toBeHidden();
-  await expect(trigger).toBeFocused();
-  await trigger.click();
+  for (const title of [
+    "Sheet von unten",
+    "Seitenleiste links",
+    "Seitenleiste rechts",
+    "Zentrierter Dialog",
+  ]) {
+    const trigger = page.getByRole("button", { name: `${title} öffnen`, exact: true });
+    await trigger.click();
+    const dialog = page.getByRole("dialog", { name: title, exact: true });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByRole("link", { name: "Zum Carousel" })).toBeVisible();
+    await dialog.getByRole("button", { name: "Schließen", exact: true }).click();
+    await expect(dialog).toBeHidden();
+    await expect(trigger).toBeFocused();
+    await trigger.click();
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+  }
+  await page.getByRole("button", { name: "Bewusst schließen öffnen" }).click();
+  const locked = page.getByRole("dialog", { name: "Bewusst schließen", exact: true });
   await page.keyboard.press("Escape");
-  await expect(dialog).toBeHidden();
+  await expect(locked).toBeVisible();
+  await locked.getByRole("button", { name: "Abschließen" }).click();
+  await expect(locked).toBeHidden();
+  await page.getByRole("button", { name: "Menü", exact: true }).click();
+  await page
+    .getByRole("dialog", { name: "Navigation", exact: true })
+    .getByRole("link", { name: "Carousel", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/carousel\.html$/);
   await context.close();
 });
 

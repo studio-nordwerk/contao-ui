@@ -2,6 +2,27 @@ import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { mkdir } from "node:fs/promises";
 
+test("Template Studio offers overrides for all bundle entry templates", async ({ page }) => {
+  await page.goto("/contao/login");
+  await page.getByLabel(/^(Username|Benutzername)$/).fill("admin@example.test");
+  await page.getByLabel(/^(Password|Passwort)$/).fill("contao-ui-local-demo");
+  await page.getByRole("button", { name: /^(Login|Anmelden)$/ }).click();
+  await page.goto("/contao/template-studio");
+  for (const template of [
+    "content_element/nw_carousel",
+    "content_element/nw_sheet",
+    "content_element/nw_sheet_button",
+    "content_element/nw_gallery",
+    "frontend_module/nw_offcanvas_navigation",
+    "component/_nw_carousel",
+    "component/_nw_sheet",
+    "component/_nw_gallery",
+  ]) {
+    await page.getByText(template, { exact: true }).first().click();
+    await expect(page.getByText("Ihr Template erstellen", { exact: true })).toBeVisible();
+  }
+});
+
 for (const colorScheme of ["light", "dark"] as const) {
   for (const bundle of ["carousel", "sheet", "gallery"] as const) {
     test(`${bundle}: ${colorScheme} release screenshot and accessibility`, async ({ page }) => {
