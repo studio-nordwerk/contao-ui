@@ -33,11 +33,4 @@
     {% if carousel_options.dots ?? true %}<div class="sc-dots" data-sc-dots></div>{% endif %}
     <p class="sc-status" data-sc-status aria-live="polite"></p>
 </div>
-{% if not as_editor_view|default(false) %}
-    {% add 'nw_carousel_css' to stylesheets %}
-        <link rel="stylesheet" href="{{ asset('bundles/nordwerkcarousel/vendor/carousel.css') }}">
-    {% endadd %}
-    {% add 'nw_carousel_js' to body %}
-        <script type="module" src="{{ asset('bundles/nordwerkcarousel/carousel.js') }}"></script>
-    {% endadd %}
-{% endif %}
+{% if not as_editor_view|default(false) %}{% do nw_carousel_assets() %}{% endif %}

@@ -6,3 +6,8 @@ services:
   Nordwerk\GalleryBundle\:
     resource: ../src/
     exclude: ../src/{ContaoManager,DependencyInjection,NordwerkGalleryBundle.php}
+
+  Nordwerk\GalleryBundle\Image\GalleryFigures:
+    arguments:
+      $filesStorage: "@contao.filesystem.virtual.files"
+      $validExtensions: "%contao.image.valid_extensions%"

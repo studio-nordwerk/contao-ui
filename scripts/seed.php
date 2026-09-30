@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Contao\Config;
+use Contao\Dbafs;
 use Contao\ManagerBundle\HttpKernel\ContaoKernel;
 use Contao\Model;
 
@@ -46,6 +47,34 @@ try {
         'modules' => serialize([['mod' => 0, 'col' => 'main', 'enable' => 1]]),
         'head' => '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light dark}body{font:1.1rem/1.6 system-ui;margin:0;background:Canvas;color:CanvasText}#wrapper{max-width:68rem;margin:auto;padding:clamp(1rem,4vw,3rem)}h1{font-size:clamp(2rem,5vw,4rem);line-height:1.1}h2{line-height:1.2}a{color:LinkText}nav{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:3rem}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid Highlight;outline-offset:4px}.demo-card{padding:3rem;background:color-mix(in srgb,CanvasText 6%,Canvas);border:1px solid color-mix(in srgb,CanvasText 20%,Canvas);border-radius:1rem}.demo-kicker{letter-spacing:.12em;text-transform:uppercase;font-size:.8rem}</style>',
     ]);
+    $imageSizeId = $save('tl_image_size', ['pid' => $themeId, 'tstamp' => $now, 'name' => 'Galeriebilder', 'width' => 640, 'height' => 0, 'resizeMode' => 'proportional', 'densities' => '1,2', 'sizes' => '(max-width: 599px) 50vw, 33vw', 'lazyLoading' => 1]);
+    $save('tl_image_size_item', ['pid' => $imageSizeId, 'sorting' => 128, 'tstamp' => $now, 'media' => '(max-width: 599px)', 'width' => 320, 'height' => 0, 'resizeMode' => 'proportional', 'densities' => '1,2', 'sizes' => '50vw']);
+    $imageUuids = [];
+    $folder = 'files/contao-ui-gallery';
+    if (!is_dir($folder)) {
+        mkdir($folder, 0775, true);
+    }
+    file_put_contents($folder.'/.public', '');
+
+    foreach ([[28, 78, 105], [45, 93, 70], [168, 92, 45], [105, 69, 124], [52, 111, 130], [136, 58, 79], [63, 81, 129], [132, 111, 54]] as $index => $rgb) {
+        $height = 0 === $index % 3 ? 1200 : (1 === $index % 3 ? 1600 : 1000);
+        $image = imagecreatetruecolor(1600, $height);
+        imagefill($image, 0, 0, imagecolorallocate($image, ...$rgb));
+        $paper = imagecolorallocate($image, 232, 234, 224);
+        $ink = imagecolorallocate($image, 22, 39, 49);
+        imagefilledrectangle($image, 120, 120, 900, $height - 120, $paper);
+        imagefilledellipse($image, 1000, (int) ($height / 2), 780, 780, $ink);
+        imagefilledrectangle($image, 940, 120, 1460, 210, $paper);
+        $path = $folder.'/study-'.($index + 1).'.jpg';
+        imagejpeg($image, $path, 85);
+        imagedestroy($image);
+        $file = Dbafs::addResource($path);
+        $file->meta = serialize(['de' => ['alt' => 'Geometrische Studie '.($index + 1), 'title' => 'Studie '.($index + 1), 'caption' => 'Studie '.($index + 1).' – Form und Farbe'], 'en' => ['alt' => 'Geometric study '.($index + 1), 'title' => 'Study '.($index + 1), 'caption' => 'Study '.($index + 1).' – form and colour']]);
+        $file->save();
+        $imageUuids[] = $file->uuid;
+    }
+    file_put_contents($folder.'/notes.txt', 'Non-image files must not appear in a gallery.');
+    $folderModel = Dbafs::addResource($folder);
     $pageId = $save('tl_page', ['tstamp' => $now, 'title' => 'Contao UI', 'type' => 'root', 'alias' => 'root', 'language' => 'de', 'fallback' => 1, 'useSSL' => 0, 'urlSuffix' => '.html', 'published' => 1, 'includeLayout' => 1, 'layout' => $layoutId]);
     $rootId = $pageId;
 
@@ -53,6 +82,12 @@ try {
         $pageId = $save('tl_page', ['pid' => $rootId, 'sorting' => ('home' === $alias ? 128 : ('carousel' === $alias ? 256 : ('sheet' === $alias ? 384 : 512))), 'tstamp' => $now, 'title' => $title, 'type' => 'regular', 'alias' => $alias, 'published' => 1]);
         $articleId = $save('tl_article', ['pid' => $pageId, 'tstamp' => $now, 'title' => $title, 'alias' => $alias, 'inColumn' => 'main', 'published' => 1]);
         $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 128, 'type' => 'html', 'html' => '<nav aria-label="Demos"><a href="/home.html">Übersicht</a><a href="/carousel.html">Carousel</a><a href="/sheet.html">Sheet</a><a href="/gallery.html">Galerie</a></nav><p class="demo-kicker">Studio Nordwerk · Contao UI</p><h1>'.$title.'</h1><p>Kein Swiper. Kein jQuery. Native Browser-Technik, mit wenigen kB JavaScript verbessert.</p>']);
+        if ('gallery' === $alias) {
+            foreach (['grid' => 'Raster', 'mosaic' => 'Wechselnde Formate', 'rail' => 'Bilderleiste'] as $index => $label) {
+                $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 256, 'type' => 'nw_gallery', 'headline' => serialize(['value' => $label, 'unit' => 'h2']), 'nwGalleryLabel' => $label, 'nwGalleryLayout' => $index, 'multiSRC' => serialize('grid' === $index ? [...array_reverse($imageUuids), $imageUuids[0]] : [$folderModel->uuid, $imageUuids[0]]), 'sortBy' => 'rail' === $index ? 'name_desc' : ('mosaic' === $index ? 'name_asc' : 'custom'), 'perRow' => 3, 'size' => serialize([0, 0, $imageSizeId]), 'fullsize' => 1]);
+            }
+            $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 512, 'type' => 'nw_gallery', 'headline' => serialize(['value' => 'Bilder ohne Lightbox', 'unit' => 'h2']), 'nwGalleryLabel' => 'Bilder ohne Lightbox', 'nwGalleryLayout' => 'grid', 'multiSRC' => serialize([$imageUuids[0]]), 'size' => serialize([0, 0, $imageSizeId]), 'fullsize' => 0]);
+        }
         if ('sheet' === $alias) {
             foreach (['bottom' => 'Sheet von unten', 'start' => 'Seitenleiste links', 'end' => 'Seitenleiste rechts', 'center' => 'Zentrierter Dialog'] as $presentation => $label) {
                 $sheetId = $save('tl_content', ['pid' => $articleId, 'ptable' => 'tl_article', 'tstamp' => $now, 'sorting' => 512, 'type' => 'nw_sheet', 'nwSheetLabel' => $label, 'nwSheetPresentation' => $presentation, 'nwSheetSnapPoints' => '50,75', 'nwSheetDrag' => 1]);

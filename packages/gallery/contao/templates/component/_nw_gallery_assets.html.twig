@@ -1,0 +1,8 @@
+{% add 'nw_gallery_css' to stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/nordwerkgallery/gallery.css') }}">
+    {% endadd %}
+    {% if interactive %}
+        {% add 'nw_gallery_js' to body %}
+            <script type="module" src="{{ asset('bundles/nordwerkgallery/gallery.js') }}"></script>
+        {% endadd %}
+    {% endif %}

@@ -1,0 +1,11 @@
+{% extends '@Contao/component/_figure.html.twig' %}
+
+{% block media_link %}
+    {% if gallery_lightbox and figure.hasLightbox and figure.lightbox.hasImage %}
+        <a href="{{ figure.lightbox.linkHref }}" data-nw-gallery-open="{{ image_index }}" aria-haspopup="dialog" aria-controls="{{ gallery_id }}-lightbox" aria-label="{{ 'nw.gallery.open'|trans({'%number%': image_index + 1}) }}">
+            {{ block('media') }}
+        </a>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% add 'nw_sheet_css' to stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/nordwerksheet/vendor/sheet.css') }}">
+{% endadd %}
+{% if not dismissible %}
+    {% add 'nw_sheet_options_css' to stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/nordwerksheet/vendor/options.css') }}">
+    {% endadd %}
+{% endif %}
+{% add 'nw_sheet_js' to body %}
+    <script type="module" src="{{ asset('bundles/nordwerksheet/sheet.js') }}"></script>
+{% endadd %}

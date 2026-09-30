@@ -1,0 +1,7 @@
+nw_gallery_legend: Gallery
+nwGalleryLabel: [Gallery label, Accessible name of the gallery and lightbox.]
+nwGalleryLayout: [Layout, Grid or varied formats or horizontal rail.]
+nwGalleryOptions:
+  grid: Grid
+  mosaic: Varied formats
+  rail: Rail

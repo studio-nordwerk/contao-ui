@@ -1,4 +1,4 @@
-<dialog class="ss" id="{{ sheet_id }}" data-ss="{{ sheet_options.presentation }}" data-nw-sheet="{{ sheet_options|json_encode }}" data-ss-dismissible="{{ sheet_options.dismissible ? 'true' : 'false' }}" closedby="{{ sheet_options.dismissible ? 'closerequest' : 'none' }}" aria-labelledby="{{ sheet_id }}-title">
+<dialog class="ss {{ sheet_class|default('') }}" id="{{ sheet_id }}" data-ss="{{ sheet_options.presentation }}" data-nw-sheet="{{ sheet_options|json_encode }}" data-ss-dismissible="{{ sheet_options.dismissible ? 'true' : 'false' }}" closedby="{{ sheet_options.dismissible ? 'closerequest' : 'none' }}" aria-labelledby="{{ sheet_id }}-title">
     <div class="ss-panel">
         {% if sheet_options.presentation == 'bottom' %}
             {% for snap in sheet_options.snaps %}
@@ -16,14 +16,4 @@
     </div>
     <div class="ss-rest"></div>
 </dialog>
-{% add 'nw_sheet_css' to stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/nordwerksheet/vendor/sheet.css') }}">
-{% endadd %}
-{% if not sheet_options.dismissible %}
-    {% add 'nw_sheet_options_css' to stylesheets %}
-        <link rel="stylesheet" href="{{ asset('bundles/nordwerksheet/vendor/options.css') }}">
-    {% endadd %}
-{% endif %}
-{% add 'nw_sheet_js' to body %}
-    <script type="module" src="{{ asset('bundles/nordwerksheet/sheet.js') }}"></script>
-{% endadd %}
+{% do nw_sheet_assets(sheet_options.dismissible) %}

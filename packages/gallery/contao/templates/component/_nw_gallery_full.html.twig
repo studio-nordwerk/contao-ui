@@ -1,0 +1,9 @@
+{% extends '@Contao/component/_figure.html.twig' %}
+
+{% block media %}
+    {% with {figure: {image: figure.lightbox.image, hasMetadata: figure.hasMetadata, metadata: figure.metadata}} %}
+        {{ block('picture_component') }}
+    {% endwith %}
+{% endblock %}
+
+{% block media_link %}{{ block('media') }}{% endblock %}

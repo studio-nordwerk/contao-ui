@@ -31,11 +31,11 @@ Alle Anforderungen aus `brief-2026-09-30-contao-ui-welle1.md` gelten. Qualität 
 
 ## 4 · Gallery
 
-- [ ] Contao-Dateiauswahl, Sortierung, Bildgröße, Figure-Builder, responsive Bilder, Lazy-Loading, Metadaten.
-- [ ] Raster, wechselnde Formate / Mauerwerk, Carousel-Leiste.
-- [ ] Sheet-Lightbox: Vollbild, Tastatur und Wischen.
-- [ ] Optionaler globaler Kern-Lightbox-Ersatz oder begründete Zurückstellung.
-- [ ] E2E: acht Bilder, Öffnen, Blättern, Schließen, Axe.
+- [x] Contao-Dateiauswahl, Sortierung, Bildgröße, Figure-Builder, responsive Bilder, Lazy-Loading, Metadaten.
+- [x] Raster, wechselnde Formate / Mauerwerk, Carousel-Leiste.
+- [x] Sheet-Lightbox: Vollbild, Tastatur und Wischen.
+- [x] Optionaler globaler Kern-Lightbox-Ersatz oder begründete Zurückstellung.
+- [x] E2E: acht Bilder, Öffnen, Blättern, Schließen, Axe.
 
 ## 5 · Release-fähig
 
@@ -48,3 +48,7 @@ Alle Anforderungen aus `brief-2026-09-30-contao-ui-welle1.md` gelten. Qualität 
 
 - [ ] `docs/report.md` je Phase mit Abweichungen und offenen Fragen für Arne.
 - [ ] `docs/goal-status.txt`: `DONE` nur wenn alle Phasen grün, sonst `NEXT: <nächster Schritt>`; mitcommitten.
+
+### Entscheidung: globaler Kern-Lightbox-Ersatz
+
+Für Welle 1 zurückgestellt. Die Galerie verwendet keine Kern-Lightbox-Attribute und lädt nur ihre nativen Bausteine. Normale Kern-Bilder und Galerien können eigene Twig-Varianten, externe Metadatenlinks, Pagination und frei im Seitenlayout eingebundene Lightbox-Skripte verwenden. Ein globaler Selektor würde diese Verträge nicht sicher erhalten und auch die manuellen Skripte nicht entfernen. Ein künftiger Ersatz muss gezielt die Standard-Kern-Templates integrieren und diese Kombinationen separat prüfen; die Installation verändert vorhandene Bildausgaben nicht.

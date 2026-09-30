@@ -1,0 +1,5 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+
+{% block content %}
+    {{ include('@Contao/component/_nw_gallery.html.twig', {gallery_id: 'nw-gallery-' ~ data.id, gallery_label: data.nwGalleryLabel, gallery_images: images, gallery_lightbox: data.fullsize and not as_editor_view}) }}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% set gallery_layout = gallery_layout|default('grid') %}
+{% set gallery_columns = gallery_columns|default(3) %}
+{% set gallery_lightbox = gallery_lightbox ?? true %}
+{% set lightbox_images = gallery_lightbox ? gallery_images|filter(image => image.hasLightbox and image.lightbox.hasImage) : [] %}
+<div id="{{ gallery_id }}" class="nw-gallery nw-gallery--{{ gallery_layout }}" data-nw-gallery style="--nw-gallery-columns: {{ gallery_columns }}; --nw-gallery-feature-span: {{ gallery_columns > 1 ? 2 : 1 }}">
+    {% if gallery_layout == 'rail' %}
+        {% embed '@Contao/component/_nw_carousel.html.twig' with {carousel_id: gallery_id ~ '-rail', carousel_label: gallery_label, carousel_options: {small: 1.2, medium: 2, large: gallery_columns, arrows: true, dots: true, drag: true}} %}
+            {% block carousel_slides %}
+                {% for image in gallery_images %}
+                    <div class="nw-gallery-item">
+                        {{ include('@Contao/component/_nw_gallery_thumbnail.html.twig', {figure: image, image_index: loop.index0, img_attributes: attrs().set('loading', 'lazy')}) }}
+                    </div>
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+    {% else %}
+        <ul class="nw-gallery-items" aria-label="{{ gallery_label }}">
+            {% for image in gallery_images %}
+                <li class="nw-gallery-item">
+                    {{ include('@Contao/component/_nw_gallery_thumbnail.html.twig', {figure: image, image_index: loop.index0, img_attributes: attrs().set('loading', 'lazy')}) }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if lightbox_images %}
+        {% embed '@Contao/component/_nw_sheet.html.twig' with {sheet_id: gallery_id ~ '-lightbox', sheet_label: gallery_label, sheet_class: 'nw-gallery-lightbox', sheet_options: {presentation: 'center', dismissible: true, snaps: [], drag: false, history: false}} %}
+            {% block sheet_body %}
+                {% embed '@Contao/component/_nw_carousel.html.twig' with {carousel_id: gallery_id ~ '-viewer', carousel_label: 'nw.gallery.images'|trans, carousel_options: {small: 1, medium: 1, large: 1, arrows: true, dots: false, drag: true}} %}
+                    {% block carousel_slides %}
+                        {% for image in gallery_images %}
+                            {% if image.hasLightbox and image.lightbox.hasImage %}
+                                <div class="nw-gallery-full" data-nw-gallery-index="{{ loop.index0 }}">
+                                    {{ include('@Contao/component/_nw_gallery_full.html.twig', {figure: image, img_attributes: attrs().set('loading', 'lazy')}) }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+</div>
+{% if not as_editor_view|default(false) %}{% do nw_gallery_assets(lightbox_images is not empty) %}{% endif %}

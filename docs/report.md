@@ -39,3 +39,13 @@ Offcanvas-Modul bettet ein vorhandenes **Kern-Navigationsmodul** ein (keine eige
 Validierung: vollständiges `make check` grün, 5 PHPUnit-Tests / 23 Assertions und 19 Playwright-Tests. Alle vier Darstellungen öffnen, schließen mit Escape, geben Fokus zurück und bestehen Axe. Hintergrund-Tipp, Invoker Commands ohne JS, nicht wegklickbarer Dialog mit Abschluss-Button sowie mobile Kern-Navigation mit Zurück-Taste und Linknavigation sind geprüft. Demo wurde für die Phase frisch aufgebaut.
 
 Browser ohne Invoker Commands benötigen die progressive JS-Ergänzung; dokumentierte Browsergrenzen der OSS-Komponente gelten. Keine offenen Produktfragen.
+
+## Phase 4 · Gallery (2026-09-30)
+
+Datei- und Ordnerauswahl über Contaos virtuelle Dateiverwaltung, Dublettenfilter, manuelle/Name-/Datum-Sortierung und FigureBuilder umgesetzt. Contao-Bildgrößen erzeugen responsive Picture-/Srcset-Ausgaben; Alt-Texte, Titel und Bildunterschriften stammen aus den Metadaten. Vorschaubilder laden lazy. Raster, wechselnde Formate und Carousel-Leiste verwenden dieselbe Reihenfolge. Die Vollbild-Lightbox kombiniert unveränderte OSS-APIs von Sheet und Carousel; der gewählte Link öffnet direkt sein Bild. Nicht aktive Großbilder sind inert und für Screenreader ausgeblendet; Escape und Schließen geben Fokus zurück.
+
+Zusätzlich besitzen alle drei Bundles kleine Twig-Asset-Funktionen. Includes/Embeds laden automatisch und dokumentweit genau einmal; Produktbilder-Beispiel und vollständige Template-Verträge stehen in `docs/integration.md`. Andere Bundle-Repositories bleiben unverändert.
+
+Validierung nach frischem Demo-Reset: vollständiges `make check` grün, 5 PHPUnit-Tests / 23 Assertions und 26 Playwright-Tests. Sieben neue Galerie-Tests prüfen acht Dateien, Datei-/Ordnerauswahl mit Dubletten und Nicht-Bild-Datei, drei Sortierungen, responsive Quellen, Metadaten, Vollbild, spätere Startbilder und Wiederöffnen, Pfeile/Home/End, echtes CDP-Touch-Wischen, Fokus, Axe, Bilderlinks und native Leiste ohne JS. Die bestehenden Request-Prüfungen bleiben grün. Demo-Bilder sind lokal erzeugte geometrische Studien, keine externen Downloads. Der Seed publiziert die neu erzeugten Dateien jetzt auch per `contao:symlinks`.
+
+Abweichungen: CSS-Raster mit wechselnden Formaten statt Spalten-Masonry bewahrt Lese- und Tab-Reihenfolge. Der optionale globale Kern-Lightbox-Ersatz ist begründet zurückgestellt (Roadmap): eigene Templates, Pagination, externe Metadatenlinks und manuell eingebundene Skripte müssen für einen sicheren Ersatz gesondert geprüft werden. Kein Produktentscheid von Arne erforderlich. Contao-6-Funktionsprüfung und Release-Artefakte folgen in Phase 5.

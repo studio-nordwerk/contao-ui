@@ -7,6 +7,7 @@ up:
 	$(DC) exec -T php composer install --no-interaction --no-progress
 	$(DC) exec -T php php bin/console contao:migrate --no-interaction --no-backup
 	$(DC) exec -T php php /workspace/scripts/seed.php
+	$(DC) exec -T php php bin/console contao:symlinks
 	vp install
 	vp exec playwright install chromium
 

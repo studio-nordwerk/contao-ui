@@ -1,1 +1,1 @@
-NEXT: Galerie über Contao FigureBuilder mit drei Layouts und nativer Sheet-Lightbox implementieren.
+NEXT: Release-Dokumentation, Backend-Icons und Hell/Dunkel-Abnahme, CI-Matrix und Manager-ZIPs; finale Checks auf Contao 5.7 und 6.0.
