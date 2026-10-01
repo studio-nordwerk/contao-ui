@@ -1,4 +1,4 @@
-Contao 6.0.2 / PHP 8.4.26 / Doctrine DBAL 4.4.5 — 2026-10-01
+Contao 6.0.2 / PHP 8.4.26 / Doctrine DBAL 4.4.5 — Review fixes, 2026-10-01
 Command: make check6
 The command restored the Contao 5.7 stack after successful checks.
 
@@ -9,7 +9,7 @@ carousel: Manager ZIP checked (40 files, pinned runtime assets intact).
 sheet: Manager ZIP checked (46 files, pinned runtime assets intact).
 gallery: Manager ZIP checked (32 files, pinned runtime assets intact).
 teasers: Manager ZIP checked (39 files, pinned runtime assets intact).
-testimonials: Manager ZIP checked (38 files, pinned runtime assets intact).
+testimonials: Manager ZIP checked (39 files, pinned runtime assets intact).
 
 
                                                                                                                         
@@ -71,64 +71,64 @@ PHPUnit 11.5.56 by Sebastian Bergmann and contributors.
 Runtime:       PHP 8.4.26
 Configuration: /workspace/phpunit.xml.dist
 
-..................                                                18 / 18 (100%)
+.............................                                     29 / 29 (100%)
 
-Time: 00:00.235, Memory: 12.00 MB
+Time: 00:00.505, Memory: 50.50 MB
 
-OK (18 tests, 49 assertions)
-pass: All 95 files are correctly formatted (238ms, 16 threads)
-pass: Found no warnings or lint errors in 12 files (103ms, 16 threads)
+OK (29 tests, 125 assertions)
+pass: All 95 files are correctly formatted (314ms, 16 threads)
+pass: Found no warnings or lint errors in 12 files (107ms, 16 threads)
 
 Running 47 tests using 1 worker
 
-(node:29015) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:94378) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-  ✓   1 e2e/carousel.spec.ts:5:1 › three published children, arrows, dots and keyboard work (2.9s)
-  ✓   2 e2e/carousel.spec.ts:30:1 › responsive views follow the container width (321ms)
-  ✓   3 e2e/carousel.spec.ts:47:1 › without JavaScript the row scrolls with native wheel input (443ms)
-  ✓   4 e2e/carousel.spec.ts:60:1 › touch swipe uses the native scroller (793ms)
-  ✓   5 e2e/carousel.spec.ts:90:1 › reduced motion starts autoplay paused and the pause button stays usable (378ms)
-  ✓   6 e2e/carousel.spec.ts:105:1 › the landing page does not request bundle assets (192ms)
-  ✓   7 e2e/carousel.spec.ts:115:1 › the opt-in core Swiper keeps its children and renders without Swiper (668ms)
-  ✓   8 e2e/carousel.spec.ts:131:1 › nested carousels keep their own arrows, dots and status (704ms)
-  ✓   9 e2e/carousel.spec.ts:159:1 › dragging a nested carousel leaves its parent in place (566ms)
-  ✓  10 e2e/gallery.spec.ts:11:3 › Raster: eight images, Contao order, responsive pictures and lightbox (944ms)
-  ✓  11 e2e/gallery.spec.ts:11:3 › Wechselnde Formate: eight images, Contao order, responsive pictures and lightbox (741ms)
-  ✓  12 e2e/gallery.spec.ts:11:3 › Bilderleiste: eight images, Contao order, responsive pictures and lightbox (749ms)
-  ✓  13 e2e/gallery.spec.ts:48:1 › a later image opens directly and reopening resets the chosen position (569ms)
-  ✓  14 e2e/gallery.spec.ts:65:1 › lightbox navigation leaves modified keyboard shortcuts to the browser (391ms)
-  ✓  15 e2e/gallery.spec.ts:90:1 › the mobile lightbox swipes through images and fits the viewport (1.5s)
-  ✓  16 e2e/gallery.spec.ts:130:1 › without JavaScript thumbnails link to the full image and the rail scrolls (791ms)
-  ✓  17 e2e/gallery.spec.ts:149:1 › disabled lightbox and plain grids need no interactive assets of their own (293ms)
+  ✓   1 e2e/carousel.spec.ts:5:1 › three published children, arrows, dots and keyboard work (3.1s)
+  ✓   2 e2e/carousel.spec.ts:30:1 › responsive views follow the container width (407ms)
+  ✓   3 e2e/carousel.spec.ts:47:1 › without JavaScript the row scrolls with native wheel input (539ms)
+  ✓   4 e2e/carousel.spec.ts:60:1 › touch swipe uses the native scroller (788ms)
+  ✓   5 e2e/carousel.spec.ts:90:1 › reduced motion starts autoplay paused and the pause button stays usable (566ms)
+  ✓   6 e2e/carousel.spec.ts:105:1 › the landing page does not request bundle assets (298ms)
+  ✓   7 e2e/carousel.spec.ts:115:1 › the opt-in core Swiper keeps its children and renders without Swiper (752ms)
+  ✓   8 e2e/carousel.spec.ts:131:1 › nested carousels keep their own arrows, dots and status (763ms)
+  ✓   9 e2e/carousel.spec.ts:159:1 › dragging a nested carousel leaves its parent in place (580ms)
+  ✓  10 e2e/gallery.spec.ts:11:3 › Raster: eight images, Contao order, responsive pictures and lightbox (1.2s)
+  ✓  11 e2e/gallery.spec.ts:11:3 › Wechselnde Formate: eight images, Contao order, responsive pictures and lightbox (835ms)
+  ✓  12 e2e/gallery.spec.ts:11:3 › Bilderleiste: eight images, Contao order, responsive pictures and lightbox (810ms)
+  ✓  13 e2e/gallery.spec.ts:48:1 › a later image opens directly and reopening resets the chosen position (621ms)
+  ✓  14 e2e/gallery.spec.ts:65:1 › lightbox navigation leaves modified keyboard shortcuts to the browser (468ms)
+  ✓  15 e2e/gallery.spec.ts:90:1 › the mobile lightbox swipes through images and fits the viewport (1.7s)
+  ✓  16 e2e/gallery.spec.ts:130:1 › without JavaScript thumbnails link to the full image and the rail scrolls (954ms)
+  ✓  17 e2e/gallery.spec.ts:149:1 › disabled lightbox and plain grids need no interactive assets of their own (313ms)
   ✓  18 e2e/release.spec.ts:5:1 › Template Studio offers overrides for all bundle entry templates (1.9s)
-  ✓  19 e2e/release.spec.ts:28:5 › carousel: light release screenshot and accessibility (661ms)
-  ✓  20 e2e/release.spec.ts:28:5 › sheet: light release screenshot and accessibility (598ms)
+  ✓  19 e2e/release.spec.ts:28:5 › carousel: light release screenshot and accessibility (664ms)
+  ✓  20 e2e/release.spec.ts:28:5 › sheet: light release screenshot and accessibility (612ms)
   ✓  21 e2e/release.spec.ts:28:5 › gallery: light release screenshot and accessibility (1.1s)
-  ✓  22 e2e/release.spec.ts:72:3 › backend: light native widgets, previews and icons (3.4s)
-  ✓  23 e2e/release.spec.ts:28:5 › carousel: dark release screenshot and accessibility (641ms)
-  ✓  24 e2e/release.spec.ts:28:5 › sheet: dark release screenshot and accessibility (582ms)
-  ✓  25 e2e/release.spec.ts:28:5 › gallery: dark release screenshot and accessibility (1.1s)
+  ✓  22 e2e/release.spec.ts:72:3 › backend: light native widgets, previews and icons (3.6s)
+  ✓  23 e2e/release.spec.ts:28:5 › carousel: dark release screenshot and accessibility (705ms)
+  ✓  24 e2e/release.spec.ts:28:5 › sheet: dark release screenshot and accessibility (645ms)
+  ✓  25 e2e/release.spec.ts:28:5 › gallery: dark release screenshot and accessibility (1.2s)
   ✓  26 e2e/release.spec.ts:72:3 › backend: dark native widgets, previews and icons (3.1s)
-  ✓  27 e2e/scaffold.spec.ts:10:3 › home: Contao frontend is accessible and dependency-free (397ms)
-  ✓  28 e2e/scaffold.spec.ts:10:3 › carousel: Contao frontend is accessible and dependency-free (601ms)
-  ✓  29 e2e/scaffold.spec.ts:10:3 › sheet: Contao frontend is accessible and dependency-free (507ms)
-  ✓  30 e2e/scaffold.spec.ts:10:3 › gallery: Contao frontend is accessible and dependency-free (680ms)
+  ✓  27 e2e/scaffold.spec.ts:10:3 › home: Contao frontend is accessible and dependency-free (422ms)
+  ✓  28 e2e/scaffold.spec.ts:10:3 › carousel: Contao frontend is accessible and dependency-free (603ms)
+  ✓  29 e2e/scaffold.spec.ts:10:3 › sheet: Contao frontend is accessible and dependency-free (537ms)
+  ✓  30 e2e/scaffold.spec.ts:10:3 › gallery: Contao frontend is accessible and dependency-free (682ms)
   ✓  31 e2e/security.spec.ts:35:1 › labels stay text and protected nested content is never shared with guests (1.8s)
-  ✓  32 e2e/security.spec.ts:71:1 › a mounted editor cannot select or submit a foreign sheet (2.3s)
-  ✓  33 e2e/sheet.spec.ts:12:3 › Sheet von unten: opens, closes with Escape and restores focus (552ms)
-  ✓  34 e2e/sheet.spec.ts:12:3 › Seitenleiste links: opens, closes with Escape and restores focus (551ms)
-  ✓  35 e2e/sheet.spec.ts:12:3 › Seitenleiste rechts: opens, closes with Escape and restores focus (532ms)
-  ✓  36 e2e/sheet.spec.ts:12:3 › Zentrierter Dialog: opens, closes with Escape and restores focus (566ms)
-  ✓  37 e2e/sheet.spec.ts:31:1 › backdrop tap closes and restores focus (321ms)
+  ✓  32 e2e/security.spec.ts:71:1 › a mounted editor cannot select or submit a foreign sheet (2.4s)
+  ✓  33 e2e/sheet.spec.ts:12:3 › Sheet von unten: opens, closes with Escape and restores focus (553ms)
+  ✓  34 e2e/sheet.spec.ts:12:3 › Seitenleiste links: opens, closes with Escape and restores focus (528ms)
+  ✓  35 e2e/sheet.spec.ts:12:3 › Seitenleiste rechts: opens, closes with Escape and restores focus (538ms)
+  ✓  36 e2e/sheet.spec.ts:12:3 › Zentrierter Dialog: opens, closes with Escape and restores focus (547ms)
+  ✓  37 e2e/sheet.spec.ts:31:1 › backdrop tap closes and restores focus (344ms)
   ✓  38 e2e/sheet.spec.ts:42:1 › native invoker commands open and close without JavaScript (8.0s)
-  ✓  39 e2e/sheet.spec.ts:79:1 › non-dismissible dialogs require an explicit completion button (374ms)
-  ✓  40 e2e/sheet.spec.ts:92:1 › mobile offcanvas renders core navigation and back closes it (601ms)
-  ✓  41 e2e/teasers.spec.ts:25:1 › sources: news grid/carousel, next three events, categories and testimonials (1.1s)
-  ✓  42 e2e/teasers.spec.ts:74:1 › submission, consent, CSRF, mail and backend moderation work without JavaScript (6.6s)
-  ✓  43 e2e/teasers.spec.ts:174:1 › Oveleon import is transactional, idempotent and always pending review (4.4s)
+  ✓  39 e2e/sheet.spec.ts:79:1 › non-dismissible dialogs require an explicit completion button (362ms)
+  ✓  40 e2e/sheet.spec.ts:92:1 › mobile offcanvas renders core navigation and back closes it (611ms)
+  ✓  41 e2e/teasers.spec.ts:25:1 › sources: news grid/carousel, next three events, categories and testimonials (1.2s)
+  ✓  42 e2e/teasers.spec.ts:74:1 › submission, consent, CSRF, mail and backend moderation work without JavaScript (5.4s)
+  ✓  43 e2e/teasers.spec.ts:174:1 › Oveleon import is transactional, idempotent and always pending review (3.2s)
   ✓  44 e2e/teasers.spec.ts:199:3 › new bundles: light screenshots and axe (1.5s)
-  ✓  45 e2e/teasers.spec.ts:199:3 › new bundles: dark screenshots and axe (1.5s)
+  ✓  45 e2e/teasers.spec.ts:199:3 › new bundles: dark screenshots and axe (1.6s)
   ✓  46 e2e/teasers.spec.ts:219:1 › new templates and German teaser settings are available in the backend (2.4s)
-  ✓  47 e2e/teasers.spec.ts:251:1 › protected local images are omitted from public cards (766ms)
+  ✓  47 e2e/teasers.spec.ts:251:1 › protected local images are omitted from public cards (772ms)
 
   47 passed (1.1m)
