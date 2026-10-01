@@ -9,7 +9,7 @@ import subprocess
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGES = ('carousel', 'sheet', 'gallery')
+PACKAGES = ('carousel', 'sheet', 'gallery', 'teasers', 'testimonials')
 VERSION = re.compile(r'\d+\.\d+\.\d+(?:-dev|-(?:alpha|beta|RC|rc)(?:[.-]?\d+)?)?')
 
 

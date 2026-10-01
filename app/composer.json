@@ -8,7 +8,9 @@
         "contao/managed-edition": "~5.7.0",
         "nordwerk/contao-carousel-bundle": "0.1.x-dev",
         "nordwerk/contao-gallery-bundle": "0.1.x-dev",
-        "nordwerk/contao-sheet-bundle": "0.1.x-dev"
+        "nordwerk/contao-sheet-bundle": "0.1.x-dev",
+        "nordwerk/contao-teasers-bundle": "0.1.x-dev",
+        "nordwerk/contao-testimonials-bundle": "0.1.x-dev"
     },
     "require-dev": {
         "contao/easy-coding-standard": "^7.1",
@@ -27,7 +29,9 @@
                 "versions": {
                     "nordwerk/contao-carousel-bundle": "0.1.x-dev",
                     "nordwerk/contao-gallery-bundle": "0.1.x-dev",
-                    "nordwerk/contao-sheet-bundle": "0.1.x-dev"
+                    "nordwerk/contao-sheet-bundle": "0.1.x-dev",
+                    "nordwerk/contao-teasers-bundle": "0.1.x-dev",
+                    "nordwerk/contao-testimonials-bundle": "0.1.x-dev"
                 }
             }
         }

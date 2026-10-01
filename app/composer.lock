@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ffdca52697c720211f04392b78b3a56",
+    "content-hash": "8066820e698ba06e250ff2f9897026cd",
     "packages": [
         {
             "name": "ausi/slug-generator",
@@ -3201,16 +3201,16 @@
         },
         {
             "name": "doctrine/lexer",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "e96fe45e92a54233726014a7cc7340abf29bb14c"
+                "reference": "71d305eaa6480d3d3460c7d053d1da7749fa9cca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/e96fe45e92a54233726014a7cc7340abf29bb14c",
-                "reference": "e96fe45e92a54233726014a7cc7340abf29bb14c",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/71d305eaa6480d3d3460c7d053d1da7749fa9cca",
+                "reference": "71d305eaa6480d3d3460c7d053d1da7749fa9cca",
                 "shasum": ""
             },
             "require": {
@@ -3256,7 +3256,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/lexer/issues",
-                "source": "https://github.com/doctrine/lexer/tree/3.0.2"
+                "source": "https://github.com/doctrine/lexer/tree/3.0.3"
             },
             "funding": [
                 {
@@ -3272,7 +3272,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-14T20:44:06+00:00"
+            "time": "2026-10-01T06:59:29+00:00"
         },
         {
             "name": "doctrine/orm",
@@ -5738,6 +5738,70 @@
                 "MIT"
             ],
             "description": "Native, dependency-free sheet content elements for Contao",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "nordwerk/contao-teasers-bundle",
+            "version": "0.1.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "../packages/teasers"
+            },
+            "require": {
+                "contao/calendar-bundle": "^5.7 || ^6.0",
+                "contao/core-bundle": "^5.7 || ^6.0",
+                "contao/manager-plugin": "^2.0",
+                "contao/news-bundle": "^5.7 || ^6.0",
+                "nordwerk/contao-carousel-bundle": "^0.1",
+                "php": "^8.3"
+            },
+            "type": "contao-bundle",
+            "extra": {
+                "contao-manager-plugin": "Nordwerk\\TeasersBundle\\ContaoManager\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nordwerk\\TeasersBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Source-driven Twig teaser cards for Contao",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "nordwerk/contao-testimonials-bundle",
+            "version": "0.1.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "../packages/testimonials"
+            },
+            "require": {
+                "contao/core-bundle": "^5.7 || ^6.0",
+                "contao/manager-plugin": "^2.0",
+                "nordwerk/contao-teasers-bundle": "^0.1",
+                "php": "^8.3"
+            },
+            "type": "contao-bundle",
+            "extra": {
+                "contao-manager-plugin": "Nordwerk\\TestimonialsBundle\\ContaoManager\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nordwerk\\TestimonialsBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Moderated customer testimonials and submissions for Contao",
             "transport-options": {
                 "symlink": true,
                 "relative": true
@@ -19277,7 +19341,9 @@
     "stability-flags": {
         "nordwerk/contao-carousel-bundle": 20,
         "nordwerk/contao-gallery-bundle": 20,
-        "nordwerk/contao-sheet-bundle": 20
+        "nordwerk/contao-sheet-bundle": 20,
+        "nordwerk/contao-teasers-bundle": 20,
+        "nordwerk/contao-testimonials-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

@@ -9,6 +9,7 @@ up:
 	$(DC) exec -T php composer install --no-interaction --no-progress
 	$(DC) exec -T php php bin/console contao:migrate --no-interaction --no-backup
 	$(DC) exec -T php php /workspace/scripts/seed.php
+	$(DC) exec -T php php /workspace/scripts/seed-teasers.php
 	$(DC) exec -T php php bin/console contao:symlinks
 	$(DC) exec -T php sh -c 'mkdir -p var/locks && chown -R www-data:www-data var assets files'
 	vp install
