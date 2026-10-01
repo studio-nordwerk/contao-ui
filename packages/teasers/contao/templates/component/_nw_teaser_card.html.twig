@@ -15,7 +15,7 @@
         {% endfor %}
     {% endblock %}
     {% block card_stars %}
-        {% if card.stars %}<p>{{ 'nw.teasers.stars'|trans({'%count%': card.stars}) }}</p>{% endif %}
+        {% if card.stars %}<p class="nw-teaser-stars" role="img" aria-label="{{ 'nw.teasers.stars'|trans({'%count%': card.stars}) }}">{% for i in 1..5 %}{{ i <= card.stars ? '★' : '☆' }}{% endfor %}</p>{% endif %}
     {% endblock %}
     {% block card_price %}{% if card.price %}<p>{{ card.price }}</p>{% endif %}{% endblock %}
 </article>
