@@ -1,4 +1,4 @@
-name: nordwerk-contao-ui
+name: contao-ui-teasers
 services:
   php:
     build:
@@ -13,7 +13,7 @@ services:
       APP_ENV: dev
       APP_SECRET: local-contao-ui-demo-only
       DATABASE_URL: mysql://contao:contao@db:3306/contao?serverVersion=mariadb-11.8.9&charset=utf8mb4
-      MAILER_DSN: "null://null"
+      MAILER_DSN: "smtp://mailpit:1025"
       COMPOSER_CACHE_DIR: /tmp/composer-cache
       COMPOSER_ALLOW_SUPERUSER: 1
     depends_on:
@@ -22,7 +22,7 @@ services:
   caddy:
     image: caddy:2-alpine
     ports:
-      - "127.0.0.1:8101:80"
+      - "127.0.0.1:8102:80"
     environment:
       APP_DIR: /workspace/app
     volumes:
@@ -30,6 +30,10 @@ services:
       - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
     depends_on:
       - php
+  mailpit:
+    image: axllent/mailpit:v1.29
+    ports:
+      - "127.0.0.1:8122:8025"
   db:
     image: mariadb:11.8.9
     environment:

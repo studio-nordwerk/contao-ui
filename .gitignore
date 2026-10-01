@@ -24,3 +24,4 @@
 .twig-cs-fixer.cache
 
 __pycache__/
+/docs/goal-status-teasers.txt
