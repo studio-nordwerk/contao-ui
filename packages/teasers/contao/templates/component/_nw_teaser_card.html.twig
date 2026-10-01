@@ -11,7 +11,7 @@
     {% block card_text %}<p class="nw-teaser-text">{{ card.text }}</p>{% endblock %}
     {% block card_meta %}
         {% for key, value in card.meta %}
-            {% if value %}<p class="nw-teaser-meta nw-teaser-meta-{{ key }}">{{ value }}</p>{% endif %}
+            {% if value and key not in hide_meta|default([]) %}<p class="nw-teaser-meta nw-teaser-meta-{{ key }}">{{ value }}</p>{% endif %}
         {% endfor %}
     {% endblock %}
     {% block card_stars %}
