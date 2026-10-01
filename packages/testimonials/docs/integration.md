@@ -9,17 +9,17 @@ Frontend-Modul `nw_testimonial_form` für die moderierte Einreichung.
 Das Template Studio überschreibt `frontend_module/nw_testimonial_form.html.twig`.
 Der Controller liefert:
 
-| Variable | Vertrag |
-| --- | --- |
-| `configured` | Nur bei gültigem Archiv, Empfänger, Einwilligungstext und veröffentlichter Datenschutzseite wahr. |
-| `form_id` | Eindeutige DOM-ID dieser Renderinstanz; Präfix für Felder, Labels und Fehlerzusammenfassung. |
-| `form_submit` | Stabile Modulkennung für das versteckte `FORM_SUBMIT`; unabhängig von DOM-IDs. |
-| `form_action` | Lokale Request-URI einschließlich Installations-Unterverzeichnis und Queryparametern. |
-| `submission_nonce` | Sitzungstoken, an den ausgegebenen Einwilligungstext und Datenschutzlink gebunden; zwei Stunden gültig, einmal verwendbar. |
-| `values` | Klartextwerte für erneute Ausgabe nach Validierungsfehlern. |
-| `errors` | Liste von Übersetzungsschlüsseln aus `messages`. |
-| `success` | Bestätigung der Annahme nach Redirect, keine Veröffentlichungszusage. |
-| `consent_text`, `privacy_url` | Aktuell angezeigter Einwilligungstext und Link für das neue Token. |
+| Variable                      | Vertrag                                                                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `configured`                  | Nur bei gültigem Archiv, Empfänger, Einwilligungstext und veröffentlichter Datenschutzseite wahr.                          |
+| `form_id`                     | Eindeutige DOM-ID dieser Renderinstanz; Präfix für Felder, Labels und Fehlerzusammenfassung.                               |
+| `form_submit`                 | Stabile Modulkennung für das versteckte `FORM_SUBMIT`; unabhängig von DOM-IDs.                                             |
+| `form_action`                 | Lokale Request-URI einschließlich Installations-Unterverzeichnis und Queryparametern.                                      |
+| `submission_nonce`            | Sitzungstoken, an den ausgegebenen Einwilligungstext und Datenschutzlink gebunden; zwei Stunden gültig, einmal verwendbar. |
+| `values`                      | Klartextwerte für erneute Ausgabe nach Validierungsfehlern.                                                                |
+| `errors`                      | Liste von Übersetzungsschlüsseln aus `messages`.                                                                           |
+| `success`                     | Bestätigung der Annahme nach Redirect, keine Veröffentlichungszusage.                                                      |
+| `consent_text`, `privacy_url` | Aktuell angezeigter Einwilligungstext und Link für das neue Token.                                                         |
 
 Bei Anpassungen diese versteckten Felder beibehalten:
 

@@ -11,16 +11,16 @@ services:
     class: Symfony\Component\RateLimiter\RateLimiterFactory
     arguments:
       - { id: nordwerk.testimonials, policy: sliding_window, limit: 5, interval: 15 minutes }
-      - '@nordwerk.testimonials.rate_limiter_storage'
-      - '@nordwerk.testimonials.rate_limiter_lock'
+      - "@nordwerk.testimonials.rate_limiter_storage"
+      - "@nordwerk.testimonials.rate_limiter_lock"
 
   nordwerk.testimonials.rate_limiter_storage:
     class: Symfony\Component\RateLimiter\Storage\CacheStorage
-    arguments: ['@cache.rate_limiter']
+    arguments: ["@cache.rate_limiter"]
 
   nordwerk.testimonials.rate_limiter_lock:
     class: Symfony\Component\Lock\LockFactory
-    arguments: ['@nordwerk.testimonials.rate_limiter_lock_store']
+    arguments: ["@nordwerk.testimonials.rate_limiter_lock_store"]
 
   nordwerk.testimonials.rate_limiter_lock_store:
     class: Symfony\Component\Lock\Store\FlockStore
