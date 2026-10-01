@@ -53,7 +53,8 @@ final class SubmissionController extends AbstractFrontendModuleController
         $session = $request->getSession();
         $nonceKey = $formId.'-nonces';
         $nonces = $session->get($nonceKey, []);
-        $nonces = array_filter($nonces, static fn (int $created): bool => $created > time() - 7200);
+        // Legacy timestamp-only tokens have no proof of the displayed consent.
+        $nonces = array_filter($nonces, static fn (mixed $snapshot): bool => \is_array($snapshot) && ($snapshot['created'] ?? 0) > time() - 7200 && isset($snapshot['consent'], $snapshot['privacy']));
         $receiptKey = $formId.'-receipt';
         $success = $request->isMethod('GET') && $session->remove($receiptKey);
 
@@ -82,7 +83,7 @@ final class SubmissionController extends AbstractFrontendModuleController
                     'source' => $values['source'],
                     'stars' => (int) $values['stars'],
                     'consentedAt' => time(),
-                    'consentText' => $data['nwTestimonialConsent']."\n".$privacy,
+                    'consentText' => $nonces[$nonce]['consent']."\n".$nonces[$nonce]['privacy'],
                     'published' => '',
                     'notifyRecipient' => $data['nwTestimonialRecipient'],
                 ]);
@@ -97,7 +98,7 @@ final class SubmissionController extends AbstractFrontendModuleController
         }
 
         $nonce = bin2hex(random_bytes(24));
-        $nonces[$nonce] = time();
+        $nonces[$nonce] = ['created' => time(), 'consent' => (string) $data['nwTestimonialConsent'], 'privacy' => $privacy];
         $session->set($nonceKey, \array_slice($nonces, -10, null, true));
         $template->set('configured', true);
         $template->set('form_id', $formId);
