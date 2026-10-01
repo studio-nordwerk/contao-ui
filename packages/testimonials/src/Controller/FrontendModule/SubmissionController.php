@@ -93,7 +93,7 @@ final class SubmissionController extends AbstractFrontendModuleController
                 $session->set($receiptKey, true);
                 $this->notification->send($id);
 
-                return $this->privateResponse(new RedirectResponse($request->getPathInfo(), Response::HTTP_SEE_OTHER));
+                return $this->privateResponse(new RedirectResponse($request->getRequestUri(), Response::HTTP_SEE_OTHER));
             }
         }
 
@@ -108,7 +108,7 @@ final class SubmissionController extends AbstractFrontendModuleController
         $template->set('success', $success);
         $template->set('consent_text', (string) $data['nwTestimonialConsent']);
         $template->set('privacy_url', $privacy);
-        $template->set('form_action', $request->getPathInfo());
+        $template->set('form_action', $request->getRequestUri());
 
         return $this->privateResponse($template->getResponse());
     }

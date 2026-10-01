@@ -88,6 +88,21 @@ final class SubmissionControllerTest extends TestCase
         $this->assertSame(303, $response->getStatusCode());
     }
 
+    public function testActionAndRedirectPreserveBasePathAndQuery(): void
+    {
+        $this->urls->method('generate')->willReturn('/privacy.html');
+        $uri = '/cms/submit.html?campaign=autumn&lang=de';
+        $server = ['SCRIPT_NAME' => '/cms/index.php', 'SCRIPT_FILENAME' => '/var/www/cms/index.php', 'PHP_SELF' => '/cms/index.php'];
+        $get = Request::create($uri, 'GET', server: $server);
+        $this->assertSame('/submit.html', $get->getPathInfo());
+        [$displayed] = $this->render($get);
+        $this->assertSame($uri, $displayed->get('form_action'));
+        $post = $this->post($displayed, $uri);
+        $post->server->add($server);
+        [, $response] = $this->render($post);
+        $this->assertSame($uri, $response->headers->get('Location'));
+    }
+
     /**
      * @return array{FragmentTemplate, Response}
      */
