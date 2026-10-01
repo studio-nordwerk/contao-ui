@@ -103,6 +103,21 @@ final class SubmissionControllerTest extends TestCase
         $this->assertSame($uri, $response->headers->get('Location'));
     }
 
+    public function testRepeatedModuleRendersUseUniqueFieldIds(): void
+    {
+        $this->urls->method('generate')->willReturn('/privacy.html');
+        $request = Request::create('/submit.html');
+        [$first] = $this->render($request);
+        [$second] = $this->render($request);
+        $this->assertNotSame($first->get('form_id'), $second->get('form_id'));
+        $this->connection->expects($this->once())->method('insert');
+        $post = $this->post($second);
+        [, $response] = $this->render($post);
+        [$other] = $this->render($post);
+        $this->assertSame(303, $response->getStatusCode());
+        $this->assertSame([], $other->get('errors'));
+    }
+
     /**
      * @return array{FragmentTemplate, Response}
      */
@@ -121,7 +136,7 @@ final class SubmissionControllerTest extends TestCase
         return Request::create(
             $uri,
             'POST', [
-                'FORM_SUBMIT' => $template->get('form_id'),
+                'FORM_SUBMIT' => $template->get('form_submit'),
                 'submission_nonce' => $template->get('submission_nonce'),
                 'name' => 'Fictional reviewer',
                 'text' => 'Fictional experience',

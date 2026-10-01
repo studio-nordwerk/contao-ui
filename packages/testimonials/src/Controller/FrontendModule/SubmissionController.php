@@ -58,7 +58,8 @@ final class SubmissionController extends AbstractFrontendModuleController
         $receiptKey = $formId.'-receipt';
         $success = $request->isMethod('GET') && $session->remove($receiptKey);
 
-        if ($request->isMethod('POST') && $formId === $request->request->get('FORM_SUBMIT')) {
+        if ($request->isMethod('POST') && $formId === $request->request->get('FORM_SUBMIT') && !$request->attributes->get($formId.'-handled')) {
+            $request->attributes->set($formId.'-handled', true);
             foreach (['name', 'text', 'email', 'role', 'source', 'stars', 'consent', 'website'] as $field) {
                 $value = $request->request->all()[$field] ?? '';
                 $values[$field] = \is_string($value) ? trim($value) : '';
@@ -101,7 +102,8 @@ final class SubmissionController extends AbstractFrontendModuleController
         $nonces[$nonce] = ['created' => time(), 'consent' => (string) $data['nwTestimonialConsent'], 'privacy' => $privacy];
         $session->set($nonceKey, \array_slice($nonces, -10, null, true));
         $template->set('configured', true);
-        $template->set('form_id', $formId);
+        $template->set('form_id', $formId.'-'.$nonce);
+        $template->set('form_submit', $formId);
         $template->set('submission_nonce', $nonce);
         $template->set('values', $values);
         $template->set('errors', $errors);
