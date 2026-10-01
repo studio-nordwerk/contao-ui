@@ -1,0 +1,26 @@
+{
+  "tl_nw_testimonial":
+    {
+      "name": ["Name", ""],
+      "role": ["Rolle / Firma", ""],
+      "text": ["Erfahrung", ""],
+      "stars": ["Sterne", ""],
+      "date": ["Datum", ""],
+      "singleSRC": ["Bild", ""],
+      "source": ["Quelle / Anlass", ""],
+      "email": ["E-Mail (intern)", ""],
+      "consentedAt": ["Einwilligung am", ""],
+      "consentText": ["Gespeicherte Einwilligung", ""],
+      "provenance": ["Import-Herkunft", ""],
+      "reviewNotes":
+        [
+          "Prüfvermerk",
+          "Herkunft, Veröffentlichungsrechte und Prüfung dokumentieren. Dieser Vermerk bleibt intern.",
+        ],
+      "published": ["Veröffentlicht", ""],
+      "title_legend": "Kundenstimme",
+      "review_legend": "Prüfung und Datenschutz",
+      "publish_legend": "Veröffentlichung",
+      "reviewRequired": "Bitte dokumentieren Sie die Prüfung im Prüfvermerk, bevor Sie veröffentlichen.",
+    },
+}

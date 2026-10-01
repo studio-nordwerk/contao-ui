@@ -1,0 +1,20 @@
+{
+  "name": "nordwerk/contao-testimonials-bundle",
+  "description": "Moderated customer testimonials and submissions for Contao",
+  "license": "MIT",
+  "type": "contao-bundle",
+  "require": {
+    "php": "^8.3",
+    "contao/core-bundle": "^5.7 || ^6.0",
+    "contao/manager-plugin": "^2.0",
+    "nordwerk/contao-teasers-bundle": "^0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Nordwerk\\TestimonialsBundle\\": "src/"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "Nordwerk\\TestimonialsBundle\\ContaoManager\\Plugin"
+  }
+}

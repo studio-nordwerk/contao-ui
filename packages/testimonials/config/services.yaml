@@ -1,0 +1,8 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Nordwerk\TestimonialsBundle\:
+    resource: ../src/
+    exclude: ../src/{ContaoManager,DependencyInjection,Model,NordwerkTestimonialsBundle.php}

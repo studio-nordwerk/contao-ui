@@ -1,0 +1,26 @@
+{
+  "tl_nw_testimonial":
+    {
+      "name": ["Name", ""],
+      "role": ["Role / company", ""],
+      "text": ["Experience", ""],
+      "stars": ["Stars", ""],
+      "date": ["Date", ""],
+      "singleSRC": ["Image", ""],
+      "source": ["Source / occasion", ""],
+      "email": ["Email (private)", ""],
+      "consentedAt": ["Consent date", ""],
+      "consentText": ["Recorded consent", ""],
+      "provenance": ["Import provenance", ""],
+      "reviewNotes":
+        [
+          "Review notes",
+          "Document origin, publication rights and review. These notes remain private.",
+        ],
+      "published": ["Published", ""],
+      "title_legend": "Testimonial",
+      "review_legend": "Review and privacy",
+      "publish_legend": "Publication",
+      "reviewRequired": "Please document the review before publishing.",
+    },
+}

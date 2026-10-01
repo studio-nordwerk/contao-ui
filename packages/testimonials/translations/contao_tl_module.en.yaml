@@ -1,0 +1,10 @@
+{
+  "tl_module":
+    {
+      "nwTestimonialArchive": ["Target archive", ""],
+      "nwTestimonialRecipient": ["Notification recipient", ""],
+      "nwTestimonialConsent": ["Consent text", ""],
+      "nwTestimonialPrivacy": ["Privacy page", ""],
+      "nw_testimonial_legend": "Submission and privacy",
+    },
+}

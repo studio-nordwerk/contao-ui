@@ -1,0 +1,53 @@
+{% extends '@Contao/frontend_module/_base.html.twig' %}
+
+{% block content %}
+    <style nonce="{{ csp_nonce('style-src') }}">
+        .nw-testimonial-form { max-width: 42rem; }
+        .nw-testimonial-form input:not([type="checkbox"]):not([type="hidden"]), .nw-testimonial-form textarea { box-sizing: border-box; width: 100%; }
+        .nw-testimonial-form input, .nw-testimonial-form textarea, .nw-testimonial-form select, .nw-testimonial-form button { font: inherit; }
+        .nw-testimonial-form input:not([type="checkbox"]), .nw-testimonial-form textarea, .nw-testimonial-form select { padding: .5rem; }
+        .nw-testimonial-form button { padding: .5rem 1rem; }
+        .nw-testimonial-form :focus-visible { outline: 3px solid Highlight; outline-offset: 3px; }
+    </style>
+    {% if not configured %}
+        <p>{{ 'nw.testimonials.unavailable'|trans }}</p>
+    {% elseif success %}
+        <p role="status">{{ 'nw.testimonials.success'|trans }}</p>
+    {% else %}
+        {% if errors %}
+            <div role="alert" id="{{ form_id }}-errors">
+                <p>{{ 'nw.testimonials.errors'|trans }}</p>
+                <ul>{% for error in errors %}<li>{{ error|trans }}</li>{% endfor %}</ul>
+            </div>
+        {% endif %}
+        <form class="nw-testimonial-form" method="post" action="{{ form_action }}"{% if errors %} aria-describedby="{{ form_id }}-errors"{% endif %}>
+            <input type="hidden" name="FORM_SUBMIT" value="{{ form_id }}">
+            <input type="hidden" name="REQUEST_TOKEN" value="{{ contao.request_token }}">
+            <input type="hidden" name="submission_nonce" value="{{ submission_nonce }}">
+            {% for field in ['name', 'role', 'email', 'source'] %}
+                <p>
+                    <label for="{{ form_id }}-{{ field }}">{{ ('nw.testimonials.field.' ~ field)|trans }}</label><br>
+                    <input id="{{ form_id }}-{{ field }}" name="{{ field }}" type="{{ field == 'email' ? 'email' : 'text' }}" maxlength="255" value="{{ values[field]|default('') }}"{% if field == 'name' %} required autocomplete="name"{% elseif field == 'email' %} autocomplete="email"{% endif %}>
+                </p>
+            {% endfor %}
+            <p>
+                <label for="{{ form_id }}-text">{{ 'nw.testimonials.field.text'|trans }}</label><br>
+                <textarea id="{{ form_id }}-text" name="text" rows="6" maxlength="10000" required>{{ values.text|default('') }}</textarea>
+            </p>
+            <p>
+                <label for="{{ form_id }}-stars">{{ 'nw.testimonials.field.stars'|trans }}</label><br>
+                <select id="{{ form_id }}-stars" name="stars">
+                    <option value="">{{ 'nw.testimonials.no_stars'|trans }}</option>
+                    {% for stars in 1..5 %}<option value="{{ stars }}"{% if values.stars|default('') == stars %} selected{% endif %}>{{ 'nw.teasers.stars'|trans({'%count%': stars}) }}</option>{% endfor %}
+                </select>
+            </p>
+            <div hidden aria-hidden="true"><label for="{{ form_id }}-website">Website</label><input id="{{ form_id }}-website" name="website" tabindex="-1" autocomplete="off"></div>
+            <p>
+                <input id="{{ form_id }}-consent" name="consent" value="1" type="checkbox" required{% if values.consent|default('') == '1' %} checked{% endif %}>
+                <label for="{{ form_id }}-consent">{{ consent_text }}</label>
+                <a href="{{ privacy_url }}">{{ 'nw.testimonials.privacy'|trans }}</a>
+            </p>
+            <button type="submit">{{ 'nw.testimonials.submit'|trans }}</button>
+        </form>
+    {% endif %}
+{% endblock %}

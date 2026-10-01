@@ -1,0 +1,7 @@
+{
+  "MOD": { "nw_testimonials": ["Kundenstimmen", "Archive und geprüfte Erfahrungen."] },
+  "FMD":
+    {
+      "nw_testimonial_form": ["Kundenstimme einreichen", "Formular mit Einwilligung und Freigabe."],
+    },
+}

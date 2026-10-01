@@ -1,0 +1,12 @@
+{
+  "tl_nw_testimonial_archive":
+    {
+      "title": ["Archivname", ""],
+      "verification":
+        [
+          "Öffentliche Hinweise zur Prüfung",
+          "Ob und wie Erfahrungen geprüft werden; erscheint bei den Karten.",
+        ],
+      "title_legend": "Archiv",
+    },
+}
