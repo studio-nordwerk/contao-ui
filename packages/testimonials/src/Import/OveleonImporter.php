@@ -91,9 +91,21 @@ final class OveleonImporter
         }
 
         $image = null;
-        $path = (string) ($row['imageUrl'] ?? '');
+        $path = trim((string) ($row['imageUrl'] ?? ''));
 
-        if (str_starts_with($path, 'files/') && ($file = $this->files->resolve($path))) {
+        if (str_starts_with($path, '/') && !str_starts_with($path, '//')) {
+            $path = substr($path, 1);
+        }
+
+        $identifier = null;
+
+        if (preg_match('/^\{\{file::([0-9a-f-]{36})\}\}$/i', $path, $matches)) {
+            $identifier = $matches[1];
+        } elseif (str_starts_with($path, 'files/')) {
+            $identifier = $path;
+        }
+
+        if (null !== $identifier && ($file = $this->files->resolve($identifier))) {
             $image = $file->uuid;
         }
 
