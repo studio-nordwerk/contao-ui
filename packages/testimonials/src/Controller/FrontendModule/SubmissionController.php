@@ -12,6 +12,7 @@ use Contao\ModuleModel;
 use Contao\PageModel;
 use Doctrine\DBAL\Connection;
 use Nordwerk\TestimonialsBundle\Submission\OperatorNotification;
+use Nordwerk\TestimonialsBundle\Submission\SubmissionThrottle;
 use Nordwerk\TestimonialsBundle\Submission\SubmissionValidator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,6 +27,7 @@ final class SubmissionController extends AbstractFrontendModuleController
         private readonly SubmissionValidator $validator,
         private readonly OperatorNotification $notification,
         private readonly ContentUrlGenerator $urls,
+        private readonly SubmissionThrottle $throttle,
     ) {
     }
 
@@ -60,6 +62,7 @@ final class SubmissionController extends AbstractFrontendModuleController
 
         if ($request->isMethod('POST') && $formId === $request->request->get('FORM_SUBMIT') && !$request->attributes->get($formId.'-handled')) {
             $request->attributes->set($formId.'-handled', true);
+
             foreach (['name', 'text', 'email', 'role', 'source', 'stars', 'consent', 'website'] as $field) {
                 $value = $request->request->all()[$field] ?? '';
                 $values[$field] = \is_string($value) ? trim($value) : '';
@@ -67,6 +70,10 @@ final class SubmissionController extends AbstractFrontendModuleController
 
             $nonce = $request->request->get('submission_nonce', '');
             $errors = $this->validator->validate($values);
+
+            if (!$this->throttle->accept($request)) {
+                $errors[] = 'nw.testimonials.error.throttled';
+            }
 
             if (!\is_string($nonce) || !isset($nonces[$nonce])) {
                 $errors[] = 'nw.testimonials.error.session';

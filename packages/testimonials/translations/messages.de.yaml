@@ -20,6 +20,7 @@
   "nw.testimonials.error.stars": "Bitte geben Sie einen gültigen Wert für „Sterne“ ein.",
   "nw.testimonials.error.consent": "Bitte stimmen Sie der Verarbeitung und Veröffentlichung zu.",
   "nw.testimonials.error.spam": "Die Einreichung konnte nicht angenommen werden.",
+  "nw.testimonials.error.throttled": "Sie haben in kurzer Zeit mehrere Einreichungen gesendet. Bitte versuchen Sie es in 15 Minuten erneut.",
   "nw.testimonials.error.session": "Das Formular ist abgelaufen oder wurde bereits gesendet. Bitte erneut ausfüllen.",
   "nw.testimonials.mail.subject": "Neue Kundenstimme zur Prüfung",
   "nw.testimonials.mail.body": "Eine Kundenstimme wurde eingereicht. Bitte prüfen Sie Eintrag %id% unter Inhalte → Kundenstimmen im Contao-Backend. Der Eintrag ist unveröffentlicht.",

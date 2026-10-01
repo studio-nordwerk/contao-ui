@@ -5787,7 +5787,9 @@
                 "contao/core-bundle": "^5.7 || ^6.0",
                 "contao/manager-plugin": "^2.0",
                 "nordwerk/contao-teasers-bundle": "^0.1",
-                "php": "^8.3"
+                "php": "^8.3",
+                "symfony/lock": "^7.4 || ^8.0",
+                "symfony/rate-limiter": "^7.4 || ^8.0"
             },
             "type": "contao-bundle",
             "extra": {

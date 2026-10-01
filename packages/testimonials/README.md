@@ -30,10 +30,21 @@ Testimonials, Teasers und Carousel mit `0.1.x-dev` verwenden; siehe Demo-Manifes
    dokumentieren, dann **Veröffentlicht** aktivieren. Ein Prüfvermerk ist Pflicht.
 
 Die E-Mail-Adresse ist freiwillig und intern. Einwilligung wird mit Zeitpunkt,
-gezeigtem Text und Datenschutzlink gespeichert. Keine IP-Speicherung. Checkbox ist
+gezeigtem Text und Datenschutzlink an das Sitzungstoken gebunden gespeichert. Checkbox ist
 anfangs leer; serverseitige Prüfung, Contao-CSRF und ein Sitzungstoken gegen
 wiederholtes Senden sind aktiv. Ein Honeypot hält einfache Bots ab. Alle Einreichungen
 bleiben unveröffentlicht. Die Dankeseite bestätigt nur die Annahme, nicht die Freigabe.
+
+Serverseitig sind pro Clientadresse fünf Sendeversuche in einem gleitenden Fenster
+von 15 Minuten erlaubt, gemeinsam für alle Module und Sitzungen. Bei Überschreitung
+erscheint eine freundliche Meldung; es entstehen weder Datensatz noch Betreiber-Mail.
+Im Symfony-Cache `cache.rate_limiter` liegt nur ein mit Tagesdatum und Anwendungsschlüssel
+gebildetes HMAC-Pseudonym, keine IP im Klartext; der Zustand läuft nach spätestens
+30 Minuten ab. Es werden keine zusätzlichen Cookies oder Drittanbieter verwendet.
+Am UTC-Tageswechsel beginnt ein neues Budget. Hinter Proxies Contao/Symfony Trusted
+Proxies korrekt konfigurieren. Bei mehreren PHP-Hosts benötigen Cache und der Dienst
+`nordwerk.testimonials.rate_limiter_lock_store` gemeinsame Speicherung (z. B. Redis);
+standardmäßig synchronisieren Dateisperren die PHP-Prozesse auf einem Host.
 
 Mailhinweise enthalten nur die Eintrags-ID, keine Kundendaten. Bei Transportfehlern
 bleibt die Einreichung erhalten; der Anwendungslog nennt die ID. Ausstehende Hinweise

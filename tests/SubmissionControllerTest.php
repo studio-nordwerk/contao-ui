@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Nordwerk\ContaoUi\Tests;
 
+use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\CoreBundle\Routing\ContentUrlGenerator;
 use Contao\CoreBundle\Twig\FragmentTemplate;
 use Contao\ManagerBundle\HttpKernel\ContaoKernel;
@@ -11,14 +12,20 @@ use Contao\ModuleModel;
 use Doctrine\DBAL\Connection;
 use Nordwerk\TestimonialsBundle\Controller\FrontendModule\SubmissionController;
 use Nordwerk\TestimonialsBundle\Submission\OperatorNotification;
+use Nordwerk\TestimonialsBundle\Submission\SubmissionThrottle;
 use Nordwerk\TestimonialsBundle\Submission\SubmissionValidator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
+use Symfony\Component\Lock\LockFactory;
+use Symfony\Component\Lock\Store\InMemoryStore;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\CacheStorage;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SubmissionControllerTest extends TestCase
@@ -31,11 +38,16 @@ final class SubmissionControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        ContaoKernel::setProjectDir(getcwd());
+        $projectDir = getcwd();
+        $this->assertIsString($projectDir);
+        ContaoKernel::setProjectDir($projectDir);
         $kernel = new ContaoKernel('dev', true);
         $kernel->boot();
-        $kernel->getContainer()->get('contao.framework')->initialize();
+        $framework = $kernel->getContainer()->get('contao.framework');
+        $this->assertInstanceOf(ContaoFramework::class, $framework);
+        $framework->initialize();
         $db = $kernel->getContainer()->get('database_connection');
+        $this->assertInstanceOf(Connection::class, $db);
         $privacy = $db->fetchOne("SELECT id FROM tl_page WHERE alias='privacy'");
         $this->assertNotFalse($privacy, 'The seeded privacy page is required.');
         $this->model = new ModuleModel();
@@ -59,7 +71,8 @@ final class SubmissionControllerTest extends TestCase
         $this->urls = $this->createMock(ContentUrlGenerator::class);
         $this->session = new Session(new MockArraySessionStorage());
         $notification = new OperatorNotification($this->connection, new NullLogger(), $this->createMock(TranslatorInterface::class));
-        $this->controller = new SubmissionController($this->connection, new SubmissionValidator(), $notification, $this->urls);
+        $limiter = new RateLimiterFactory(['id' => 'test', 'policy' => 'sliding_window', 'limit' => 5, 'interval' => '15 minutes'], new CacheStorage(new ArrayAdapter()), new LockFactory(new InMemoryStore()));
+        $this->controller = new SubmissionController($this->connection, new SubmissionValidator(), $notification, $this->urls, new SubmissionThrottle($limiter, 'test-secret'));
     }
 
     public function testStoresConsentAndPrivacyLinkDisplayedWithTheToken(): void
@@ -69,7 +82,7 @@ final class SubmissionControllerTest extends TestCase
             ->willReturnOnConsecutiveCalls('/original-privacy.html', '/changed-privacy.html')
         ;
         [$displayed] = $this->render();
-        $this->model->nwTestimonialConsent = 'Changed consent';
+        $this->model->setRow(array_replace($this->model->row(), ['nwTestimonialConsent' => 'Changed consent']));
         $this->connection
             ->expects($this->once())
             ->method('insert')
@@ -90,7 +103,10 @@ final class SubmissionControllerTest extends TestCase
 
     public function testActionAndRedirectPreserveBasePathAndQuery(): void
     {
-        $this->urls->method('generate')->willReturn('/privacy.html');
+        $this->urls
+            ->method('generate')
+            ->willReturn('/privacy.html')
+        ;
         $uri = '/cms/submit.html?campaign=autumn&lang=de';
         $server = ['SCRIPT_NAME' => '/cms/index.php', 'SCRIPT_FILENAME' => '/var/www/cms/index.php', 'PHP_SELF' => '/cms/index.php'];
         $get = Request::create($uri, 'GET', server: $server);
@@ -105,17 +121,56 @@ final class SubmissionControllerTest extends TestCase
 
     public function testRepeatedModuleRendersUseUniqueFieldIds(): void
     {
-        $this->urls->method('generate')->willReturn('/privacy.html');
+        $this->urls
+            ->method('generate')
+            ->willReturn('/privacy.html')
+        ;
         $request = Request::create('/submit.html');
         [$first] = $this->render($request);
         [$second] = $this->render($request);
         $this->assertNotSame($first->get('form_id'), $second->get('form_id'));
-        $this->connection->expects($this->once())->method('insert');
+        $this->connection
+            ->expects($this->once())
+            ->method('insert')
+        ;
         $post = $this->post($second);
         [, $response] = $this->render($post);
         [$other] = $this->render($post);
         $this->assertSame(303, $response->getStatusCode());
         $this->assertSame([], $other->get('errors'));
+    }
+
+    public function testFreshSessionsAndTokensCannotBypassSubmissionThrottle(): void
+    {
+        $this->urls
+            ->method('generate')
+            ->willReturn('/privacy.html')
+        ;
+
+        $this->connection
+            ->expects($this->exactly(5))
+            ->method('insert')
+        ;
+
+        $this->connection
+            ->expects($this->exactly(5))
+            ->method('fetchAssociative')
+            ->willReturn(false)
+        ;
+
+        for ($attempt = 0; $attempt < 6; ++$attempt) {
+            $this->session = new Session(new MockArraySessionStorage());
+            $this->model->id = 42 + $attempt;
+            [$displayed] = $this->render();
+            [$result, $response] = $this->render($this->post($displayed));
+
+            if ($attempt < 5) {
+                $this->assertSame(303, $response->getStatusCode());
+            } else {
+                $this->assertContains('nw.testimonials.error.throttled', $result->get('errors'));
+                $this->assertSame(200, $response->getStatusCode());
+            }
+        }
     }
 
     /**
@@ -135,13 +190,14 @@ final class SubmissionControllerTest extends TestCase
     {
         return Request::create(
             $uri,
-            'POST', [
+            'POST',
+            [
                 'FORM_SUBMIT' => $template->get('form_submit'),
                 'submission_nonce' => $template->get('submission_nonce'),
                 'name' => 'Fictional reviewer',
                 'text' => 'Fictional experience',
                 'consent' => '1',
-        ],
+            ],
         );
     }
 }

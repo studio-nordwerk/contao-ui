@@ -20,6 +20,7 @@
   "nw.testimonials.error.stars": "Please enter a valid value for stars.",
   "nw.testimonials.error.consent": "Please consent to processing and publication.",
   "nw.testimonials.error.spam": "The submission could not be accepted.",
+  "nw.testimonials.error.throttled": "You have sent several submissions in a short time. Please try again in 15 minutes.",
   "nw.testimonials.error.session": "This form expired or was already submitted. Please try again.",
   "nw.testimonials.mail.subject": "New testimonial for review",
   "nw.testimonials.mail.body": "A testimonial was submitted. Please review entry %id% under Content → Testimonials in the Contao backend. The entry is unpublished.",
