@@ -20,4 +20,7 @@ $DC exec -T php php bin/console lint:container
 $DC exec -T php vendor/bin/phpstan analyse --configuration=/workspace/phpstan.neon.dist --no-progress --autoload-file=/workspace/$APP_DIR/vendor/autoload.php
 $DC exec -T php vendor/bin/phpunit --configuration=/workspace/phpunit.xml.dist
 vp check
+# Console-Aufrufe oben laufen als root; unter Linux müsste PHP-FPM (www-data) sonst in
+# root-eigene Cache-Verzeichnisse schreiben (Template-Studio-Inspektion fehlt dann).
+$DC exec -T php sh -c 'chown -R www-data:www-data var assets files'
 vp exec playwright test
