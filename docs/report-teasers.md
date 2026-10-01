@@ -64,5 +64,19 @@ Import-Dry-run, Rollback bei ungültigem Datensatz und idempotenter Wiederholung
 Template-Studio und deutsche Backend-Felder, Axe in hell/dunkel und Screenshots.
 Zusätzliche agent-browser-Formularprüfung: keine Axe-Befunde.
 
-Vollständiger Reset/Check und Contao-6-Matrix: noch in Arbeit. Abschließende Ergebnisse
-werden nach erfolgreichem Lauf hier ergänzt.
+| Installation                           | Ergebnis                                               |
+| -------------------------------------- | ------------------------------------------------------ |
+| Contao 5.7.13 / PHP 8.3.35             | `make reset && make check`: grün                       |
+| Contao 6.0.2 / PHP 8.4.26 / DBAL 4.4.5 | `make check6`: grün, danach 5.7-Demo wiederhergestellt |
+
+Je Installation: ECS, Twig-CS, Composer validate/normalize, Twig/YAML/Container-Lint,
+PHPStan Level 8, 18 PHPUnit-Tests (49 Assertions), Vite-Plus-Format/Lint und 47
+Browsertests erfolgreich. Alle fünf Manager-ZIPs werden aus dem Git-Stand erzeugt
+und auf Manifest, Lizenz, vollständige Exporte und unveränderte Runtime-Assets geprüft.
+Die sieben neuen Browsertests sind Teil beider Matrix-Läufe; keine schweren Axe-Befunde.
+Das ist eine technische Prüfung, keine Behauptung vollständiger Barrierefreiheit.
+
+Prüfprotokolle: `docs/check-teasers-contao57.txt` und `docs/check-teasers-contao6.txt`.
+Der Lock-Stand behält die bestehenden Drittanbieter-Versionen der 5.7-Demo bei;
+zusätzlich aufgenommen sind nur die beiden neuen Path-Pakete.
+Keine Pushes, Veröffentlichung, Tags oder Änderungen an bestehenden Bundles.
