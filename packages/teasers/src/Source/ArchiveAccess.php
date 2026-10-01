@@ -19,6 +19,16 @@ final class ArchiveAccess
     }
 
     /**
+     * @param array<int, string> $choices
+     *
+     * @return array<int, string>
+     */
+    public function backendChoices(array $choices, string $permission): array
+    {
+        return array_filter($choices, fn (int $id): bool => $this->security->isGranted($permission, $id), ARRAY_FILTER_USE_KEY);
+    }
+
+    /**
      * @param list<int> $ids
      *
      * @return list<int>

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nordwerk\TeasersBundle\Source;
 
 use Contao\CalendarBundle\Generator\CalendarEventsGenerator;
+use Contao\CalendarBundle\Security\ContaoCalendarPermissions;
 use Doctrine\DBAL\Connection;
 use Nordwerk\TeasersBundle\Card\Card;
 use Nordwerk\TeasersBundle\Query\TeaserQuery;
@@ -30,7 +31,7 @@ final class EventsSource implements TeaserSourceInterface
 
     public function getArchives(): array
     {
-        return array_map('strval', $this->connection->fetchAllKeyValue('SELECT id, title FROM tl_calendar ORDER BY title'));
+        return $this->access->backendChoices(array_map('strval', $this->connection->fetchAllKeyValue('SELECT id, title FROM tl_calendar ORDER BY title')), ContaoCalendarPermissions::USER_CAN_EDIT_CALENDAR);
     }
 
     public function fetch(TeaserQuery $query): iterable

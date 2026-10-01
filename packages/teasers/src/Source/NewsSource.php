@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nordwerk\TeasersBundle\Source;
 
 use Contao\CoreBundle\Routing\ContentUrlGenerator;
+use Contao\NewsBundle\Security\ContaoNewsPermissions;
 use Contao\NewsModel;
 use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Connection;
@@ -33,7 +34,7 @@ final class NewsSource implements TeaserSourceInterface
 
     public function getArchives(): array
     {
-        return array_map('strval', $this->connection->fetchAllKeyValue('SELECT id, title FROM tl_news_archive ORDER BY title'));
+        return $this->access->backendChoices(array_map('strval', $this->connection->fetchAllKeyValue('SELECT id, title FROM tl_news_archive ORDER BY title')), ContaoNewsPermissions::USER_CAN_EDIT_ARCHIVE);
     }
 
     public function fetch(TeaserQuery $query): iterable
