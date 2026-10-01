@@ -93,9 +93,13 @@ services:
     tags: [nordwerk.teaser_source]
 ```
 
-Der Schlüssel ist eindeutig und besteht aus Kleinbuchstaben, Ziffern und Unterstrichen.
+Der Schlüssel ist eindeutig, 1–64 ASCII-Zeichen lang, beginnt mit einem Kleinbuchstaben
+und besteht aus Kleinbuchstaben, Ziffern und Unterstrichen (`[a-z][a-z0-9_]{0,63}`).
+Ungültige oder doppelte Schlüssel werden beim Aufbau der Registry abgewiesen.
 `getLabel()` liefert einen Übersetzungsschlüssel aus `messages`;
-`getArchives()` eine Zuordnung `{positive ID: Name}` für die Backend-Auswahl.
+`getArchives()` eine Zuordnung `{positive ID: Name}` für die Backend-Auswahl, gefiltert
+nach den Rechten der aktuellen Redakteurin. News/Kalender verwenden dieselben
+Archivberechtigungen wie die Contao-Kernmodule.
 `fetch(TeaserQuery $query)` liefert `iterable<Card>`: berechtigte, veröffentlichte
 Einträge in der gewünschten Reihenfolge, höchstens `limit`. Der Renderer begrenzt
 zusätzlich. Keine globalen Benutzer- oder Requestzustände in der Quelle behalten.

@@ -9,6 +9,9 @@ use Nordwerk\TeasersBundle\Query\TeaserQuery;
 
 interface TeaserSourceInterface
 {
+    /**
+     * Unique, persistable ASCII key: [a-z][a-z0-9_]{0,63} (1–64 characters).
+     */
     public function getKey(): string;
 
     /**
@@ -17,6 +20,8 @@ interface TeaserSourceInterface
     public function getLabel(): string;
 
     /**
+     * Only choices authorized for the current backend user.
+     *
      * @return array<int, string>
      */
     public function getArchives(): array;

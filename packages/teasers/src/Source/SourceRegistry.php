@@ -21,7 +21,7 @@ final class SourceRegistry
         foreach ($sources as $source) {
             $key = $source->getKey();
 
-            if (!preg_match('/^[a-z][a-z0-9_]*$/', $key) || isset($this->sources[$key])) {
+            if (!preg_match('/^[a-z][a-z0-9_]{0,63}$/D', $key) || isset($this->sources[$key])) {
                 throw new \LogicException('Invalid or duplicate teaser source key: '.$key);
             }
 

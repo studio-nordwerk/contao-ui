@@ -76,4 +76,21 @@ final class TeaserContractTest extends TestCase
         $this->assertSame('date_desc', $query->sort);
         $this->assertSame(0, $query->minStars);
     }
+
+    public function testSourceKeysMustFitTheStoredField(): void
+    {
+        $source = $this->createMock(TeaserSourceInterface::class);
+        $source
+            ->method('getKey')
+            ->willReturn(str_repeat('a', 64))
+        ;
+        $this->assertSame($source, (new SourceRegistry([$source]))->get(str_repeat('a', 64)));
+        $tooLong = $this->createMock(TeaserSourceInterface::class);
+        $tooLong
+            ->method('getKey')
+            ->willReturn(str_repeat('a', 65))
+        ;
+        $this->expectException(\LogicException::class);
+        new SourceRegistry([$tooLong]);
+    }
 }
