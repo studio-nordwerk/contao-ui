@@ -1,0 +1,22 @@
+{
+  "name": "nordwerk/contao-teasers-bundle",
+  "description": "Source-driven Twig teaser cards for Contao",
+  "license": "MIT",
+  "type": "contao-bundle",
+  "require": {
+    "php": "^8.3",
+    "contao/calendar-bundle": "^5.7 || ^6.0",
+    "contao/core-bundle": "^5.7 || ^6.0",
+    "contao/manager-plugin": "^2.0",
+    "contao/news-bundle": "^5.7 || ^6.0",
+    "nordwerk/contao-carousel-bundle": "^0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Nordwerk\\TeasersBundle\\": "src/"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "Nordwerk\\TeasersBundle\\ContaoManager\\Plugin"
+  }
+}

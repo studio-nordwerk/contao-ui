@@ -1,0 +1,21 @@
+<article class="nw-teaser-card">
+    {% block card_image %}
+        {% if figure %}{{ include('@Contao/component/_figure.html.twig', {figure: figure}) }}{% endif %}
+    {% endblock %}
+    {% block card_title %}
+        <h3>{% if card.link %}<a href="{{ card.link }}">{{ card.title }}</a>{% else %}{{ card.title }}{% endif %}</h3>
+    {% endblock %}
+    {% block card_date %}
+        {% if card.date %}<time datetime="{{ card.date|date('c') }}">{{ card.date|date('d.m.Y') }}</time>{% endif %}
+    {% endblock %}
+    {% block card_text %}<p class="nw-teaser-text">{{ card.text }}</p>{% endblock %}
+    {% block card_meta %}
+        {% for key, value in card.meta %}
+            {% if value %}<p class="nw-teaser-meta nw-teaser-meta-{{ key }}">{{ value }}</p>{% endif %}
+        {% endfor %}
+    {% endblock %}
+    {% block card_stars %}
+        {% if card.stars %}<p>{{ 'nw.teasers.stars'|trans({'%count%': card.stars}) }}</p>{% endif %}
+    {% endblock %}
+    {% block card_price %}{% if card.price %}<p>{{ card.price }}</p>{% endif %}{% endblock %}
+</article>

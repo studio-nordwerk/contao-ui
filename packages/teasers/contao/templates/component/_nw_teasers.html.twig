@@ -1,0 +1,31 @@
+{% if cards %}
+    <style nonce="{{ csp_nonce('style-src') }}">
+        .nw-teasers { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+        .nw-teasers-list { grid-template-columns: 1fr; }
+        .nw-teaser-card { padding: 1.25rem; border: 1px solid currentColor; border-radius: .5rem; min-width: 0; overflow-wrap: anywhere; }
+        .nw-teaser-card img { width: 100%; height: auto; }
+        .nw-teaser-text { white-space: pre-line; }
+        @media (min-width: 960px) { #{{ teaser_id }}.nw-teasers-grid { grid-template-columns: repeat({{ teaser_columns }}, minmax(0, 1fr)); } }
+    </style>
+    {% if teaser_layout == 'carousel' %}
+        {% embed '@Contao/component/_nw_carousel.html.twig' with {
+            carousel_id: teaser_id,
+            carousel_label: teaser_label,
+            carousel_options: {small: 1, medium: 2, large: teaser_columns, arrows: true, dots: true, drag: true, autoplay: 0},
+        } %}
+            {% block carousel_slides %}
+                {% for entry in cards %}
+                    <div class="nw-carousel-slide">{{ include('@Contao/component/_nw_teaser_card.html.twig', entry) }}</div>
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+    {% else %}
+        <div id="{{ teaser_id }}" class="nw-teasers nw-teasers-{{ teaser_layout }}" role="list" aria-label="{{ teaser_label }}">
+            {% for entry in cards %}
+                <div role="listitem">{{ include('@Contao/component/_nw_teaser_card.html.twig', entry) }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% else %}
+    <p>{{ 'nw.teasers.empty'|trans }}</p>
+{% endif %}

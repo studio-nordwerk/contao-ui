@@ -1,0 +1,28 @@
+{
+  "tl_content":
+    {
+      "nwTeaserSource": ["Source", "A tagged source service."],
+      "nwTeaserArchives":
+        ["Archives / calendars", "After changing the source, save a new archive selection."],
+      "nwTeaserCategories":
+        [
+          "News categories",
+          "Optional Codefog News Categories; selected categories are combined with OR.",
+        ],
+      "nwTeaserMinStars": ["Minimum stars", "Testimonials only; 0 includes unrated entries."],
+      "nwTeaserSort": ["Sort order", "Events are always chronological (or ordered by title)."],
+      "nwTeaserLimit": ["Number of entries", "Between 1 and 100 entries."],
+      "nwTeaserLayout": ["Layout", "Grid, list or carousel."],
+      "nwTeaserLabel": ["Accessible label", "Accessible name of the list."],
+      "nwTeaserColumns": ["Columns", "Between 1 and 6 columns on wide screens."],
+      "nw_teaser_legend": "Teasers",
+      "nwTeaserSortOptions":
+        {
+          "date_desc": "Newest first",
+          "date_asc": "Oldest first / upcoming events",
+          "title_asc": "Title A–Z",
+          "stars_desc": "Highest stars first",
+        },
+      "nwTeaserLayoutOptions": { "grid": "Grid", "list": "List", "carousel": "Carousel" },
+    },
+}

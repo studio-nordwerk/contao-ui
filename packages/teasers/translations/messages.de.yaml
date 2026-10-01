@@ -1,0 +1,6 @@
+{
+  "nw.teasers.source.news": "Nachrichten",
+  "nw.teasers.source.events": "Termine",
+  "nw.teasers.empty": "Derzeit sind keine Einträge vorhanden.",
+  "nw.teasers.stars": "%count% von 5 Sternen",
+}

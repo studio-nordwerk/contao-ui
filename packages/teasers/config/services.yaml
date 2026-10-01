@@ -1,0 +1,8 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Nordwerk\TeasersBundle\:
+    resource: ../src/
+    exclude: ../src/{ContaoManager,DependencyInjection,Model,Card,Query,NordwerkTeasersBundle.php}

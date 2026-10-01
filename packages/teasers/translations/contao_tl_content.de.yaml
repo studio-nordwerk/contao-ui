@@ -1,0 +1,33 @@
+{
+  "tl_content":
+    {
+      "nwTeaserSource": ["Quelle", "Ein getaggter Quellendienst."],
+      "nwTeaserArchives":
+        ["Archive / Kalender", "Nach einem Quellenwechsel die Auswahl neu speichern."],
+      "nwTeaserCategories":
+        [
+          "Nachrichtenkategorien",
+          "Optional: Codefog News Categories; ausgewählte Kategorien werden mit ODER verknüpft.",
+        ],
+      "nwTeaserMinStars":
+        ["Mindestens Sterne", "Nur Kundenstimmen; 0 zeigt auch Einträge ohne Sterne."],
+      "nwTeaserSort":
+        [
+          "Sortierung",
+          "Termine werden immer chronologisch aufsteigend ausgegeben (oder nach Titel).",
+        ],
+      "nwTeaserLimit": ["Anzahl", "1 bis 100 Einträge."],
+      "nwTeaserLayout": ["Ansicht", "Raster, Liste oder Carousel."],
+      "nwTeaserLabel": ["Bezeichnung", "Zugänglicher Name der Liste."],
+      "nwTeaserColumns": ["Spalten", "Auf breiten Bildschirmen, 1 bis 6."],
+      "nw_teaser_legend": "Teaser",
+      "nwTeaserSortOptions":
+        {
+          "date_desc": "Neueste zuerst",
+          "date_asc": "Älteste zuerst / nächste Termine",
+          "title_asc": "Titel A–Z",
+          "stars_desc": "Höchste Sterne zuerst",
+        },
+      "nwTeaserLayoutOptions": { "grid": "Raster", "list": "Liste", "carousel": "Carousel" },
+    },
+}

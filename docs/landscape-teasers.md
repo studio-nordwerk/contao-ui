@@ -29,20 +29,20 @@ Verbesserung der Ausgabe. Fremde Templates werden nicht kopiert.
 
 Primärquelle: [tl_recommendation.php](https://github.com/oveleon/contao-recommendation-bundle/blob/d3c0a74b98d56d6b3ec5578a479504ccfc33c139/contao/dca/tl_recommendation.php).
 
-| Oveleon | Ziel / Umgang |
-| --- | --- |
-| tl_recommendation_archive.id/title | explizit ausgewähltes Quellarchiv; Zielarchiv bleibt separat |
-| tl_recommendation.id/pid | Herkunftsschlüssel; wiederholter Import überspringt bestehende Zeilen |
-| author | name |
-| customField | role (Bedeutung im Altprojekt vor Import prüfen) |
-| text | text, HTML in Klartext umwandeln |
-| rating | stars, nur 1–5 |
-| date | date (enthält nach Oveleon-Speicherung auch die Zeit) |
-| email | private email |
-| location | source / Anlass |
-| imageUrl | Herkunftsnotiz; keine externen Downloads, lokale öffentliche Dateien auf UUID prüfen |
-| published, verified, start, stop | im Herkunftsprotokoll erhalten; Ziel immer unveröffentlicht |
-| title, alias, teaser, scope, featured, cssClass, time | Herkunftsprotokoll, kein Leser-/Sitemap-Nachbau |
+| Oveleon                                               | Ziel / Umgang                                                                        |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| tl_recommendation_archive.id/title                    | explizit ausgewähltes Quellarchiv; Zielarchiv bleibt separat                         |
+| tl_recommendation.id/pid                              | Herkunftsschlüssel; wiederholter Import überspringt bestehende Zeilen                |
+| author                                                | name                                                                                 |
+| customField                                           | role (Bedeutung im Altprojekt vor Import prüfen)                                     |
+| text                                                  | text, HTML in Klartext umwandeln                                                     |
+| rating                                                | stars, nur 1–5                                                                       |
+| date                                                  | date (enthält nach Oveleon-Speicherung auch die Zeit)                                |
+| email                                                 | private email                                                                        |
+| location                                              | source / Anlass                                                                      |
+| imageUrl                                              | Herkunftsnotiz; keine externen Downloads, lokale öffentliche Dateien auf UUID prüfen |
+| published, verified, start, stop                      | im Herkunftsprotokoll erhalten; Ziel immer unveröffentlicht                          |
+| title, alias, teaser, scope, featured, cssClass, time | Herkunftsprotokoll, kein Leser-/Sitemap-Nachbau                                      |
 
 `verified` ist Oveleons Opt-in-Status, kein Nachweis eines Kaufs und kein übertragener
 Einwilligungsnachweis. Import erfindet keine Einwilligung. Freigabe und Rechte an
