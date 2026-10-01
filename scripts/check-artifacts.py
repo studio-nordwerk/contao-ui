@@ -28,7 +28,12 @@ with tempfile.TemporaryDirectory(prefix='contao-ui-artifacts-') as directory:
             assert all(n in ('composer.json', 'README.md', 'LICENSE', 'CHANGELOG.md') or n.startswith(allowed) for n in names), names
             for required in ('composer.json', 'README.md', 'LICENSE', 'CHANGELOG.md', 'src/ContaoManager/Plugin.php', 'config/services.yaml', 'contao/templates/.twig-root', f'public/{name}.svg', f'docs/{name}.png', f'docs/{name}-dark.png'):
                 assert required in names, f'{name}: missing {required}'
-            assert archive.read('docs/integration.md') == (ROOT / 'docs/integration.md').read_bytes(), 'Stale integration copy'
+            integration_source = ROOT / (f'packages/{name}/docs/integration.md' if name in ('teasers', 'testimonials') else 'docs/integration.md')
+            assert archive.read('docs/integration.md') == integration_source.read_bytes(), 'Stale integration copy'
+            if name in ('teasers', 'testimonials'):
+                integration = archive.read('docs/integration.md').decode()
+                assert 'GalleryFigures' not in integration and 'nw_sheet_assets' not in integration and 'nw_gallery_assets' not in integration, f'{name}: documents unavailable components'
+                assert ('TeaserSourceInterface' if name == 'teasers' else 'submission_nonce') in integration, f'{name}: missing package integration contract'
             manifest = json.loads(archive.read('composer.json'))
             assert manifest['name'] == f'nordwerk/contao-{name}-bundle'
             assert manifest['version'] == '0.1.0-dev'

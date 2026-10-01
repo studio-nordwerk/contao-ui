@@ -62,9 +62,10 @@ sind Teil derselben kleinen Sammlung, es gibt keine zusätzliche Archiv-Mandante
 ## Twig und Darstellung
 
 `frontend_module/nw_testimonial_form.html.twig` im Template Studio überschreiben.
-Verfügbar: `configured`, `form_id`, `form_action`, `values`, `errors` (Übersetzungsschlüssel),
+Verfügbar: `configured`, `form_id` (DOM-ID pro Renderinstanz), `form_submit` (Modulkennung),
+`form_action`, `values`, `errors` (Übersetzungsschlüssel),
 `success`, `consent_text`, `privacy_url`, `submission_nonce`. `contao.request_token`,
-`FORM_SUBMIT` und `submission_nonce` bei eigenen Templates beibehalten. Beschriftungen,
+`FORM_SUBMIT={{ form_submit }}` und `submission_nonce` bei eigenen Templates beibehalten. Beschriftungen,
 Pflichtfelder und Fehlerzusammenfassung zugänglich lassen.
 
 Die Ausgabe ist eine getaggte Teaser-Quelle (`testimonials`). Name wird Kartentitel,
@@ -102,8 +103,8 @@ gleichen IDs müssen vorher getrennt migriert werden.
 
 `author` → Name; `customField` → Rolle/Firma; `location` → Quelle/Anlass;
 `text` → Klartext; `rating` → Sterne; `date` → Datum; `email` → private E-Mail.
-Bedeutung von `customField` vorab prüfen. Lokale `imageUrl`-Pfade im Contao-Dateibestand
-werden auf UUID abgebildet; externe URLs werden nur im Herkunftsprotokoll aufbewahrt,
+Bedeutung von `customField` vorab prüfen. Lokale `imageUrl`-Referenzen als `files/…`,
+`/files/…` oder `{{file::UUID}}` im öffentlichen Contao-Dateibestand werden auf UUID abgebildet; externe URLs werden nur im Herkunftsprotokoll aufbewahrt,
 niemals heruntergeladen. Alttext, Zusatzfelder und Veröffentlichungs-/Opt-in-Status
 bleiben im internen JSON-Protokoll erhalten. Alle Ziele sind unveröffentlicht und
 haben keinen erfundenen Einwilligungsnachweis. Bild- und Veröffentlichungsrechte

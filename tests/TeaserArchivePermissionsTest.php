@@ -47,7 +47,7 @@ final class TeaserArchivePermissionsTest extends TestCase
                     $this->assertSame($permission, $attribute);
 
                     return $admin || 1 === (int) $id;
-                }
+                },
             )
         ;
         $access = new ArchiveAccess($connection, $security);

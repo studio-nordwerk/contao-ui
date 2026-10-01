@@ -27,6 +27,7 @@ final class OveleonImageImportTest extends TestCase
         $framework->initialize();
         $file = FilesModel::findByPath('files/contao-ui-gallery/study-1.jpg');
         $this->assertInstanceOf(FilesModel::class, $file);
+        $this->assertIsString($file->uuid);
         $uuid = StringUtil::binToUuid($file->uuid);
         $importer = new OveleonImporter($this->createMock(Connection::class), new PublicFiles());
         $map = new \ReflectionMethod($importer, 'map');

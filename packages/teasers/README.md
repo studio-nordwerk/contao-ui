@@ -90,6 +90,7 @@ mit `nordwerk.teaser_source` getaggt. Ohne Autoconfiguration:
 services:
   App\Teaser\NewProductsSource:
     autowire: true
+    autoconfigure: false
     tags: [nordwerk.teaser_source]
 ```
 
@@ -104,32 +105,100 @@ Archivberechtigungen wie die Contao-Kernmodule.
 Einträge in der gewünschten Reihenfolge, höchstens `limit`. Der Renderer begrenzt
 zusätzlich. Keine globalen Benutzer- oder Requestzustände in der Quelle behalten.
 
+Das folgende vollständige Dienstbeispiel nutzt ein **beispielhaftes Shop-Schema**,
+keine Behauptung über das spätere Mini-Shop-Datenmodell:
+`tl_shop_category(id, title)` und
+`tl_shop_product(id, category_id, title, description, image_uuid, reader_url,
+created_at, price_cents, published, available)`. Preise sind hier EUR inklusive
+Steuer. Der Shop stellt die Voter `shop.category.edit` (Backend-Auswahl) und
+`shop.category.view` (Frontend-Zugriff) bereit; Schema und Voter sind Voraussetzungen
+im Fremdpaket. Query und Kartenmapping sind vollständig; Tabellennamen/Felder und
+Preisformat an den tatsächlichen Shop anpassen.
+
 ```php
+<?php
+
+declare(strict_types=1);
+
 namespace App\Teaser;
 
+use Doctrine\DBAL\ArrayParameterType;
+use Doctrine\DBAL\Connection;
 use Nordwerk\TeasersBundle\Card\Card;
 use Nordwerk\TeasersBundle\Query\TeaserQuery;
 use Nordwerk\TeasersBundle\Source\TeaserSourceInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 
 final class NewProductsSource implements TeaserSourceInterface
 {
-    public function getKey(): string { return 'new_products'; }
-    public function getLabel(): string { return 'shop.new_products'; }
-    public function getArchives(): array { return [1 => 'Shop']; }
+    public function __construct(
+        private readonly Connection $connection,
+        private readonly Security $security,
+    ) {
+    }
+
+    public function getKey(): string
+    {
+        return 'new_products';
+    }
+
+    public function getLabel(): string
+    {
+        return 'shop.new_products';
+    }
+
+    public function getArchives(): array
+    {
+        $choices = [];
+        foreach ($this->connection->fetchAllKeyValue('SELECT id, title FROM tl_shop_category ORDER BY title') as $id => $title) {
+            if ($this->security->isGranted('shop.category.edit', (int) $id)) {
+                $choices[(int) $id] = (string) $title;
+            }
+        }
+
+        return $choices;
+    }
 
     public function fetch(TeaserQuery $query): iterable
     {
-        if (!in_array(1, $query->archives, true)) { return; }
-        // Query your shop repository here; apply publication, visibility, sort and limit.
-        yield new Card(
-            title: 'Example product',
-            text: 'Plain text description',
-            link: '/shop/example.html',
-            price: '19,00 €',
+        $categories = array_values(array_filter($query->archives, fn (int $id): bool => $this->security->isGranted('shop.category.view', $id)));
+        if (!$categories) {
+            return;
+        }
+
+        $order = match ($query->sort) {
+            'date_asc' => 'created_at ASC',
+            'title_asc' => 'title ASC',
+            default => 'created_at DESC',
+        };
+        $rows = $this->connection->fetchAllAssociative(
+            'SELECT * FROM tl_shop_product WHERE category_id IN (?) AND published=1 AND available=1 AND created_at<=? ORDER BY '.$order.', id DESC LIMIT '.$query->limit,
+            [$categories, time()],
+            [ArrayParameterType::INTEGER],
         );
+        $plain = static fn (string $value): string => html_entity_decode(strip_tags($value), ENT_QUOTES | ENT_HTML5);
+
+        foreach ($rows as $row) {
+            yield new Card(
+                title: $plain((string) $row['title']),
+                text: $plain((string) $row['description']),
+                image: $row['image_uuid'] ? (string) $row['image_uuid'] : null,
+                link: (string) $row['reader_url'],
+                date: (new \DateTimeImmutable())->setTimestamp((int) $row['created_at']),
+                price: number_format((int) $row['price_cents'] / 100, 2, ',', '.').' €',
+            );
+        }
     }
 }
 ```
+
+Die YAML-Registrierung oben gehört in `config/services.yaml` der Anwendung, der
+Dienst in `src/Teaser/NewProductsSource.php`; `translations/messages.de.yaml`
+enthält `shop.new_products: Neue Produkte`. Dieses Beispiel verwendet die
+Archiv-Auswahl für Kategorien; `categories` und `minStars` bleiben ungenutzt,
+`stars_desc` fällt auf neueste Produkte zurück. **Hervorgehobene Produkte** können
+als eigene Quelle mit `featured=1` filtern; **passende Produkte** benötigen einen
+requestabhängigen Produktkontext und dieselben Sichtbarkeitsprüfungen.
 
 `TeaserQuery`: `archives`, `categories`, `limit`, `sort` (`date_desc`, `date_asc`,
 `title_asc`, `stars_desc`), `minStars`. `Card`: `title`, `text`, `image` (lokale UUID

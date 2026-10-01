@@ -1,67 +1,65 @@
-# Twig-Bausteine für andere Bundles
+# Teaser-Integration
 
-Die Bausteine benötigen kein Inhaltselement. Sie funktionieren in einem Contao-Frontend-Request und laden ihre Assets automatisch über `nw_carousel_assets()`, `nw_sheet_assets(dismissible = true)` und `nw_gallery_assets(interactive = true)`. Bei eigenem Markup dürfen diese Funktionen mit `{% do … %}` aufgerufen werden. Benannte Contao-Twig-Sammlungen binden CSS und Module je Dokument einmal ein, auch bei mehreren verschachtelten Komponenten. Plugins laden nach Bedarf. Keine manuelle Einbindung im Seitenlayout nötig.
+Das Paket installiert Contao News, Calendar und `nordwerk/contao-carousel-bundle`.
+Kundenstimmen benötigen zusätzlich `nordwerk/contao-testimonials-bundle`.
+Die hier beschriebenen Templates und Dienste sind mit diesen Abhängigkeiten verfügbar.
 
-IDs müssen im Dokument eindeutig sein und dürfen nur ASCII-Buchstaben, Ziffern und Bindestriche enthalten (mit Buchstaben beginnen). Optionen sind vertrauenswürdige Template-Konfiguration, keine ungeprüften Formulardaten.
+## Quellenvertrag
 
-## Carousel
+Ein Dienst implementiert `Nordwerk\TeasersBundle\Source\TeaserSourceInterface`
+und erhält das Tag `nordwerk.teaser_source` (bei Autoconfiguration automatisch).
+`getKey()` liefert einen eindeutigen Schlüssel nach `[a-z][a-z0-9_]{0,63}` mit
+höchstens 64 ASCII-Zeichen; ungültige/mehrfach verwendete Schlüssel brechen den
+Registry-Aufbau ab. `getLabel()` ist ein Übersetzungsschlüssel aus `messages`.
+`getArchives()` liefert `{positive ID: Name}` ausschließlich für vom aktuellen
+Backend-Benutzer auswählbare Archive/Kategorien. Die eingebauten Quellen prüfen
+Contao-News- beziehungsweise Kalenderberechtigungen. Eigene Quellen müssen ihre
+Backend-Berechtigungen selbst anwenden.
 
-`@Contao/component/_nw_carousel.html.twig`: `carousel_id`, `carousel_label` und `carousel_options`. Block `carousel_slides`: genau ein direktes HTML-Element je Slide. `small`, `medium`, `large` sind Zahlen von 1–12 (Bruchteile erlaubt), Container-Breakpoints 600/960 px. Optionen: `arrows`, `dots`, `drag` (bool), `autoplay` (0 oder Millisekunden 1000–60000), `initial` (0-basierter Index), `rewind` (bool). Deutsche/englische Steuerungslabels kommen aus der aktuellen Locale.
+`fetch(TeaserQuery $query)` liefert höchstens `limit` öffentliche, für den aktuellen
+Frontend-Benutzer berechtigte `Card`-Objekte in der gewünschten Reihenfolge.
+Leere Archivauswahl liefert keine Einträge. `TeaserQuery` enthält `archives`,
+`categories`, `limit` (1–100), `sort` (`date_desc`, `date_asc`, `title_asc`,
+`stars_desc`) und `minStars`. Nicht unterstützte Filter und Sortierungen dokumentieren.
+Keine Benutzer-/Requestzustände dauerhaft im Quelldienst behalten.
 
-```twig
-{% embed '@Contao/component/_nw_carousel.html.twig' with {
-    carousel_id: 'featured-products', carousel_label: 'Unsere Produkte',
-    carousel_options: {small: 1, medium: 2, large: 3, drag: true}
-} %}
-    {% block carousel_slides %}
-        {% for product in products %}<article>{{ product.name }}</article>{% endfor %}
-    {% endblock %}
-{% endembed %}
-```
+`Card`: `title`, `text` (Klartext), `image` (öffentliche lokale Contao-UUID/Pfad),
+`link` (HTTP(S), absoluter lokaler Pfad oder Fragment), `date` (`DateTimeImmutable`
+oder null), `meta` (String-Zuordnung), `price` (fertiger Anzeige-String oder null),
+`stars` (1–5 oder null). Keine privaten Einreichungsdaten in Karten ausgeben.
+Ein vollständiger Fremd-Quelldienst einschließlich Registrierung steht im [README](../README.md#eigene-quellen).
 
-## Sheet
+## Twig-Vertrag
 
-`@Contao/component/_nw_sheet.html.twig`: `sheet_id`, `sheet_label`, optional `sheet_class`, `sheet_options`. Block `sheet_body`: beliebiger HTML-Inhalt. Optionen: `presentation` (`bottom`, `start`, `end`, `center`), `dismissible`, `drag`, `history` (bool), `snaps` (aufsteigende Viewport-Prozentwerte zwischen 5 und 95, z. B. `[50, 75]`). Keine Snaps für zentrierte Dialoge oder Seitenleisten nötig. Trigger können überall im Dokument stehen.
+Das Template Studio kann `content_element/nw_teaser.html.twig`,
+`frontend_module/nw_teaser.html.twig`, `component/_nw_teasers.html.twig` und
+`component/_nw_teaser_card.html.twig` überschreiben.
 
-```twig
-<button type="button" commandfor="mini-cart" command="show-modal">Warenkorb öffnen</button>
-{% embed '@Contao/component/_nw_sheet.html.twig' with {
-    sheet_id: 'mini-cart', sheet_label: 'Warenkorb',
-    sheet_options: {presentation: 'end', dismissible: true, snaps: [], drag: false, history: true}
-} %}
-    {% block sheet_body %}{% include '@MyShop/cart.html.twig' %}{% endblock %}
-{% endembed %}
-```
+Die Liste erhält `cards` als Liste von `{card, figure}`, `teaser_id` (eindeutige
+DOM-ID), `teaser_label`, `teaser_layout` (`grid`, `list`, `carousel`) und
+`teaser_columns` (1–6). `figure` ist eine Contao-Studio-Figure oder null; der Renderer
+prüft den öffentlichen Dateibestand und nutzt die konfigurierte Contao-Bildgröße.
+Der Renderer setzt `private, no-store`, damit Veröffentlichung und Mitgliedsrechte
+sofort wirken. Eigene Controller müssen diesen Cache-Vertrag ebenfalls beachten.
 
-Native Invoker Commands öffnen ohne JavaScript in unterstützten Browsern; die Original-Komponente ergänzt ältere Browser. Für einen nicht wegklickbaren Dialog einen expliziten Button mit `command="close"` anbieten. Links können stattdessen im eigenen JS die dokumentierte Sheet-API aufrufen; ein echter Button mit `commandfor` ist der native Auslöser.
-
-## Produktbilder mit Lightbox
-
-`@Contao/component/_nw_gallery.html.twig`: `gallery_id`, `gallery_label`, `gallery_images` (Liste von Contao-`Figure`-Objekten), optional `gallery_layout` (`grid`, `mosaic`, `rail`), `gallery_columns` (1–6), `gallery_lightbox` (bool, Standard `true`). Thumbnail, Vollbild und Bildunterschrift nutzen die Kern-Figure-/Picture-Blöcke. Metadatenlinks auf externe Ziele bleiben Links. Nur Figures mit `hasLightbox` und `lightbox.hasImage` werden als Lightbox-Bilder behandelt.
-
-Ein Controller kann den Dienst `Nordwerk\GalleryBundle\Image\GalleryFigures` injizieren:
-
-```php
-$images = $galleryFigures->build(
-    $productImageUuids, // Liste binärer/String-UUIDs oder serialisierte Multi-Source
-    [0, 0, $contaoImageSizeId],
-    'custom', // Auswahlreihenfolge; alternativ name_asc/desc, date_asc/desc
-    lightbox: true,
-);
-$template->set('product_images', $images);
-```
+Die Karte bietet `card_image`, `card_title`, `card_date`, `card_text`, `card_meta`,
+`card_stars` und `card_price`. Twig escaped den Quellen-Klartext automatisch.
 
 ```twig
-{% include '@Contao/component/_nw_gallery.html.twig' with {
-    gallery_id: 'product-images-' ~ product.id,
-    gallery_label: 'Produktbilder: ' ~ product.name,
-    gallery_images: product_images,
-    gallery_layout: 'rail', gallery_columns: 3, gallery_lightbox: true
-} %}
+{% extends '@Contao/component/_nw_teaser_card.html.twig' %}
+
+{% block card_price %}
+    {% if card.price %}<p class="product-price">{{ card.price }}</p>{% endif %}
+{% endblock %}
 ```
 
-Einzeln erzeugte Figures sind ebenfalls möglich: `figure(uuid, [800, 600, 'proportional'], {enableLightbox: true})`. Die Lightbox-Bildgröße kommt wie im Kern aus dem Seitenlayout. Ohne JavaScript zeigt die Galerie alle Vorschaubilder und öffnet große Bilder als normale Links; die Leiste bleibt scrollbar. Mit JavaScript öffnet der gewählte Link direkt sein Bild im Vollbild-Sheet. Pfeile, Home/End, Escape und Wischen verwenden die Original-APIs. Der Fokus kehrt zum Link zurück.
+Für eigene Controller kann `Nordwerk\TeasersBundle\Rendering\TeaserRenderer`
+injiziert werden: `render($template, $data, $uniqueDomId)` erwartet die DCA-Felder
+`nwTeaserSource`, `nwTeaserArchives`, `nwTeaserCategories`, `nwTeaserLimit`,
+`nwTeaserSort`, `nwTeaserMinStars`, `nwTeaserLayout`, `nwTeaserColumns`,
+`nwTeaserLabel` und `size` (Contao-Bildgröße). Rückgabe ist eine private Response.
 
-Die Galerie verwendet ein Raster mit wechselnden Formaten statt Spalten-Masonry: visuelle Reihenfolge, Tab-Reihenfolge und Dateisortierung bleiben gleich. Themes können die eigenen Galerie-Regeln und die dokumentierten `--sc-*`-/`--ss-*`-Tokens überschreiben. Die Original-npm-Dateien bleiben unverändert.
-
-Die Mini-Shop- und Seminar-Repositories wurden nicht verändert. Grundlage für FigureBuilder und responsive Metadaten: [Contao Image Studio](https://docs.contao.org/5.x/dev/framework/image-processing/image-studio/).
+Die Carousel-Ansicht bindet `@Contao/component/_nw_carousel.html.twig` aus der
+installierten Carousel-Abhängigkeit ein; Assets werden automatisch geladen.
+Ohne JavaScript bleiben alle Karten und Links erreichbar. Es entsteht kein
+Review-/AggregateRating-Markup.
