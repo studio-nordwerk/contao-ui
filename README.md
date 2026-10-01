@@ -14,4 +14,4 @@ Demo-Backend: `admin@example.test` / `contao-ui-local-demo` (nur lokal).
 
 `make artifacts` erzeugt drei versionierte Contao-Manager-ZIPs aus `HEAD`. Die CI-Datei bereitet Checks für 5.7/6.0 und ZIPs als Workflow-Artefakte vor.
 
-Kein Remote eingerichtet, keine Veröffentlichung. MIT.
+Die Pakete erscheinen als eigenständige Read-only-Repositories [contao-carousel](https://github.com/studio-nordwerk/contao-carousel), [contao-sheet](https://github.com/studio-nordwerk/contao-sheet) und [contao-gallery](https://github.com/studio-nordwerk/contao-gallery); dieses Monorepo ist die einzige Schreibquelle. MIT.

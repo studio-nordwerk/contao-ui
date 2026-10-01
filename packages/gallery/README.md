@@ -4,11 +4,11 @@
 
 Contaos responsive Bilder und Dateimetadaten als Raster, wechselnde Formate oder native Bilderleiste, ohne Swiper, jQuery oder JavaScript-Laufzeitabhängigkeiten. Die Sheet-Lightbox ergänzt Tastatur und Wischen; ohne JavaScript bleiben Bilder und Links nutzbar.
 
-Für Contao **^5.7 || ^6.0**. PHP 8.3+ für 5.7, PHP 8.4+ für 6.0. MIT. Release vorbereitet, noch nicht veröffentlicht.
+Für Contao **^5.7 || ^6.0**. PHP 8.3+ für 5.7, PHP 8.4+ für 6.0. MIT. Version 0.1.0.
 
 ## Installation
 
-Im Contao Manager nach `nordwerk/contao-gallery-bundle` suchen (nach Veröffentlichung). Alternativ:
+Im Contao Manager nach `nordwerk/contao-gallery-bundle` suchen oder das Manager-ZIP aus den [GitHub-Releases](https://github.com/studio-nordwerk/contao-gallery/releases) hochladen. Alternativ:
 
 ```sh
 composer require nordwerk/contao-gallery-bundle

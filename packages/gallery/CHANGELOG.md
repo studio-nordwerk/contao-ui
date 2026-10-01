@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 – 2026-10-01
 
 - Preserve browser keyboard shortcuts with modifier keys inside the lightbox.
 - Native Contao file selection and FigureBuilder, responsive pictures, lazy loading and metadata captions.

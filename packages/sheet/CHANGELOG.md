@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 – 2026-10-01
 
 - Filter sheet and navigation target lists by native Contao record read permissions.
 - Native nested bottom sheets, sidebars and centered dialogs with snap points and dismissal settings.

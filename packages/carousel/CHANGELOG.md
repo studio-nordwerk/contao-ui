@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 – 2026-10-01
 
 - Isolate nested carousel controls and mouse dragging so child interaction cannot move the parent.
 - Native nested content, responsive slide counts, arrows, dots, mouse dragging and accessible autoplay.
