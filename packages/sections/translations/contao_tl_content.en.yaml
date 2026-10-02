@@ -81,7 +81,7 @@ tl_content:
     - For example access, parking, stop. Optional.
   nwRouteUrl:
     - Own route link
-    - "Leave empty: \"Plan route\" opens OpenStreetMap with the address."
+    - 'Leave empty: "Plan route" opens OpenStreetMap with the address.'
   nwColumns:
     value: Number
     label: Label
