@@ -1,0 +1,14 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% set attributes = attrs().addClass('nw-person').mergeWith(attributes|default) %}
+{% block wrapper_tag %}article{% endblock %}
+{% block inner %}
+    {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
+    {{ include('@Contao/component/_nw_section_media.html.twig', {image: image, size: [600, 750, 'crop'], class: 'nw-person__image'}) }}
+    <div class="nw-person__text">
+        {% if plain.name %}<h3>{{ plain.name }}</h3>{% endif %}
+        {% if plain.role %}<p class="nw-person__role">{{ plain.role }}</p>{% endif %}
+        {% if plain.text %}<p class="nw-person__about">{{ plain.text }}</p>{% endif %}
+    </div>
+    {% endif %}
+{% endblock %}
+{% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}

@@ -1,0 +1,11 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% set attributes = attrs().addClass(['nw-section', 'nw-callout']).mergeWith(attributes|default) %}
+{% block wrapper_tag %}section{% endblock %}
+{% block inner %}
+    {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
+    {% if headline.text %}{{ block('headline_component') }}{% endif %}
+    {% if plain.text %}<p class="nw-callout__text">{{ plain.text|nl2br }}</p>{% endif %}
+    {% if primary %}<a class="nw-button" href="{{ primary.href }}">{{ primary.text }}</a>{% endif %}
+    {% endif %}
+{% endblock %}
+{% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}

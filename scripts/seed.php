@@ -121,6 +121,54 @@ try {
         }
     }
 
+    // Sections: every element once on one page, with the generated studies as
+    // pictures. Logos get their own folder: the gallery demo shows a whole folder
+    // and expects eight studies.
+    $logoUuids = [];
+    $logoFolder = 'files/contao-ui-sections';
+    if (!is_dir($logoFolder)) {
+        mkdir($logoFolder, 0775, true);
+    }
+    file_put_contents($logoFolder.'/.public', '');
+
+    foreach (['Nordlicht' => 'M6 30 18 10l12 20Z', 'Kreiswerk' => 'M18 8a12 12 0 1 0 0.01 0Z', 'Stufe Drei' => 'M6 30h8v-8h8v-8h8', 'Wellenhaus' => 'M4 22c5-6 9-6 14 0s9 6 14 0'] as $name => $path) {
+        $file = $logoFolder.'/logo-'.strtolower(str_replace(' ', '-', $name)).'.svg';
+        file_put_contents($file, '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 40" width="170" height="40"><path d="'.$path.'" fill="none" stroke="#7a7a7a" stroke-width="3" stroke-linejoin="round"/><text x="42" y="26" font-family="Georgia, serif" font-size="17" fill="#7a7a7a">'.$name.'</text></svg>');
+        $logo = Dbafs::addResource($file);
+        $logo->meta = serialize(['de' => ['alt' => 'Logo '.$name.' (fiktiv)', 'title' => '', 'link' => '', 'caption' => '']]);
+        $logo->save();
+        $logoUuids[] = $logo->uuid;
+    }
+    $sectionsPage = $save('tl_page', ['pid' => $rootId, 'sorting' => 640, 'tstamp' => $now, 'title' => 'Abschnitte', 'type' => 'regular', 'alias' => 'sections', 'published' => 1]);
+    $sectionsArticle = $save('tl_article', ['pid' => $sectionsPage, 'tstamp' => $now, 'title' => 'Abschnitte', 'alias' => 'sections', 'inColumn' => 'main', 'published' => 1]);
+    $headline = static fn (string $text, string $unit = 'h2'): string => serialize(['value' => $text, 'unit' => $unit]);
+    $rows = static fn (array $rows, array $keys): string => serialize(array_map(static fn (array $row): array => array_combine($keys, $row), $rows));
+    $section = static fn (int $sorting, array $data, int $pid = 0, string $ptable = 'tl_article'): int => $save('tl_content', ['pid' => $pid ?: $sectionsArticle, 'ptable' => $ptable, 'tstamp' => $now, 'sorting' => $sorting, ...$data]);
+    $section(128, ['type' => 'nw_page_head', 'nwEyebrow' => 'Über uns', 'headline' => $headline('Eine kleine Werkstatt.', 'h1'), 'nwText' => 'Fiktives Beispiel: So sieht eine Inhaltsseite aus, die nur aus Abschnitten besteht.', 'nwImage' => $imageUuids[1]]);
+    $section(192, ['type' => 'nw_promises', 'nwLines' => "Von Hand gemacht\nVersand in 2–3 Werktagen\nAntwort am selben Tag"]);
+    $section(256, ['type' => 'nw_split', 'headline' => $headline('Bild und Text'), 'text' => '<p>Ein Text mit Bild daneben. Die Bildposition wechselt mit einem Feld, auf dem Handy steht das Bild oben.</p>', 'nwImage' => $imageUuids[2], 'nwImagePosition' => 'left', 'nwUrl' => '/carousel.html', 'nwLinkText' => 'Zum Carousel']);
+    $section(320, ['type' => 'nw_split', 'headline' => $headline('Gespiegelt'), 'text' => '<p>Dasselbe Element mit dem Bild rechts.</p>', 'nwImage' => $imageUuids[3], 'nwImagePosition' => 'right']);
+    $section(384, ['type' => 'nw_figures', 'headline' => $headline('Zahlen'), 'nwFigures' => $rows([['6 Wo.', 'Reifezeit'], ['40', 'Stück je Charge'], ['12', 'Sorten im Jahr'], ['2019', 'gegründet']], ['value', 'label']), 'nwNote' => 'Beispielzahlen.']);
+    $section(448, ['type' => 'nw_features', 'headline' => $headline('Merkmale'), 'nwIntro' => 'Symbol, Titel und ein kurzer Text.', 'nwFeatures' => $rows([['leaf', 'Natürlich', 'Wenige Zutaten, die wir kennen.'], ['truck', 'Schnell da', 'Versand in zwei bis drei Werktagen.'], ['chat', 'Erreichbar', 'Fragen beantworten wir am selben Tag.'], ['shield', 'Sicher', 'Bezahlen per Rechnung oder Überweisung.']], ['icon', 'title', 'text'])]);
+    $section(512, ['type' => 'nw_steps', 'headline' => $headline('Ablauf'), 'nwSteps' => $rows([['Anfragen', 'Sie schreiben uns, was Sie brauchen.'], ['Abstimmen', 'Wir melden uns mit einem Vorschlag.'], ['Umsetzen', 'Wir fertigen in kleiner Charge.'], ['Liefern', 'Das Paket kommt zu Ihnen.']], ['title', 'text'])]);
+    $team = $section(576, ['type' => 'nw_team', 'headline' => $headline('Team'), 'nwTeamLayout' => 'grid', 'nwNote' => 'Fiktive Personen mit Studienbildern.']);
+
+    foreach ([['Anna Beispiel', 'Gründerin', 'Leitet die Werkstatt.'], ['Ben Muster', 'Versand', 'Packt jede Bestellung.'], ['Cleo Probe', 'Rezepturen', 'Entwickelt neue Sorten.']] as $index => [$name, $role, $about]) {
+        $section(($index + 1) * 128, ['type' => 'nw_person', 'nwName' => $name, 'nwRole' => $role, 'nwText' => $about, 'nwImage' => $imageUuids[4 + $index]], $team, 'tl_content');
+    }
+    $carouselTeam = $section(608, ['type' => 'nw_team', 'headline' => $headline('Team als Karussell'), 'nwTeamLayout' => 'carousel']);
+
+    foreach (['Dora', 'Emil', 'Fritzi', 'Gustav', 'Hanna'] as $index => $name) {
+        $section(($index + 1) * 128, ['type' => 'nw_person', 'nwName' => $name.' Beispiel', 'nwRole' => 'Werkstatt', 'nwImage' => $imageUuids[$index % 8]], $carouselTeam, 'tl_content');
+    }
+    $section(640, ['type' => 'nw_logos', 'headline' => $headline('Erhältlich bei'), 'nwLogos' => serialize($logoUuids)]);
+    $section(704, ['type' => 'nw_contact', 'headline' => $headline('Kontakt'), 'nwName' => 'Werkstatt Beispiel', 'nwStreet' => 'Musterweg 1', 'nwPostal' => '10115', 'nwCity' => 'Berlin', 'nwPhone' => '030 000000 (Demo)', 'nwEmail' => 'werkstatt@example.test', 'nwHours' => $rows([['Do – Fr', '12 – 18 Uhr'], ['Sa', '10 – 14 Uhr']], ['days', 'times']), 'nwHint' => 'Fiktive Adresse.']);
+    $section(768, ['type' => 'nw_callout', 'headline' => $headline('Abschluss-Kachel'), 'nwText' => 'Eine Einladung am Seitenende.', 'nwUrl' => '/gallery.html', 'nwLinkText' => 'Zur Galerie']);
+    // The hero carries its own h1, so it gets its own page.
+    $heroPage = $save('tl_page', ['pid' => $rootId, 'sorting' => 704, 'tstamp' => $now, 'title' => 'Hero', 'type' => 'regular', 'alias' => 'sections-hero', 'published' => 1]);
+    $heroArticle = $save('tl_article', ['pid' => $heroPage, 'tstamp' => $now, 'title' => 'Hero', 'alias' => 'sections-hero', 'inColumn' => 'main', 'published' => 1]);
+    $section(128, ['type' => 'nw_hero', 'nwEyebrow' => 'Hero', 'headline' => $headline('Ein Hero für die Startseite.', 'h1'), 'text' => '<p>Dachzeile, Überschrift, Text, Bild und zwei Buttons.</p>', 'nwImage' => $imageUuids[0], 'nwUrl' => '/carousel.html', 'nwLinkText' => 'Carousel', 'nwSecondUrl' => '/sheet.html', 'nwSecondLinkText' => 'Sheet'], $heroArticle);
+
     $db->commit();
     echo "Contao UI demo seeded.\n";
 } catch (Throwable $exception) {

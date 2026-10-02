@@ -1,0 +1,38 @@
+CTE:
+  nordwerk_sections: Nordwerk sections
+  nw_hero:
+    - Hero
+    - "Large opener for the home page: kicker, headline, text, picture and up to two buttons."
+  nw_page_head:
+    - Page head
+    - "Opener for content pages: headline, introduction and a wide picture."
+  nw_promises:
+    - Promises
+    - Three or four short promises with a check mark.
+  nw_split:
+    - Picture and text
+    - Picture and text side by side, picture on the left or right.
+  nw_figures:
+    - Figures
+    - Two to four key figures with a label.
+  nw_features:
+    - Features
+    - Tiles with an icon, a title and a short text.
+  nw_steps:
+    - Steps
+    - Numbered steps, for example "How your order works".
+  nw_team:
+    - Team
+    - People with photo, name and role. Add the people as elements inside.
+  nw_person:
+    - Person
+    - "One person of the team: photo, name, role and one sentence."
+  nw_logos:
+    - Logos
+    - A row of partner or retailer logos.
+  nw_contact:
+    - Contact
+    - Address, phone, e-mail, opening hours and a route link.
+  nw_callout:
+    - Closing tile
+    - Tinted tile with headline, text and button at the end of a page.

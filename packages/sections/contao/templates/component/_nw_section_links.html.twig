@@ -1,0 +1,7 @@
+{# Main and secondary button of a section. #}
+{% if primary|default or secondary|default %}
+    <p class="nw-section__actions">
+        {%- if primary|default %}<a class="nw-button" href="{{ primary.href }}">{{ primary.text }}</a>{% endif -%}
+        {%- if secondary|default %}<a class="nw-button nw-button--secondary" href="{{ secondary.href }}">{{ secondary.text }}</a>{% endif -%}
+    </p>
+{% endif %}

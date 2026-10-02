@@ -1,0 +1,17 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% set attributes = attrs().addClass(['nw-section', 'nw-figures']).mergeWith(attributes|default) %}
+{% block wrapper_tag %}section{% endblock %}
+{% block inner %}
+    {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
+    {{ include('@Contao/component/_nw_section_head.html.twig') }}
+    {% if figures %}
+        <ul class="nw-figures__list" data-count="{{ figures|length }}">
+            {% for figure in figures %}
+                <li><b>{{ figure.number }}{% if figure.unit %}<small>{{ figure.unit }}</small>{% endif %}</b><span>{{ figure.label }}</span></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if plain.note %}<p class="nw-section__note">{{ plain.note }}</p>{% endif %}
+    {% endif %}
+{% endblock %}
+{% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}

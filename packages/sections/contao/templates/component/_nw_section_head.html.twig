@@ -1,0 +1,8 @@
+{# Headline and optional intro of a section. #}
+{% use '@Contao/component/_headline.html.twig' %}
+{% if headline.text|default or intro|default %}
+    <header class="nw-section__head">
+        {% if headline.text|default %}{{ block('headline_component') }}{% endif %}
+        {% if intro|default %}<p class="nw-section__intro">{{ intro }}</p>{% endif %}
+    </header>
+{% endif %}

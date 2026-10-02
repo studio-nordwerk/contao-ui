@@ -1,0 +1,15 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% use '@Contao/component/_rich_text.html.twig' %}
+{% set attributes = attrs().addClass(['nw-section', 'nw-split']).addClass('nw-split--reverse', data.nwImagePosition == 'right').mergeWith(attributes|default) %}
+{% block wrapper_tag %}section{% endblock %}
+{% block inner %}
+    {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
+    {{ include('@Contao/component/_nw_section_media.html.twig', {image: image, size: [900, 675, 'crop'], class: 'nw-split__image'}) }}
+    <div class="nw-split__text">
+        {% if headline.text %}{{ block('headline_component') }}{% endif %}
+        {% if data.text %}{% with {text: data.text, attributes: attrs()} %}{{ block('rich_text_component') }}{% endwith %}{% endif %}
+        {% if primary %}<p><a class="nw-split__link" href="{{ primary.href }}">{{ primary.text }}</a></p>{% endif %}
+    </div>
+    {% endif %}
+{% endblock %}
+{% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}

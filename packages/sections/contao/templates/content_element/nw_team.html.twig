@@ -1,0 +1,26 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% set attributes = attrs().addClass(['nw-section', 'nw-team', 'nw-team--' ~ layout]).mergeWith(attributes|default) %}
+{% block wrapper_tag %}section{% endblock %}
+{% block inner %}
+    {{ include('@Contao/component/_nw_section_head.html.twig') }}
+    {% if as_editor_view %}
+        {{ include('@Contao/component/_nw_sections_preview.html.twig') }}
+        {% for fragment in nested_fragments %}{{ content_element(fragment) }}{% endfor %}
+    {% elseif layout == 'carousel' %}
+        {% embed '@Contao/component/_nw_carousel.html.twig' with {
+            carousel_id: 'nw-team-' ~ data.id,
+            carousel_label: headline.text|default('nw.sections.team'|trans),
+            carousel_options: {small: 1.25, medium: 2, large: 3, arrows: true, dots: true, drag: true},
+        } %}
+            {% block carousel_slides %}
+                {% for fragment in nested_fragments %}<div class="nw-team__slide">{{ content_element(fragment) }}</div>{% endfor %}
+            {% endblock %}
+        {% endembed %}
+    {% else %}
+        <div class="nw-team__grid" data-count="{{ nested_fragments|length }}">
+            {% for fragment in nested_fragments %}{{ content_element(fragment) }}{% endfor %}
+        </div>
+    {% endif %}
+    {% if plain.note %}<p class="nw-section__note">{{ plain.note }}</p>{% endif %}
+{% endblock %}
+{% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}

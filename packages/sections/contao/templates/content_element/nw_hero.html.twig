@@ -1,0 +1,16 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% use '@Contao/component/_rich_text.html.twig' %}
+{% set attributes = attrs().addClass(['nw-section', 'nw-hero']).mergeWith(attributes|default) %}
+{% block wrapper_tag %}section{% endblock %}
+{% block inner %}
+    {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
+    <div class="nw-hero__copy">
+        {% if eyebrow %}<p class="nw-eyebrow">{{ eyebrow }}</p>{% endif %}
+        {% if headline.text %}{% with {headline: headline|merge({tag_name: 'h1'})} %}{{ block('headline_component') }}{% endwith %}{% endif %}
+        {% if data.text %}{% with {text: data.text, attributes: attrs().addClass('nw-hero__text')} %}{{ block('rich_text_component') }}{% endwith %}{% endif %}
+        {{ include('@Contao/component/_nw_section_links.html.twig') }}
+    </div>
+    {{ include('@Contao/component/_nw_section_media.html.twig', {image: image, size: [1100, 880, 'crop'], class: 'nw-hero__image', eager: true}) }}
+    {% endif %}
+{% endblock %}
+{% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}

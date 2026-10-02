@@ -41,6 +41,9 @@ with tempfile.TemporaryDirectory(prefix='contao-ui-artifacts-') as directory:
             assert manifest['require']['contao/core-bundle'] == '^5.7 || ^6.0'
             if name == 'gallery':
                 assert all(f'nordwerk/contao-{dependency}-bundle' in manifest['require'] for dependency in ('carousel', 'sheet'))
+            elif name == 'sections':
+                assert 'nordwerk/contao-carousel-bundle' in manifest['require'] and 'public/sections.css' in names
+                assert all(f'translations/{domain}.{language}.yaml' in names for domain in ('contao_default', 'contao_tl_content', 'messages') for language in ('de', 'en'))
             elif name in lock:
                 for filename, checksum in lock[name]['files'].items():
                     assert hashlib.sha256(archive.read('public/vendor/' + filename)).hexdigest() == checksum, filename

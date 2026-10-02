@@ -12,7 +12,7 @@ Drei eigenständige Bundles inklusive Manager-Registrierung, Docker mit Contao 5
 
 Validierung: Datenbank mit `make reset` frisch erstellt, anschließend `make check` vollständig grün: ECS, Twig-CS (noch keine Elemente), Composer validate / normalize für alle Pakete und App, Twig-/YAML-/Container-Lints, PHPStan Level 8, PHPUnit (1 Test / 9 Assertions), vp Format/Lint und vier Playwright-Tests mit Axe und Request-Prüfung. In diesem Stadium enthält die Demo noch keine interaktiven Bundle-Elemente.
 
-Seed verwendet Contao-Modelle und dieselbe Datenbankverbindung wie der Kern, damit Transaktionen und virtuelle Felder unterstützt werden. Symfony-Debug-Toolbar in der Demo deaktiviert (deren Status-Badge hatte einen schweren Axe-Kontrastbefund). Kein Mailversand erforderlich, deshalb kein Mailpit; 8121 bleibt frei.
+Seed verwendet Contao-Modelle und dieselbe Datenbankverbindung wie der Kern, damit Transaktionen und virtuelle Felder unterstützt werden. Symfony-Debug-Toolbar in der Demo deaktiviert (deren Status-Badge hatte einen schweren Axe-Kontrastbefund). Mailhinweise der Kundenstimmen gehen nur an das lokale Mailpit (Port 8131, `CONTAO_UI_MAIL_PORT`).
 
 Noch offen: reale 6.0-Installation und sämtliche Funktionsphasen. Keine Produktentscheidung von Arne erforderlich.
 

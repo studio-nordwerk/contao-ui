@@ -1,0 +1,4 @@
+nw.sections.route: "Plan route"
+nw.sections.route_new_window: "(opens a map in a new window)"
+nw.sections.hours: "Opening hours"
+nw.sections.team: "Team"

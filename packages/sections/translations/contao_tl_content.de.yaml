@@ -1,0 +1,114 @@
+tl_content:
+  nw_rows_legend: Einträge
+  nw_team_legend: Darstellung
+  nw_address_legend: Adresse
+  nw_hours_legend: Öffnungszeiten
+  nw_route_legend: Anfahrt
+  nwEyebrow:
+    - Dachzeile
+    - Kurze Zeile über der Überschrift, z. B. „Über uns“. Optional.
+  nwText:
+    - Text
+    - Ein bis drei Sätze ohne Formatierung.
+  nwIntro:
+    - Einleitung
+    - Ein Satz unter der Überschrift. Optional.
+  nwNote:
+    - Hinweis
+    - Kleine Zeile unter dem Abschnitt, z. B. Quelle oder Stand. Optional.
+  nwUrl:
+    - Link-Ziel
+    - Seite oder Adresse für den Button. Leer lassen für keinen Button.
+  nwLinkText:
+    - Button-Text
+    - z. B. „Zum Shop“.
+  nwSecondUrl:
+    - Zweites Link-Ziel
+    - Optionaler zweiter Button.
+  nwSecondLinkText:
+    - Zweiter Button-Text
+    - z. B. „Über uns“.
+  nwImage:
+    - Bild
+    - Optional. Alt-Text und Bildunterschrift kommen aus der Dateiverwaltung.
+  nwImagePosition:
+    - Bild steht
+    - Links oder rechts vom Text. Auf dem Handy steht das Bild immer oben.
+  nwLines:
+    - Versprechen
+    - Bis zu vier kurze Zeilen, eine je Zeile, z. B. „Versand in 2–3 Werktagen“.
+  nwFigures:
+    - Zahlen
+    - Zwei bis vier Einträge. Die Einheit darf an der Zahl stehen, z. B. „6 Wo.“ oder „2019“.
+  nwFeatures:
+    - Merkmale
+    - Einträge mit Symbol, Titel und einem kurzen Text; drei oder vier passen am besten.
+  nwSteps:
+    - Schritte
+    - Zwei bis sechs Schritte in der richtigen Reihenfolge. Die Nummern setzt das Element.
+  nwTeamLayout:
+    - Darstellung
+    - Raster zeigt alle Personen, Karussell blättert (ab vier Personen sinnvoll).
+  nwName:
+    - Name
+    - Person oder Ort, z. B. „Werkstattladen am Markt“.
+  nwRole:
+    - Rolle
+    - z. B. „Gründerin und Seifensiederin“.
+  nwLogos:
+    - Logos
+    - SVG oder PNG aus der Dateiverwaltung, Reihenfolge per Ziehen. Ein Link in den Datei-Metadaten macht das Logo klickbar.
+  nwStreet:
+    - Straße und Hausnummer
+    - ""
+  nwPostal:
+    - PLZ
+    - ""
+  nwCity:
+    - Ort
+    - ""
+  nwPhone:
+    - Telefon
+    - So, wie es auf der Seite stehen soll.
+  nwEmail:
+    - E-Mail
+    - Wird vor Spam-Robotern verschlüsselt ausgegeben.
+  nwHours:
+    - Öffnungszeiten
+    - Eine Zeile je Zeitraum, z. B. „Do – Fr“ und „12 – 18 Uhr“.
+  nwHint:
+    - Hinweis zur Anfahrt
+    - z. B. Zugang, Parken, Haltestelle. Optional.
+  nwRouteUrl:
+    - Eigener Routen-Link
+    - "Leer lassen: „Route planen“ öffnet OpenStreetMap mit der Adresse."
+  nwColumns:
+    value: Zahl
+    label: Beschriftung
+    icon: Symbol
+    title: Titel
+    text: Text
+    days: Tage
+    times: Zeiten
+  nwOptions:
+    left: links
+    right: rechts
+    grid: Raster
+    carousel: Karussell
+  nwIcons:
+    leaf: Blatt
+    drop: Tropfen
+    box: Paket
+    hourglass: Sanduhr
+    people: Personen
+    checklist: Checkliste
+    gift: Geschenk
+    door: Tür
+    heart: Herz
+    truck: Lieferung
+    clock: Uhr
+    calendar: Kalender
+    shield: Schutz
+    chat: Gespräch
+    hand: Hand
+    sparkle: Funkeln

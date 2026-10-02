@@ -1,0 +1,3 @@
+{# Compact backend preview: icon, element name and its main text. Pictures stay out of the article list. #}
+<span data-nw-icon="sections" aria-hidden="true" style="display:inline-block;width:24px;height:24px;vertical-align:middle;background:currentColor;mask:url('{{ asset('bundles/nordwerksections/sections.svg') }}') center / contain no-repeat"></span>
+<strong>{{ headline.text|default(plain.name|default(eyebrow|default(lines|default([])|first|default(''))))|slice(0, 80) }}</strong>

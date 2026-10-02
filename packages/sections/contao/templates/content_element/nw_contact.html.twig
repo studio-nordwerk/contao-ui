@@ -1,0 +1,27 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% set attributes = attrs().addClass(['nw-section', 'nw-contact']).mergeWith(attributes|default) %}
+{% block wrapper_tag %}section{% endblock %}
+{% block inner %}
+    {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
+    {% if headline.text %}{{ block('headline_component') }}{% endif %}
+    <div class="nw-contact__card">
+        {% if contact.name %}<h3>{{ contact.name }}</h3>{% endif %}
+        <ul class="nw-contact__rows">
+            {% if contact.address %}<li>{{ nw_section_icon('pin', 'nw-contact__icon') }}<address>{% for line in contact.address %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}</address></li>{% endif %}
+            {% if contact.phone %}<li>{{ nw_section_icon('phone', 'nw-contact__icon') }}<a href="{{ contact.phone.href }}">{{ contact.phone.text }}</a></li>{% endif %}
+            {% if contact.email %}<li>{{ nw_section_icon('mail', 'nw-contact__icon') }}<a href="{{ contact.email.href|raw }}">{{ contact.email.text|raw }}</a></li>{% endif %}
+        </ul>
+        {% if contact.route %}<p class="nw-contact__route"><a class="nw-button nw-button--secondary" href="{{ contact.route }}" target="_blank" rel="noopener">{{ 'nw.sections.route'|trans }}<span class="nw-visually-hidden"> {{ 'nw.sections.route_new_window'|trans }}</span></a></p>{% endif %}
+    </div>
+    {% if contact.hours or contact.hint %}
+        <div class="nw-contact__hours">
+            {% if contact.hours %}
+                <h3>{{ 'nw.sections.hours'|trans }}</h3>
+                <dl>{% for row in contact.hours %}<dt>{{ row.days }}</dt><dd>{{ row.times }}</dd>{% endfor %}</dl>
+            {% endif %}
+            {% if contact.hint %}<p>{{ contact.hint|nl2br }}</p>{% endif %}
+        </div>
+    {% endif %}
+    {% endif %}
+{% endblock %}
+{% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}

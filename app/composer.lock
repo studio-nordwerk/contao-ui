@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8066820e698ba06e250ff2f9897026cd",
+    "content-hash": "ec2dcd319c3f7d682dc0c6abaee06073",
     "packages": [
         {
             "name": "ausi/slug-generator",
@@ -5708,6 +5708,37 @@
                 "MIT"
             ],
             "description": "Native, dependency-free gallery content elements for Contao",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "nordwerk/contao-sections-bundle",
+            "version": "0.1.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "../packages/sections"
+            },
+            "require": {
+                "contao/core-bundle": "^5.7 || ^6.0",
+                "contao/manager-plugin": "^2.0",
+                "nordwerk/contao-carousel-bundle": "^0.1",
+                "php": "^8.3"
+            },
+            "type": "contao-bundle",
+            "extra": {
+                "contao-manager-plugin": "Nordwerk\\SectionsBundle\\ContaoManager\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nordwerk\\SectionsBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Page sections for Contao content pages: hero, page head, promises, picture and text, figures, features, steps, team, logos, contact and closing tile",
             "transport-options": {
                 "symlink": true,
                 "relative": true
@@ -19343,6 +19374,7 @@
     "stability-flags": {
         "nordwerk/contao-carousel-bundle": 20,
         "nordwerk/contao-gallery-bundle": 20,
+        "nordwerk/contao-sections-bundle": 20,
         "nordwerk/contao-sheet-bundle": 20,
         "nordwerk/contao-teasers-bundle": 20,
         "nordwerk/contao-testimonials-bundle": 20

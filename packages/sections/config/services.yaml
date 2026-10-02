@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+  Nordwerk\SectionsBundle\Controller\SectionController: ~
+  Nordwerk\SectionsBundle\Controller\TeamController: ~
+  Nordwerk\SectionsBundle\Section\AssetsExtension: ~

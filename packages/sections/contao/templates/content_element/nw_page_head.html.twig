@@ -1,0 +1,14 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% set attributes = attrs().addClass(['nw-section', 'nw-page-head']).mergeWith(attributes|default) %}
+{% block wrapper_tag %}section{% endblock %}
+{% block inner %}
+    {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
+    <div class="nw-page-head__copy">
+        {% if eyebrow %}<p class="nw-eyebrow">{{ eyebrow }}</p>{% endif %}
+        {% if headline.text %}{% with {headline: headline|merge({tag_name: 'h1'})} %}{{ block('headline_component') }}{% endwith %}{% endif %}
+        {% if plain.text %}<p class="nw-page-head__lead">{{ plain.text|nl2br }}</p>{% endif %}
+    </div>
+    {{ include('@Contao/component/_nw_section_media.html.twig', {image: image, size: [1600, 610, 'crop'], class: 'nw-page-head__image', eager: true}) }}
+    {% endif %}
+{% endblock %}
+{% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}
