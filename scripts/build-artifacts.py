@@ -8,6 +8,11 @@ import re
 import subprocess
 import zipfile
 
+
+def unix_mode(info):
+    """Readable for every PHP user: files 0644, directories 0755 (zipfile writes 0600 by default)."""
+    return (0o40755 << 16 | 0x10) if info.is_dir() else 0o100644 << 16
+
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGES = ('carousel', 'sheet', 'gallery', 'sections')
 VERSION = re.compile(r'\d+\.\d+\.\d+(?:-dev|-(?:alpha|beta|RC|rc)(?:[.-]?\d+)?)?')
@@ -28,6 +33,7 @@ def build(name, version, directory, ref='HEAD'):
                 manifest = json.loads(data)
                 manifest['version'] = version
                 data = (json.dumps(manifest, ensure_ascii=False, indent=2) + '\n').encode()
+            entry.create_system, entry.external_attr = 3, unix_mode(entry)
             target.writestr(entry, data)
     return output
 
