@@ -28,8 +28,8 @@
                 "versions": {
                     "nordwerk/contao-carousel-bundle": "0.1.x-dev",
                     "nordwerk/contao-gallery-bundle": "0.1.x-dev",
-                    "nordwerk/contao-sheet-bundle": "0.1.x-dev",
-                    "nordwerk/contao-sections-bundle": "0.1.x-dev"
+                    "nordwerk/contao-sections-bundle": "0.1.x-dev",
+                    "nordwerk/contao-sheet-bundle": "0.1.x-dev"
                 }
             }
         }
