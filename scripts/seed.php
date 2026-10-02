@@ -123,6 +123,7 @@ try {
 
     // Sections: every element once on one page, with the generated studies as pictures.
     $logoUuids = [];
+
     foreach (['Nordlicht' => 'M6 30 18 10l12 20Z', 'Kreiswerk' => 'M18 8a12 12 0 1 0 0.01 0Z', 'Stufe Drei' => 'M6 30h8v-8h8v-8h8', 'Wellenhaus' => 'M4 22c5-6 9-6 14 0s9 6 14 0'] as $name => $path) {
         $file = $folder.'/logo-'.strtolower(str_replace(' ', '-', $name)).'.svg';
         file_put_contents($file, '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 40" width="170" height="40"><path d="'.$path.'" fill="none" stroke="#7a7a7a" stroke-width="3" stroke-linejoin="round"/><text x="42" y="26" font-family="Georgia, serif" font-size="17" fill="#7a7a7a">'.$name.'</text></svg>');
@@ -144,10 +145,12 @@ try {
     $section(448, ['type' => 'nw_features', 'headline' => $headline('Merkmale'), 'nwIntro' => 'Symbol, Titel und ein kurzer Text.', 'nwFeatures' => $rows([['leaf', 'Natürlich', 'Wenige Zutaten, die wir kennen.'], ['truck', 'Schnell da', 'Versand in zwei bis drei Werktagen.'], ['chat', 'Erreichbar', 'Fragen beantworten wir am selben Tag.'], ['shield', 'Sicher', 'Bezahlen per Rechnung oder Überweisung.']], ['icon', 'title', 'text'])]);
     $section(512, ['type' => 'nw_steps', 'headline' => $headline('Ablauf'), 'nwSteps' => $rows([['Anfragen', 'Sie schreiben uns, was Sie brauchen.'], ['Abstimmen', 'Wir melden uns mit einem Vorschlag.'], ['Umsetzen', 'Wir fertigen in kleiner Charge.'], ['Liefern', 'Das Paket kommt zu Ihnen.']], ['title', 'text'])]);
     $team = $section(576, ['type' => 'nw_team', 'headline' => $headline('Team'), 'nwTeamLayout' => 'grid', 'nwNote' => 'Fiktive Personen mit Studienbildern.']);
+
     foreach ([['Anna Beispiel', 'Gründerin', 'Leitet die Werkstatt.'], ['Ben Muster', 'Versand', 'Packt jede Bestellung.'], ['Cleo Probe', 'Rezepturen', 'Entwickelt neue Sorten.']] as $index => [$name, $role, $about]) {
         $section(($index + 1) * 128, ['type' => 'nw_person', 'nwName' => $name, 'nwRole' => $role, 'nwText' => $about, 'nwImage' => $imageUuids[4 + $index]], $team, 'tl_content');
     }
     $carouselTeam = $section(608, ['type' => 'nw_team', 'headline' => $headline('Team als Karussell'), 'nwTeamLayout' => 'carousel']);
+
     foreach (['Dora', 'Emil', 'Fritzi', 'Gustav', 'Hanna'] as $index => $name) {
         $section(($index + 1) * 128, ['type' => 'nw_person', 'nwName' => $name.' Beispiel', 'nwRole' => 'Werkstatt', 'nwImage' => $imageUuids[$index % 8]], $carouselTeam, 'tl_content');
     }
