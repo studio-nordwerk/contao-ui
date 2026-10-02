@@ -1,0 +1,114 @@
+tl_content:
+  nw_rows_legend: Entries
+  nw_team_legend: Layout
+  nw_address_legend: Address
+  nw_hours_legend: Opening hours
+  nw_route_legend: Directions
+  nwEyebrow:
+    - Kicker
+    - Short line above the headline, for example "About us". Optional.
+  nwText:
+    - Text
+    - One to three sentences without formatting.
+  nwIntro:
+    - Introduction
+    - One sentence below the headline. Optional.
+  nwNote:
+    - Note
+    - Small line below the section, for example source or date. Optional.
+  nwUrl:
+    - Link target
+    - Page or address for the button. Leave empty for no button.
+  nwLinkText:
+    - Button text
+    - For example "Visit the shop".
+  nwSecondUrl:
+    - Second link target
+    - Optional second button.
+  nwSecondLinkText:
+    - Second button text
+    - For example "About us".
+  nwImage:
+    - Picture
+    - Optional. Alt text and caption come from the file manager.
+  nwImagePosition:
+    - Picture position
+    - Left or right of the text. On phones the picture is always on top.
+  nwLines:
+    - Promises
+    - Up to four short lines, one per line, for example "Shipping in 2–3 days".
+  nwFigures:
+    - Figures
+    - Two to four entries. The unit may follow the number, for example "6 wks" or "2019".
+  nwFeatures:
+    - Features
+    - Entries with icon, title and short text; three or four fit best.
+  nwSteps:
+    - Steps
+    - Two to six steps in order. The element adds the numbers.
+  nwTeamLayout:
+    - Layout
+    - Grid shows everyone, carousel pages through (useful from four people).
+  nwName:
+    - Name
+    - Person or place, for example "Workshop store at the market".
+  nwRole:
+    - Role
+    - For example "Founder and soap maker".
+  nwLogos:
+    - Logos
+    - SVG or PNG from the file manager, order by dragging. A link in the file metadata makes a logo clickable.
+  nwStreet:
+    - Street and number
+    - ""
+  nwPostal:
+    - Postal code
+    - ""
+  nwCity:
+    - City
+    - ""
+  nwPhone:
+    - Phone
+    - As it should appear on the page.
+  nwEmail:
+    - E-mail
+    - Printed encoded so that spam robots cannot read it.
+  nwHours:
+    - Opening hours
+    - One row per period, for example "Thu – Fri" and "12 – 6 pm".
+  nwHint:
+    - Directions note
+    - For example access, parking, stop. Optional.
+  nwRouteUrl:
+    - Own route link
+    - "Leave empty: \"Plan route\" opens OpenStreetMap with the address."
+  nwColumns:
+    value: Number
+    label: Label
+    icon: Icon
+    title: Title
+    text: Text
+    days: Days
+    times: Times
+  nwOptions:
+    left: left
+    right: right
+    grid: Grid
+    carousel: Carousel
+  nwIcons:
+    leaf: Leaf
+    drop: Drop
+    box: Parcel
+    hourglass: Hourglass
+    people: People
+    checklist: Checklist
+    gift: Gift
+    door: Door
+    heart: Heart
+    truck: Delivery
+    clock: Clock
+    calendar: Calendar
+    shield: Shield
+    chat: Conversation
+    hand: Hand
+    sparkle: Sparkle

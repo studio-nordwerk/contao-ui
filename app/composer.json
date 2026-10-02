@@ -8,6 +8,7 @@
         "contao/managed-edition": "~5.7.0",
         "nordwerk/contao-carousel-bundle": "0.1.x-dev",
         "nordwerk/contao-gallery-bundle": "0.1.x-dev",
+        "nordwerk/contao-sections-bundle": "0.1.x-dev",
         "nordwerk/contao-sheet-bundle": "0.1.x-dev"
     },
     "require-dev": {
@@ -27,7 +28,8 @@
                 "versions": {
                     "nordwerk/contao-carousel-bundle": "0.1.x-dev",
                     "nordwerk/contao-gallery-bundle": "0.1.x-dev",
-                    "nordwerk/contao-sheet-bundle": "0.1.x-dev"
+                    "nordwerk/contao-sheet-bundle": "0.1.x-dev",
+                    "nordwerk/contao-sections-bundle": "0.1.x-dev"
                 }
             }
         }

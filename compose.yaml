@@ -1,4 +1,4 @@
-name: nordwerk-contao-ui
+name: ${CONTAO_UI_PROJECT:-nordwerk-contao-ui}
 services:
   php:
     build:
@@ -22,7 +22,7 @@ services:
   caddy:
     image: caddy:2-alpine
     ports:
-      - "127.0.0.1:8101:80"
+      - "127.0.0.1:${CONTAO_UI_PORT:-8101}:80"
     environment:
       APP_DIR: /workspace/app
     volumes:

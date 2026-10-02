@@ -36,6 +36,9 @@ with tempfile.TemporaryDirectory(prefix='contao-ui-artifacts-') as directory:
             assert manifest['require']['contao/core-bundle'] == '^5.7 || ^6.0'
             if name == 'gallery':
                 assert all(f'nordwerk/contao-{dependency}-bundle' in manifest['require'] for dependency in ('carousel', 'sheet'))
+            elif name == 'sections':
+                assert 'nordwerk/contao-carousel-bundle' in manifest['require'] and 'public/sections.css' in names
+                assert all(f'translations/{domain}.{language}.yaml' in names for domain in ('contao_default', 'contao_tl_content', 'messages') for language in ('de', 'en'))
             else:
                 for filename, checksum in lock[name]['files'].items():
                     assert hashlib.sha256(archive.read('public/vendor/' + filename)).hexdigest() == checksum, filename
@@ -43,4 +46,4 @@ with tempfile.TemporaryDirectory(prefix='contao-ui-artifacts-') as directory:
             print(f'{name}: Manager ZIP checked ({len(names)} files, pinned runtime assets intact).')
     result = subprocess.run(['python3', str(ROOT / 'scripts/build-artifacts.py'), '0.1.0-garbage', directory], capture_output=True)
     assert result.returncode != 0, 'Invalid versions must be rejected'
-    assert len(list(Path(directory).glob('*.zip'))) == 3
+    assert len(list(Path(directory).glob('*.zip'))) == len(builder.PACKAGES)

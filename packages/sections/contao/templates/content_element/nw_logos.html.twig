@@ -1,0 +1,18 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% use '@Contao/component/_figure.html.twig' %}
+{% set attributes = attrs().addClass(['nw-section', 'nw-logos']).mergeWith(attributes|default) %}
+{% block wrapper_tag %}section{% endblock %}
+{% block inner %}
+    {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
+    {% if headline.text %}{{ block('headline_component') }}{% endif %}
+    {% if logos %}
+        <ul class="nw-logos__list">
+            {% for logo in logos %}
+                {% set picture = figure(logo, [0, 96, 'proportional'], {options: {img_attr: {loading: 'lazy'}}}) %}
+                {% if picture %}<li>{% with {figure: picture} %}{{ block('figure_component') }}{% endwith %}</li>{% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% endif %}
+{% endblock %}
+{% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}

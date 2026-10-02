@@ -1,0 +1,38 @@
+CTE:
+  nordwerk_sections: Nordwerk Abschnitte
+  nw_hero:
+    - Hero
+    - "Großer Einstieg für die Startseite: Dachzeile, Überschrift, Text, Bild und bis zu zwei Buttons."
+  nw_page_head:
+    - Seitenkopf
+    - "Einstieg für Inhaltsseiten: Überschrift, Einleitung und ein Bild im Breitformat."
+  nw_promises:
+    - Versprechen-Zeile
+    - Drei oder vier kurze Versprechen mit Häkchen.
+  nw_split:
+    - Bild und Text
+    - Bild und Text nebeneinander, Bild links oder rechts.
+  nw_figures:
+    - Zahlen
+    - Zwei bis vier Kennzahlen mit Beschriftung.
+  nw_features:
+    - Merkmale
+    - Kacheln mit Symbol, Titel und Text.
+  nw_steps:
+    - Ablauf
+    - Nummerierte Schritte, z. B. „So läuft Ihr Auftrag“.
+  nw_team:
+    - Team
+    - Personen mit Foto, Name und Rolle. Die Personen legen Sie als Elemente darin an.
+  nw_person:
+    - Person
+    - "Eine Person im Team: Foto, Name, Rolle und ein Satz."
+  nw_logos:
+    - Logos
+    - Eine Reihe Partner- oder Händlerlogos.
+  nw_contact:
+    - Kontakt
+    - Adresse, Telefon, E-Mail, Öffnungszeiten und ein Routen-Link.
+  nw_callout:
+    - Abschluss-Kachel
+    - Farbige Kachel mit Überschrift, Text und Button am Seitenende.

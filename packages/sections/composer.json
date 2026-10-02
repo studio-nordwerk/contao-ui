@@ -1,0 +1,20 @@
+{
+  "name": "nordwerk/contao-sections-bundle",
+  "description": "Page sections for Contao content pages: hero, page head, promises, picture and text, figures, features, steps, team, logos, contact and closing tile",
+  "license": "MIT",
+  "type": "contao-bundle",
+  "require": {
+    "php": "^8.3",
+    "contao/core-bundle": "^5.7 || ^6.0",
+    "contao/manager-plugin": "^2.0",
+    "nordwerk/contao-carousel-bundle": "^0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Nordwerk\\SectionsBundle\\": "src/"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "Nordwerk\\SectionsBundle\\ContaoManager\\Plugin"
+  }
+}

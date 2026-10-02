@@ -22,10 +22,11 @@ Nach Veröffentlichung können die Pakete über den Contao Manager/Packagist ins
 | `packages/carousel` | `studio-nordwerk/contao-carousel` | `nordwerk/contao-carousel-bundle` |
 | `packages/sheet`    | `studio-nordwerk/contao-sheet`    | `nordwerk/contao-sheet-bundle`    |
 | `packages/gallery`  | `studio-nordwerk/contao-gallery`  | `nordwerk/contao-gallery-bundle`  |
+| `packages/sections` | `studio-nordwerk/contao-sections` | `nordwerk/contao-sections-bundle` |
 
 Das Monorepo bleibt die einzige Schreibquelle. Ein späterer, gesondert autorisierter Workflow kann nach beiden Checks für jedes Paket `git subtree split --prefix=packages/<paket>` erzeugen und diese Commits mit einem auf die drei Ziele begrenzten Token pushen. Tags erst nach erfolgreichem Split synchronisieren, anschließend die Read-only-Repositories bei Packagist anmelden. Keine Remotes oder Token sind hier eingerichtet, kein Split wurde ausgeführt.
 
-Versionen zunächst gemeinsam (0.1.x), damit die Galerie-Abhängigkeiten zu beiden Bundles passen. Bei unabhängigem Versionieren nur die tatsächlich benötigten Mindestversionen erhöhen. Release-Version und PHP-/Contao-Grenzen müssen in allen drei Composer-Dateien, CHANGELOGs und Manager-Artefakten übereinstimmen. Die Root-CI bleibt im Monorepo; Paket-Exports benötigen keinen eigenen Build.
+Versionen zunächst gemeinsam (0.1.x), damit die Galerie-Abhängigkeiten zu beiden Bundles passen. Abschnitte kam am 02.10.2026 als 0.1.0 dazu und verlangt Carousel `^0.1`. Bei unabhängigem Versionieren nur die tatsächlich benötigten Mindestversionen erhöhen. Release-Version und PHP-/Contao-Grenzen müssen in allen drei Composer-Dateien, CHANGELOGs und Manager-Artefakten übereinstimmen. Die Root-CI bleibt im Monorepo; Paket-Exports benötigen keinen eigenen Build.
 
 ## Assets und Screenshots
 

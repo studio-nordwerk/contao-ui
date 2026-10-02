@@ -1,0 +1,8 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% set attributes = attrs().addClass(['nw-section', 'nw-promises']).mergeWith(attributes|default) %}
+{% block inner %}
+    {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
+    {% if lines %}<ul class="nw-usps" data-count="{{ lines|length }}">{% for line in lines %}<li class="nw-usps__item">{{ line }}</li>{% endfor %}</ul>{% endif %}
+    {% endif %}
+{% endblock %}
+{% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}

@@ -1,0 +1,20 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% set attributes = attrs().addClass(['nw-section', 'nw-steps']).mergeWith(attributes|default) %}
+{% block wrapper_tag %}section{% endblock %}
+{% block inner %}
+    {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
+    {{ include('@Contao/component/_nw_section_head.html.twig') }}
+    {% if steps %}
+        <ol class="nw-steps__list" data-count="{{ steps|length }}">
+            {% for step in steps %}
+                <li>
+                    <span class="nw-steps__number" aria-hidden="true">{{ loop.index }}</span>
+                    {% if step.title %}<h3>{{ step.title }}</h3>{% endif %}
+                    {% if step.text %}<p>{{ step.text }}</p>{% endif %}
+                </li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+    {% endif %}
+{% endblock %}
+{% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}

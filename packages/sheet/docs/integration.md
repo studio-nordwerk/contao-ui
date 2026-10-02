@@ -64,4 +64,18 @@ Einzeln erzeugte Figures sind ebenfalls möglich: `figure(uuid, [800, 600, 'prop
 
 Die Galerie verwendet ein Raster mit wechselnden Formaten statt Spalten-Masonry: visuelle Reihenfolge, Tab-Reihenfolge und Dateisortierung bleiben gleich. Themes können die eigenen Galerie-Regeln und die dokumentierten `--sc-*`-/`--ss-*`-Tokens überschreiben. Die Original-npm-Dateien bleiben unverändert.
 
+## Abschnitte
+
+Die zwölf Abschnitte aus `nordwerk/contao-sections-bundle` sind normale Inhaltselemente mit Twig-Vorlagen unter `content_element/nw_*`. Das Stylesheet lädt jedes Element genau einmal; bei eigenem Markup mit denselben Klassen lädt `{% do nw_sections_assets() %}` es ebenfalls. `{{ nw_section_icon('leaf') }}` gibt eines der Linien-Symbole als inline SVG aus. Gestaltet wird nur über die gemeinsamen `--nw-*`-Variablen; ohne Werte gelten neutrale, aus der Textfarbe abgeleitete Rückfallwerte.
+
+```twig
+<section class="nw-section nw-features">
+    <ul class="nw-features__list" data-count="3">
+        <li><span class="nw-features__icon">{{ nw_section_icon('clock') }}</span><h3>Schnell</h3><p>Antwort am selben Tag.</p></li>
+        …
+    </ul>
+</section>
+{% do nw_sections_assets() %}
+```
+
 Die Mini-Shop- und Seminar-Repositories wurden nicht verändert. Grundlage für FigureBuilder und responsive Metadaten: [Contao Image Studio](https://docs.contao.org/5.x/dev/framework/image-processing/image-studio/).

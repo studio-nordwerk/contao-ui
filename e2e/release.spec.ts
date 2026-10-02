@@ -14,6 +14,9 @@ test("Template Studio offers overrides for all bundle entry templates", async ({
     "content_element/nw_sheet_button",
     "content_element/nw_gallery",
     "frontend_module/nw_offcanvas_navigation",
+    "content_element/nw_page_head",
+    "content_element/nw_team",
+    "component/_nw_section_media",
     "component/_nw_carousel",
     "component/_nw_sheet",
     "component/_nw_gallery",
@@ -24,7 +27,7 @@ test("Template Studio offers overrides for all bundle entry templates", async ({
 });
 
 for (const colorScheme of ["light", "dark"] as const) {
-  for (const bundle of ["carousel", "sheet", "gallery"] as const) {
+  for (const bundle of ["carousel", "sheet", "gallery", "sections"] as const) {
     test(`${bundle}: ${colorScheme} release screenshot and accessibility`, async ({ page }) => {
       await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
       await page.setViewportSize({ width: 1120, height: 1200 });
@@ -42,6 +45,12 @@ for (const colorScheme of ["light", "dark"] as const) {
           "background-color",
           colorScheme === "dark" ? "rgb(18, 18, 18)" : "rgb(255, 255, 255)",
         );
+      } else if (bundle === "sections") {
+        await page.setViewportSize({ width: 1120, height: 1500 });
+        target = page.locator("#main");
+        for (const image of await page.locator("img[loading=lazy]").all())
+          await image.scrollIntoViewIfNeeded();
+        await page.evaluate(() => scrollTo(0, 0));
       } else {
         await expect(target.locator("[data-nw-gallery]")).toHaveAttribute(
           "data-nw-gallery-ready",
@@ -63,9 +72,10 @@ for (const colorScheme of ["light", "dark"] as const) {
       ).toEqual([]);
       expect(errors).toEqual([]);
       await mkdir(`packages/${bundle}/docs`, { recursive: true });
-      await target.screenshot({
-        path: `packages/${bundle}/docs/${bundle}${colorScheme === "dark" ? "-dark" : ""}.png`,
-      });
+      const path = `packages/${bundle}/docs/${bundle}${colorScheme === "dark" ? "-dark" : ""}.png`;
+      // Sections: the first screen of the demo page, not the whole long article.
+      if (bundle === "sections") await page.screenshot({ path });
+      else await target.screenshot({ path });
     });
   }
 
@@ -89,9 +99,12 @@ for (const colorScheme of ["light", "dark"] as const) {
       [2, "carousel", "nwCarouselLabel"],
       [3, "sheet", "nwSheetLabel"],
       [4, "gallery", "nwGalleryLabel"],
+      [5, "sections", "nwEyebrow"],
     ] as const) {
       await page.goto(`/contao?do=article&table=tl_content&id=${article}`);
-      const icon = page.locator(`.content-nw-${bundle} [data-nw-icon="${bundle}"]`).first();
+      // Sections has one element type per section; the article starts with the page head.
+      const element = bundle === "sections" ? "page-head" : bundle;
+      const icon = page.locator(`.content-nw-${element} [data-nw-icon="${bundle}"]`).first();
       await expect(icon).toBeVisible();
       await expect(icon).toHaveCSS(
         "background-color",

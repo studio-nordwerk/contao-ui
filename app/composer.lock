@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ffdca52697c720211f04392b78b3a56",
+    "content-hash": "708f02137b8e5671512a0c6053b2fecf",
     "packages": [
         {
             "name": "ausi/slug-generator",
@@ -5708,6 +5708,37 @@
                 "MIT"
             ],
             "description": "Native, dependency-free gallery content elements for Contao",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "nordwerk/contao-sections-bundle",
+            "version": "0.1.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "../packages/sections"
+            },
+            "require": {
+                "contao/core-bundle": "^5.7 || ^6.0",
+                "contao/manager-plugin": "^2.0",
+                "nordwerk/contao-carousel-bundle": "^0.1",
+                "php": "^8.3"
+            },
+            "type": "contao-bundle",
+            "extra": {
+                "contao-manager-plugin": "Nordwerk\\SectionsBundle\\ContaoManager\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nordwerk\\SectionsBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Page sections for Contao content pages: hero, page head, promises, picture and text, figures, features, steps, team, logos, contact and closing tile",
             "transport-options": {
                 "symlink": true,
                 "relative": true
@@ -19277,6 +19308,7 @@
     "stability-flags": {
         "nordwerk/contao-carousel-bundle": 20,
         "nordwerk/contao-gallery-bundle": 20,
+        "nordwerk/contao-sections-bundle": 20,
         "nordwerk/contao-sheet-bundle": 20
     },
     "prefer-stable": true,

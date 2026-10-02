@@ -1,0 +1,20 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% set attributes = attrs().addClass(['nw-section', 'nw-features']).mergeWith(attributes|default) %}
+{% block wrapper_tag %}section{% endblock %}
+{% block inner %}
+    {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
+    {{ include('@Contao/component/_nw_section_head.html.twig') }}
+    {% if features %}
+        <ul class="nw-features__list" data-count="{{ features|length }}">
+            {% for feature in features %}
+                <li>
+                    <span class="nw-features__icon">{{ nw_section_icon(feature.icon) }}</span>
+                    {% if feature.title %}<h3>{{ feature.title }}</h3>{% endif %}
+                    {% if feature.text %}<p>{{ feature.text }}</p>{% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% endif %}
+{% endblock %}
+{% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}
