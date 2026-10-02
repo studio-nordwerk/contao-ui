@@ -122,10 +122,17 @@ try {
     }
 
     // Sections: every element once on one page, with the generated studies as pictures.
+    // Logos get their own folder: the gallery demo shows a whole folder
+    // and expects eight studies.
     $logoUuids = [];
+    $logoFolder = 'files/contao-ui-sections';
+    if (!is_dir($logoFolder)) {
+        mkdir($logoFolder, 0775, true);
+    }
+    file_put_contents($logoFolder.'/.public', '');
 
     foreach (['Nordlicht' => 'M6 30 18 10l12 20Z', 'Kreiswerk' => 'M18 8a12 12 0 1 0 0.01 0Z', 'Stufe Drei' => 'M6 30h8v-8h8v-8h8', 'Wellenhaus' => 'M4 22c5-6 9-6 14 0s9 6 14 0'] as $name => $path) {
-        $file = $folder.'/logo-'.strtolower(str_replace(' ', '-', $name)).'.svg';
+        $file = $logoFolder.'/logo-'.strtolower(str_replace(' ', '-', $name)).'.svg';
         file_put_contents($file, '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 40" width="170" height="40"><path d="'.$path.'" fill="none" stroke="#7a7a7a" stroke-width="3" stroke-linejoin="round"/><text x="42" y="26" font-family="Georgia, serif" font-size="17" fill="#7a7a7a">'.$name.'</text></svg>');
         $logo = Dbafs::addResource($file);
         $logo->meta = serialize(['de' => ['alt' => 'Logo '.$name.' (fiktiv)', 'title' => '', 'link' => '', 'caption' => '']]);
