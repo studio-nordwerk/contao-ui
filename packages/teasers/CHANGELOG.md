@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 – 2026-10-02
 
 - Apply Contao news/calendar archive permissions to backend choices.
 - Reject source keys exceeding the DCA's 64-character capacity and document a complete third-party source service.

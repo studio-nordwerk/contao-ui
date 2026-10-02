@@ -128,7 +128,9 @@ test("submission, consent, CSRF, mail and backend moderation work without JavaSc
     const replay = await page.request.post("/submit.html", { form: submitted });
     expect(await replay.text()).toContain("bereits gesendet");
     expect(fixture("inspect", name).id).toBe(record.id);
-    const mail = await request.get(`http://127.0.0.1:${process.env.CONTAO_UI_MAIL_PORT ?? "8131"}/api/v1/messages`);
+    const mail = await request.get(
+      `http://127.0.0.1:${process.env.CONTAO_UI_MAIL_PORT ?? "8131"}/api/v1/messages`,
+    );
     expect(
       (await mail.json()).messages.some(
         (message: { Subject: string }) => message.Subject === "Neue Kundenstimme zur Prüfung",

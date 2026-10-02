@@ -16,9 +16,6 @@ composer require nordwerk/contao-testimonials-bundle
 php bin/console contao:migrate --no-interaction
 ```
 
-Noch unveröffentlicht: Bis zur Veröffentlichung lokale Path-Repositories für
-Testimonials, Teasers und Carousel mit `0.1.x-dev` verwenden; siehe Demo-Manifest.
-
 1. Unter **Inhalte → Kundenstimmen** ein Archiv anlegen. Die öffentlichen Hinweise
    erklären, ob und wie die Erfahrungen geprüft werden; sie erscheinen bei den Karten.
 2. Frontend-Modul **Kundenstimme einreichen** anlegen: Zielarchiv, Mail-Empfängerin,

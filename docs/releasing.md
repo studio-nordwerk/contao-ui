@@ -17,19 +17,21 @@ Nach Veröffentlichung können die Pakete über den Contao Manager/Packagist ins
 
 ## Vorgesehener Split, noch nicht ausführen
 
-| Monorepo-Pfad       | Vorgesehenes Read-only-Repository | Composer-Paket                    |
-| ------------------- | --------------------------------- | --------------------------------- |
-| `packages/carousel` | `studio-nordwerk/contao-carousel` | `nordwerk/contao-carousel-bundle` |
-| `packages/sheet`    | `studio-nordwerk/contao-sheet`    | `nordwerk/contao-sheet-bundle`    |
-| `packages/gallery`  | `studio-nordwerk/contao-gallery`  | `nordwerk/contao-gallery-bundle`  |
-| `packages/sections` | `studio-nordwerk/contao-sections` | `nordwerk/contao-sections-bundle` |
+| Monorepo-Pfad           | Vorgesehenes Read-only-Repository     | Composer-Paket                        |
+| ----------------------- | ------------------------------------- | ------------------------------------- |
+| `packages/carousel`     | `studio-nordwerk/contao-carousel`     | `nordwerk/contao-carousel-bundle`     |
+| `packages/sheet`        | `studio-nordwerk/contao-sheet`        | `nordwerk/contao-sheet-bundle`        |
+| `packages/gallery`      | `studio-nordwerk/contao-gallery`      | `nordwerk/contao-gallery-bundle`      |
+| `packages/sections`     | `studio-nordwerk/contao-sections`     | `nordwerk/contao-sections-bundle`     |
+| `packages/teasers`      | `studio-nordwerk/contao-teasers`      | `nordwerk/contao-teasers-bundle`      |
+| `packages/testimonials` | `studio-nordwerk/contao-testimonials` | `nordwerk/contao-testimonials-bundle` |
 
 Das Monorepo bleibt die einzige Schreibquelle. Ein späterer, gesondert autorisierter Workflow kann nach beiden Checks für jedes Paket `git subtree split --prefix=packages/<paket>` erzeugen und diese Commits mit einem auf die drei Ziele begrenzten Token pushen. Tags erst nach erfolgreichem Split synchronisieren, anschließend die Read-only-Repositories bei Packagist anmelden. Keine Remotes oder Token sind hier eingerichtet, kein Split wurde ausgeführt.
 
-Versionen zunächst gemeinsam (0.1.x), damit die Galerie-Abhängigkeiten zu beiden Bundles passen. Abschnitte kam am 02.10.2026 als 0.1.0 dazu und verlangt Carousel `^0.1`. Bei unabhängigem Versionieren nur die tatsächlich benötigten Mindestversionen erhöhen. Release-Version und PHP-/Contao-Grenzen müssen in allen drei Composer-Dateien, CHANGELOGs und Manager-Artefakten übereinstimmen. Die Root-CI bleibt im Monorepo; Paket-Exports benötigen keinen eigenen Build.
+Versionen zunächst gemeinsam (0.1.x), damit die Galerie-Abhängigkeiten zu beiden Bundles passen. Abschnitte, Teaser und Kundenstimmen kamen am 02.10.2026 als 0.1.0 dazu; Abschnitte und Teaser verlangen Carousel `^0.1`, Kundenstimmen Teaser `^0.1`. Bei unabhängigem Versionieren nur die tatsächlich benötigten Mindestversionen erhöhen. Release-Version und PHP-/Contao-Grenzen müssen in allen drei Composer-Dateien, CHANGELOGs und Manager-Artefakten übereinstimmen. Die Root-CI bleibt im Monorepo; Paket-Exports benötigen keinen eigenen Build.
 
 ## Assets und Screenshots
 
 `make assets` holt exakt die gepinnten npm-Tarballs und prüft Integrität sowie jede Datei aus `assets.lock.json`. `python3 scripts/asset-sizes.py` misst tatsächlich ausgelieferte, einzeln gzippte Dateien inklusive der statischen ESM-Importe. Keine zusätzliche Minifizierung oder Nachimplementierung der OSS-Dateien. Bei Wrapper-Änderungen README-Größen neu messen.
 
-`vp exec playwright test e2e/release.spec.ts` erstellt überprüfte Frontend-Screenshots in den Paket-`docs/`-Verzeichnissen (je Hell/Dunkel) sowie Backend-Nachweise unter `test-results/`. Die Testbilder sind selbst erzeugte geometrische Studien. Integrationstext in allen drei Paket-`docs/integration.md` ist eine Kopie von `docs/integration.md` für eigenständige Exports; bei Vertragsänderungen alle Kopien aktualisieren. Der Artefaktcheck prüft die Kopien gegen die Quelle.
+`vp exec playwright test e2e/release.spec.ts` erstellt überprüfte Frontend-Screenshots in den Paket-`docs/`-Verzeichnissen (je Hell/Dunkel) sowie Backend-Nachweise unter `test-results/`. Die Testbilder sind selbst erzeugte geometrische Studien. Integrationstext in Carousel, Sheet, Galerie und Abschnitte (`docs/integration.md`) ist eine Kopie von `docs/integration.md` für eigenständige Exports; Teaser und Kundenstimmen haben eigene Integrationsverträge; bei Vertragsänderungen alle Kopien aktualisieren. Der Artefaktcheck prüft die Kopien gegen die Quelle.

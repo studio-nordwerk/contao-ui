@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 – 2026-10-02
 
 - Bind consent evidence to the issued token; retain base paths and query strings on POST/redirect.
 - Generate unique field IDs for repeated module renders while preserving the submission identifier.

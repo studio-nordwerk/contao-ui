@@ -16,10 +16,6 @@ composer require nordwerk/contao-teasers-bundle
 php bin/console contao:migrate --no-interaction
 ```
 
-Noch unveröffentlicht: Composer benötigt bis zur ersten Veröffentlichung lokale
-Path-Repositories für `packages/teasers` und `packages/carousel` mit Version
-`0.1.x-dev` (siehe Demo-Manifest). Es wurden keine Pakete veröffentlicht.
-
 News-, Calendar- und Carousel-Bundle werden als Abhängigkeiten installiert.
 Kundenstimmen kommen separat aus `nordwerk/contao-testimonials-bundle`.
 
