@@ -121,8 +121,8 @@ try {
         }
     }
 
-    // Sections: every element once on one page, with the generated studies as pictures.
-    // Logos get their own folder: the gallery demo shows a whole folder
+    // Sections: every element once on one page, with the generated studies as
+    // pictures. Logos get their own folder: the gallery demo shows a whole folder
     // and expects eight studies.
     $logoUuids = [];
     $logoFolder = 'files/contao-ui-sections';
