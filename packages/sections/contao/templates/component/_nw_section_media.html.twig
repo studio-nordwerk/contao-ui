@@ -1,4 +1,4 @@
-{# Picture of a section inside a figure box. Variables: image (UUID), size, class, eager. #}
+{# Picture of a section inside a figure box. Variables: image (UUID), size (the element's own size or the section's default), class, eager. #}
 {% use '@Contao/component/_picture.html.twig' %}
 {% set picture = image ? figure(image, size, {options: {img_attr: eager|default(false) ? {loading: 'eager', fetchpriority: 'high'} : {loading: 'lazy'}}}) : null %}
 {% if picture %}

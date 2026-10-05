@@ -3,7 +3,7 @@
 {% block wrapper_tag %}article{% endblock %}
 {% block inner %}
     {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
-    {{ include('@Contao/component/_nw_section_media.html.twig', {image: image, size: [600, 750, 'crop'], class: 'nw-person__image'}) }}
+    {{ include('@Contao/component/_nw_section_media.html.twig', {image: image, size: size ?: [600, 750, 'crop'], class: 'nw-person__image'}) }}
     <div class="nw-person__text">
         {% if plain.name %}<h3>{{ plain.name }}</h3>{% endif %}
         {% if plain.role %}<p class="nw-person__role">{{ plain.role }}</p>{% endif %}

@@ -30,7 +30,7 @@ tl_content:
     - For example "About us".
   nwImage:
     - Picture
-    - Optional. Alt text and caption come from the file manager.
+    - Optional. Alt text and caption come from the file manager. Without a picture size the section's own crop applies.
   nwImagePosition:
     - Picture position
     - Left or right of the text. On phones the picture is always on top.

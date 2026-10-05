@@ -6,22 +6,24 @@ use Nordwerk\SectionsBundle\Section\Icons;
 
 /*
  * Page sections. Each element has a few plain fields; none needs a CSS class.
+ * Pictures and links are optional here, so they keep their own fields: the core
+ * fields singleSRC and url are mandatory. The picture size is the core field.
  * Labels and option names live in translations/contao_tl_content.*.yaml.
  */
 $dca = &$GLOBALS['TL_DCA']['tl_content'];
 $tail = '{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},cssID;{invisible_legend:hide},invisible,start,stop';
 $link = '{link_legend},nwUrl,nwLinkText';
 
-$dca['palettes']['nw_hero'] = '{type_legend},type,nwEyebrow,headline;{text_legend},text;{image_legend},nwImage;'.$link.',nwSecondUrl,nwSecondLinkText;'.$tail;
-$dca['palettes']['nw_page_head'] = '{type_legend},type,nwEyebrow,headline;{text_legend},nwText;{image_legend},nwImage;'.$tail;
+$dca['palettes']['nw_hero'] = '{type_legend},type,nwEyebrow,headline;{text_legend},text;{image_legend},nwImage,size;'.$link.',nwSecondUrl,nwSecondLinkText;'.$tail;
+$dca['palettes']['nw_page_head'] = '{type_legend},type,nwEyebrow,headline;{text_legend},nwText;{image_legend},nwImage,size;'.$tail;
 $dca['palettes']['nw_promises'] = '{type_legend},type;{text_legend},nwLines;'.$tail;
-$dca['palettes']['nw_split'] = '{type_legend},type,headline;{text_legend},text;{image_legend},nwImage,nwImagePosition;'.$link.';'.$tail;
+$dca['palettes']['nw_split'] = '{type_legend},type,headline;{text_legend},text;{image_legend},nwImage,nwImagePosition,size;'.$link.';'.$tail;
 $dca['palettes']['nw_figures'] = '{type_legend},type,headline;{nw_rows_legend},nwFigures,nwNote;'.$tail;
 $dca['palettes']['nw_features'] = '{type_legend},type,headline,nwIntro;{nw_rows_legend},nwFeatures;'.$tail;
 $dca['palettes']['nw_steps'] = '{type_legend},type,headline,nwIntro;{nw_rows_legend},nwSteps;'.$tail;
 $dca['palettes']['nw_team'] = '{type_legend},type,headline,nwIntro;{nw_team_legend},nwTeamLayout,nwNote;'.$tail;
-$dca['palettes']['nw_person'] = '{type_legend},type,nwName,nwRole;{text_legend},nwText;{image_legend},nwImage;'.$tail;
-$dca['palettes']['nw_logos'] = '{type_legend},type,headline;{image_legend},nwLogos;'.$tail;
+$dca['palettes']['nw_person'] = '{type_legend},type,nwName,nwRole;{text_legend},nwText;{image_legend},nwImage,size;'.$tail;
+$dca['palettes']['nw_logos'] = '{type_legend},type,headline;{image_legend},nwLogos,size;'.$tail;
 $dca['palettes']['nw_contact'] = '{type_legend},type,headline;{nw_address_legend},nwName,nwStreet,nwPostal,nwCity,nwPhone,nwEmail;{nw_hours_legend},nwHours,nwHint;{nw_route_legend:hide},nwRouteUrl;'.$tail;
 $dca['palettes']['nw_callout'] = '{type_legend},type,headline;{text_legend},nwText;'.$link.';'.$tail;
 

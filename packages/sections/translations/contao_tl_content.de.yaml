@@ -30,7 +30,7 @@ tl_content:
     - z. B. „Über uns“.
   nwImage:
     - Bild
-    - Optional. Alt-Text und Bildunterschrift kommen aus der Dateiverwaltung.
+    - Optional. Alt-Text und Bildunterschrift kommen aus der Dateiverwaltung. Ohne Bildgröße gilt der Zuschnitt des Abschnitts.
   nwImagePosition:
     - Bild steht
     - Links oder rechts vom Text. Auf dem Handy steht das Bild immer oben.

@@ -48,6 +48,7 @@ final class SectionController extends AbstractContentElementController
         $template->set('primary', $this->link($row['nwUrl'] ?? '', $row['nwLinkText'] ?? ''));
         $template->set('secondary', $this->link($row['nwSecondUrl'] ?? '', $row['nwSecondLinkText'] ?? ''));
         $template->set('image', $this->image($row['nwImage'] ?? null));
+        $template->set('size', $this->size($row['size'] ?? null));
 
         switch ($model->type) {
             case 'nw_promises':
@@ -89,6 +90,19 @@ final class SectionController extends AbstractContentElementController
         $text = Rows::plain($text);
 
         return '' !== $href && '' !== $text ? ['href' => $href, 'text' => $text] : null;
+    }
+
+    /**
+     * The picture size chosen in the element (core field "size"); null keeps the size
+     * the template suggests.
+     *
+     * @return array<mixed>|null
+     */
+    private function size(mixed $value): array|null
+    {
+        $size = StringUtil::deserialize($value, true);
+
+        return [] !== array_filter($size, static fn (mixed $part): bool => '' !== trim((string) $part) && '0' !== (string) $part) ? $size : null;
     }
 
     private function image(mixed $uuid): string|null

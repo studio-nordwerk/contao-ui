@@ -8,7 +8,7 @@
         {% if headline.text %}{% with {headline: headline|merge({tag_name: 'h1'})} %}{{ block('headline_component') }}{% endwith %}{% endif %}
         {% if plain.text %}<p class="nw-page-head__lead">{{ plain.text|nl2br }}</p>{% endif %}
     </div>
-    {{ include('@Contao/component/_nw_section_media.html.twig', {image: image, size: [1600, 610, 'crop'], class: 'nw-page-head__image', eager: true}) }}
+    {{ include('@Contao/component/_nw_section_media.html.twig', {image: image, size: size ?: [1600, 610, 'crop'], class: 'nw-page-head__image', eager: true}) }}
     {% endif %}
 {% endblock %}
 {% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}

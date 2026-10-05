@@ -4,7 +4,7 @@
 {% block wrapper_tag %}section{% endblock %}
 {% block inner %}
     {% if as_editor_view|default(false) %}{{ include('@Contao/component/_nw_sections_preview.html.twig') }}{% else %}
-    {{ include('@Contao/component/_nw_section_media.html.twig', {image: image, size: [900, 675, 'crop'], class: 'nw-split__image'}) }}
+    {{ include('@Contao/component/_nw_section_media.html.twig', {image: image, size: size ?: [900, 675, 'crop'], class: 'nw-split__image'}) }}
     <div class="nw-split__text">
         {% if headline.text %}{{ block('headline_component') }}{% endif %}
         {% if data.text %}{% with {text: data.text, attributes: attrs()} %}{{ block('rich_text_component') }}{% endwith %}{% endif %}

@@ -33,6 +33,9 @@ for (const colorScheme of ["light", "dark"] as const) {
       await expect(page.locator("link[href*='nordwerksections/sections.css']")).toHaveCount(1);
       await expect(page.getByRole("heading", { level: 1 })).toHaveText("Eine kleine Werkstatt.");
       await expect(page.locator(".nw-steps__number")).toHaveText(["1", "2", "3", "4"]);
+      // Without a picture size the section's own crop applies; the second split picks 600 × 450.
+      await expect(page.locator(".nw-split__image img").first()).toHaveAttribute("width", "900");
+      await expect(page.locator(".nw-split__image img").nth(1)).toHaveAttribute("width", "600");
       await expect(page.locator(".nw-features__list svg")).toHaveCount(4);
       await expect(page.locator(".nw-team--grid .nw-person")).toHaveCount(3);
       await expect(page.locator(".nw-team--carousel [data-nw-carousel]")).toHaveAttribute(

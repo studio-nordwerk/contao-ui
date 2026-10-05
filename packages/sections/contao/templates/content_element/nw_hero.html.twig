@@ -10,7 +10,7 @@
         {% if data.text %}{% with {text: data.text, attributes: attrs().addClass('nw-hero__text')} %}{{ block('rich_text_component') }}{% endwith %}{% endif %}
         {{ include('@Contao/component/_nw_section_links.html.twig') }}
     </div>
-    {{ include('@Contao/component/_nw_section_media.html.twig', {image: image, size: [1100, 880, 'crop'], class: 'nw-hero__image', eager: true}) }}
+    {{ include('@Contao/component/_nw_section_media.html.twig', {image: image, size: size ?: [1100, 880, 'crop'], class: 'nw-hero__image', eager: true}) }}
     {% endif %}
 {% endblock %}
 {% block style %}{% if not as_editor_view|default(false) %}{% do nw_sections_assets() %}{% endif %}{% endblock %}

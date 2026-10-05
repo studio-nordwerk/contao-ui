@@ -4,7 +4,7 @@
 
 Zwölf Inhaltselemente für Inhaltsseiten wie „Über uns“, „Kontakt“ oder eine Leistungsseite: Hero, Seitenkopf, Versprechen, Bild und Text, Zahlen, Merkmale, Ablauf, Team mit Personen, Logos, Kontakt und Abschluss-Kachel. Jedes Element hat wenige, klar benannte Felder; CSS-Klassen müssen Redakteure nicht eintippen. Ohne JavaScript, das Team-Karussell nutzt das native [Carousel-Bundle](https://github.com/studio-nordwerk/contao-carousel).
 
-Für Contao **^5.7 || ^6.0**. PHP 8.3+ für 5.7, PHP 8.4+ für 6.0. MIT. Version 0.1.0.
+Für Contao **^5.7 || ^6.0**. PHP 8.3+ für 5.7, PHP 8.4+ für 6.0. MIT. Version 0.1.1.
 
 ![Abschnitte im neutralen Demo-Layout](docs/sections.png)
 

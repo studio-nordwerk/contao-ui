@@ -8,7 +8,7 @@
     {% if logos %}
         <ul class="nw-logos__list">
             {% for logo in logos %}
-                {% set picture = figure(logo, [0, 96, 'proportional'], {options: {img_attr: {loading: 'lazy'}}}) %}
+                {% set picture = figure(logo, size ?: [0, 96, 'proportional'], {options: {img_attr: {loading: 'lazy'}}}) %}
                 {% if picture %}<li>{% with {figure: picture} %}{{ block('figure_component') }}{% endwith %}</li>{% endif %}
             {% endfor %}
         </ul>

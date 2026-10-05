@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 – 2026-10-05
+
+- Hero, page head, picture and text, person and logos offer Contao's picture size field. Left empty, the section keeps its own crop.
+
 ## 0.1.0 – 2026-10-02
 
 - Twelve content elements for content pages: hero, page head, promises, picture and text, figures, features, steps, team with nested people (grid or carousel), logos, contact and closing tile.
