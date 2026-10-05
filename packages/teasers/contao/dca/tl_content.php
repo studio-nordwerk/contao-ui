@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['nw_teaser'] = '{type_legend},type,headline;{nw_teaser_legend},nwTeaserSource,nwTeaserArchives,nwTeaserCategories,nwTeaserMinStars,nwTeaserSort,nwTeaserLimit,nwTeaserLayout,nwTeaserLabel,nwTeaserColumns;{image_legend},size;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},cssID;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['nw_teaser'] = '{type_legend},type,headline;{nw_teaser_legend},nwTeaserSource,nwTeaserArchives,nwTeaserCategories,nwTeaserMinStars,nwTeaserSort,nwTeaserLimit,nwTeaserLayout,nwTeaserColumns,nwTeaserLabel;{image_legend},size;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},cssID;{invisible_legend:hide},invisible,start,stop';
 
 foreach ([
-    'nwTeaserSource' => ['select', "varchar(64) NOT NULL default ''", ['submitOnChange' => true, 'mandatory' => true]],
+    'nwTeaserSource' => ['select', "varchar(64) NOT NULL default ''", ['submitOnChange' => true, 'mandatory' => true, 'tl_class' => 'w50 clr']],
     'nwTeaserArchives' => ['checkbox', 'blob NULL', ['multiple' => true, 'mandatory' => true]],
     'nwTeaserCategories' => ['checkbox', 'blob NULL', ['multiple' => true]],
-    'nwTeaserMinStars' => ['text', "int(10) unsigned NOT NULL default '0'", ['rgxp' => 'digit', 'minval' => 0, 'maxval' => 5]],
-    'nwTeaserSort' => ['select', "varchar(32) NOT NULL default 'date_desc'", []],
-    'nwTeaserLimit' => ['text', "int(10) unsigned NOT NULL default '6'", ['rgxp' => 'digit', 'mandatory' => true, 'minval' => 1, 'maxval' => 100]],
-    'nwTeaserLayout' => ['select', "varchar(16) NOT NULL default 'grid'", []],
-    'nwTeaserLabel' => ['text', "varchar(255) NOT NULL default ''", ['maxlength' => 255, 'mandatory' => true]],
-    'nwTeaserColumns' => ['text', "int(10) unsigned NOT NULL default '3'", ['rgxp' => 'digit', 'mandatory' => true, 'minval' => 1, 'maxval' => 6]],
+    'nwTeaserMinStars' => ['text', "int(10) unsigned NOT NULL default '0'", ['rgxp' => 'digit', 'minval' => 0, 'maxval' => 5, 'tl_class' => 'w50']],
+    'nwTeaserSort' => ['select', "varchar(32) NOT NULL default 'date_desc'", ['tl_class' => 'w50 clr']],
+    'nwTeaserLimit' => ['text', "int(10) unsigned NOT NULL default '6'", ['rgxp' => 'digit', 'mandatory' => true, 'minval' => 1, 'maxval' => 100, 'tl_class' => 'w50']],
+    'nwTeaserLayout' => ['select', "varchar(16) NOT NULL default 'grid'", ['tl_class' => 'w50 clr']],
+    'nwTeaserLabel' => ['text', "varchar(255) NOT NULL default ''", ['maxlength' => 255, 'tl_class' => 'clr long']],
+    'nwTeaserColumns' => ['text', "int(10) unsigned NOT NULL default '3'", ['rgxp' => 'digit', 'mandatory' => true, 'minval' => 1, 'maxval' => 6, 'tl_class' => 'w50']],
 ] as $field => [$input, $sql, $eval]) {
     $GLOBALS['TL_DCA']['tl_content']['fields'][$field] = [
         'label' => &$GLOBALS['TL_LANG']['tl_content'][$field],

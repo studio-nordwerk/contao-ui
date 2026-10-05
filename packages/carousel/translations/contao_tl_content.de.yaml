@@ -2,7 +2,7 @@ tl_content:
   nw_carousel_legend: Carousel
   nwCarouselLabel:
     - "Name für Hilfstechnologien"
-    - "Ein kurzer Name beschreibt diese Bild- oder Inhaltsfolge."
+    - "Ein kurzer Name beschreibt diese Bild- oder Inhaltsfolge. Leer lassen für die Überschrift des Elements."
   nwCarouselSmall:
     - "Slides · schmal"
     - "Anzahl bis 599 px Containerbreite, auch Dezimalzahlen."

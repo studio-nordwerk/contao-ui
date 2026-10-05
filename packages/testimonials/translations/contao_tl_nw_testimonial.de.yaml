@@ -1,23 +1,26 @@
 {
   "tl_nw_testimonial":
     {
-      "name": ["Name", ""],
-      "role": ["Rolle / Firma", ""],
-      "text": ["Erfahrung", ""],
-      "stars": ["Sterne", ""],
-      "date": ["Datum", ""],
-      "singleSRC": ["Bild", ""],
-      "source": ["Quelle / Anlass", ""],
-      "email": ["E-Mail (intern)", ""],
-      "consentedAt": ["Einwilligung am", ""],
-      "consentText": ["Gespeicherte Einwilligung", ""],
-      "provenance": ["Import-Herkunft", ""],
+      "name": ["Name", "Erscheint öffentlich bei der Kundenstimme."],
+      "role": ["Rolle / Firma", "Optional, erscheint unter dem Namen."],
+      "text": ["Erfahrung", "Der veröffentlichte Text, ohne Formatierung."],
+      "stars": ["Sterne", "Optional, 1 bis 5."],
+      "date": ["Datum", "Bestimmt die Reihenfolge „Neueste zuerst“."],
+      "singleSRC": ["Bild", "Optional, zum Beispiel ein Porträt."],
+      "source":
+        ["Quelle / Anlass", "Optional, zum Beispiel „Workshop im Mai“. Erscheint bei der Karte."],
+      "email": ["E-Mail (intern)", "Für Rückfragen. Wird nie veröffentlicht."],
+      "consentedAt": ["Einwilligung am", "Zeitpunkt der Einwilligung aus dem Formular."],
+      "consentText":
+        ["Gespeicherte Einwilligung", "Wortlaut, dem beim Einreichen zugestimmt wurde."],
+      "provenance":
+        ["Import-Herkunft", "Technische Angaben eines Imports, nur zum Nachvollziehen."],
       "reviewNotes":
         [
           "Prüfvermerk",
           "Herkunft, Veröffentlichungsrechte und Prüfung dokumentieren. Dieser Vermerk bleibt intern.",
         ],
-      "published": ["Veröffentlicht", ""],
+      "published": ["Veröffentlicht", "Erst danach erscheint die Kundenstimme auf der Website."],
       "title_legend": "Kundenstimme",
       "review_legend": "Prüfung und Datenschutz",
       "publish_legend": "Veröffentlichung",

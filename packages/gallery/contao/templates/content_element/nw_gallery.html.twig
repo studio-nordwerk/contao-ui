@@ -1,10 +1,11 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
 
 {% block content %}
+    {% set gallery_label = data.nwGalleryLabel|default(headline.text|default('nw.gallery.images'|trans)) %}
     {% if as_editor_view %}
-        {{ include('@Contao/component/_nw_gallery_icon.html.twig') }} <strong>{{ data.nwGalleryLabel }}</strong>
+        {{ include('@Contao/component/_nw_gallery_icon.html.twig') }} <strong>{{ gallery_label }}</strong>
         <p>{{ 'nw.gallery.count'|trans({'%count%': images|length}) }}</p>
     {% else %}
-    {{ include('@Contao/component/_nw_gallery.html.twig', {gallery_id: 'nw-gallery-' ~ data.id, gallery_label: data.nwGalleryLabel, gallery_images: images, gallery_lightbox: data.fullsize and not as_editor_view}) }}
+    {{ include('@Contao/component/_nw_gallery.html.twig', {gallery_id: 'nw-gallery-' ~ data.id, gallery_label: gallery_label, gallery_images: images, gallery_lightbox: data.fullsize and not as_editor_view}) }}
     {% endif %}
 {% endblock %}

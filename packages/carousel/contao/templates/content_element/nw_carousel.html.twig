@@ -2,7 +2,7 @@
 
 {% block content %}
     {% if as_editor_view %}
-        {{ include('@Contao/component/_nw_carousel_icon.html.twig') }} <strong>{{ data.nwCarouselLabel }}</strong>
+        {{ include('@Contao/component/_nw_carousel_icon.html.twig') }} <strong>{{ data.nwCarouselLabel|default(headline.text|default('Carousel')) }}</strong>
         {% for fragment in nested_fragments %}{{ content_element(fragment) }}{% endfor %}
     {% else %}
     {% embed '@Contao/component/_nw_carousel.html.twig' with {

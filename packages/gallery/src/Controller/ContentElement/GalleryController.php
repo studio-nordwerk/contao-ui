@@ -31,6 +31,11 @@ final class GalleryController extends AbstractContentElementController
             shuffle($images);
         }
 
+        // Core field "numberOfItems": 0 shows all pictures.
+        if (($limit = (int) $model->numberOfItems) > 0) {
+            $images = \array_slice($images, 0, $limit);
+        }
+
         $layout = $model->row()['nwGalleryLayout'] ?? 'grid';
         $template->set('images', $images);
         $template->set('gallery_layout', \in_array($layout, ['grid', 'mosaic', 'rail'], true) ? $layout : 'grid');

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 – 2026-10-05
+
+- The element and the module show only the filters of the chosen source: news categories with the Codefog extension, stars for testimonials.
+- Plain help texts, compact two-column form, and the list name is optional (falls back to the headline).
+
 ## 0.1.0 – 2026-10-02
 
 - Apply Contao news/calendar archive permissions to backend choices.

@@ -4,7 +4,7 @@
 
 Beliebige Contao-Inhalte als native Scroll-Snap-Slides, ohne Swiper, jQuery oder JavaScript-Laufzeitabhängigkeiten. Bereits das Server-Markup ist scrollbar; wenige kB JavaScript ergänzen Pfeile, Punkte, Mausziehen und pausierbares Autoplay.
 
-Für Contao **^5.7 || ^6.0**. PHP 8.3+ für 5.7, PHP 8.4+ für 6.0. MIT. Version 0.1.0.
+Für Contao **^5.7 || ^6.0**. PHP 8.3+ für 5.7, PHP 8.4+ für 6.0. MIT. Version 0.1.1.
 
 ## Installation
 

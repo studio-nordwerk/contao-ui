@@ -6,6 +6,7 @@ namespace Nordwerk\TeasersBundle\Rendering;
 
 use Contao\CoreBundle\Image\Studio\Studio;
 use Contao\CoreBundle\Twig\FragmentTemplate;
+use Contao\StringUtil;
 use Nordwerk\TeasersBundle\Query\TeaserQuery;
 use Nordwerk\TeasersBundle\Source\SourceRegistry;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,7 +48,8 @@ final class TeaserRenderer
         $layout = $data['nwTeaserLayout'] ?? 'grid';
         $template->set('cards', $cards);
         $template->set('teaser_id', $id);
-        $template->set('teaser_label', (string) ($data['nwTeaserLabel'] ?? 'Teaser'));
+        // Without an own name the list is called like its headline.
+        $template->set('teaser_label', trim((string) ($data['nwTeaserLabel'] ?? '')) ?: trim((string) (StringUtil::deserialize($data['headline'] ?? null, true)['value'] ?? '')) ?: 'Teaser');
         $template->set('teaser_layout', \in_array($layout, ['grid', 'list', 'carousel'], true) ? $layout : 'grid');
         $template->set('teaser_columns', max(1, min(6, (int) ($data['nwTeaserColumns'] ?? 3))));
         $response = $template->getResponse();

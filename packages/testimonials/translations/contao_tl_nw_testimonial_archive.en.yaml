@@ -1,7 +1,7 @@
 {
   "tl_nw_testimonial_archive":
     {
-      "title": ["Archive name", ""],
+      "title": ["Archive name", "Internal name, for example “Shop testimonials”."],
       "verification":
         ["Public review policy", "Whether and how experiences are checked; shown with cards."],
       "title_legend": "Archive",

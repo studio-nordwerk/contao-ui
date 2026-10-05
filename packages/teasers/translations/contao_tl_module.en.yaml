@@ -1,19 +1,24 @@
 {
   "tl_module":
     {
-      "nwTeaserSource": ["Source", "A tagged source service."],
+      "nwTeaserSource":
+        ["Source", "Where the entries come from, e.g. news, events or testimonials."],
       "nwTeaserArchives":
-        ["Archives / calendars", "After changing the source, save a new archive selection."],
+        [
+          "Archives / calendars",
+          "Archives or calendars of the chosen source. Pick them again after changing the source.",
+        ],
       "nwTeaserCategories":
         [
           "News categories",
-          "Optional Codefog News Categories; selected categories are combined with OR.",
+          "Optional, with the Codefog News Categories extension. Entries from at least one chosen category appear.",
         ],
-      "nwTeaserMinStars": ["Minimum stars", "Testimonials only; 0 includes unrated entries."],
+      "nwTeaserMinStars": ["Minimum stars", "0 includes unrated entries."],
       "nwTeaserSort": ["Sort order", "Events are always chronological (or ordered by title)."],
       "nwTeaserLimit": ["Number of entries", "Between 1 and 100 entries."],
       "nwTeaserLayout": ["Layout", "Grid, list or carousel."],
-      "nwTeaserLabel": ["Accessible label", "Accessible name of the list."],
+      "nwTeaserLabel":
+        ["Accessible label", "Accessible name of the list. Leave empty to use the headline."],
       "nwTeaserColumns": ["Columns", "Between 1 and 6 columns on wide screens."],
       "nw_teaser_legend": "Teasers",
       "nwTeaserSortOptions":

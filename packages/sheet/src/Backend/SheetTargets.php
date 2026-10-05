@@ -44,7 +44,7 @@ final class SheetTargets
     {
         $options = [];
 
-        foreach (ModuleModel::findBy('type', 'navigation', ['order' => 'name']) ?? [] as $model) {
+        foreach (ModuleModel::findBy(['type IN (?, ?)'], ['navigation', 'customnav'], ['order' => 'name']) ?? [] as $model) {
             if (!$this->security->isGranted(ContaoCorePermissions::DC_PREFIX.'tl_module', new ReadAction('tl_module', $model->row()))) {
                 continue;
             }

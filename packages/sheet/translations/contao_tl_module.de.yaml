@@ -9,7 +9,7 @@ tl_module:
     close: "Schließen"
   nwSheetNavigation:
     - "Navigationsmodul"
-    - "Ein vorhandenes Kern-Navigationsmodul einbinden."
+    - "Ein vorhandenes Modul „Navigationsmenü“ oder „Individuelle Navigation“ einbinden."
   nwSheetPresentation:
     - "Darstellung"
     - "Die Seitenleisten folgen der Schreibrichtung."

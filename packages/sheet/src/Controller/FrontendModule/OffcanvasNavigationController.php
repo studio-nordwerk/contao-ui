@@ -18,7 +18,7 @@ final class OffcanvasNavigationController extends AbstractFrontendModuleControll
     protected function getResponse(FragmentTemplate $template, ModuleModel $model, Request $request): Response
     {
         $navigation = ModuleModel::findById((int) ($model->row()['nwSheetNavigation'] ?? null));
-        if (!$navigation || 'navigation' !== $navigation->type) {
+        if (!$navigation || !\in_array($navigation->type, ['navigation', 'customnav'], true)) {
             return new Response();
         }
 

@@ -1,10 +1,16 @@
 {
   "tl_module":
     {
-      "nwTestimonialArchive": ["Target archive", ""],
-      "nwTestimonialRecipient": ["Notification recipient", ""],
-      "nwTestimonialConsent": ["Consent text", ""],
-      "nwTestimonialPrivacy": ["Privacy page", ""],
+      "nwTestimonialArchive":
+        ["Target archive", "Archive that receives new submissions, unpublished."],
+      "nwTestimonialRecipient":
+        ["Notification recipient", "Email address that is notified about a new submission."],
+      "nwTestimonialConsent":
+        [
+          "Consent text",
+          "Text next to the mandatory checkbox. It is stored with every submission.",
+        ],
+      "nwTestimonialPrivacy": ["Privacy page", "Page with the privacy notice the form links to."],
       "nw_testimonial_legend": "Submission and privacy",
     },
 }

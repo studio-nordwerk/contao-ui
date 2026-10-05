@@ -1,16 +1,19 @@
 {
   "tl_module":
     {
-      "nwTeaserSource": ["Quelle", "Ein getaggter Quellendienst."],
+      "nwTeaserSource":
+        ["Quelle", "Woher die Einträge kommen, z. B. Nachrichten, Termine oder Kundenstimmen."],
       "nwTeaserArchives":
-        ["Archive / Kalender", "Nach einem Quellenwechsel die Auswahl neu speichern."],
+        [
+          "Archive / Kalender",
+          "Archive oder Kalender der gewählten Quelle. Nach einem Quellenwechsel neu auswählen.",
+        ],
       "nwTeaserCategories":
         [
           "Nachrichtenkategorien",
-          "Optional: Codefog News Categories; ausgewählte Kategorien werden mit ODER verknüpft.",
+          "Optional, mit der Erweiterung „News Categories“ von Codefog. Einträge aus mindestens einer gewählten Kategorie erscheinen.",
         ],
-      "nwTeaserMinStars":
-        ["Mindestens Sterne", "Nur Kundenstimmen; 0 zeigt auch Einträge ohne Sterne."],
+      "nwTeaserMinStars": ["Mindestens Sterne", "0 zeigt auch Einträge ohne Sterne."],
       "nwTeaserSort":
         [
           "Sortierung",
@@ -18,7 +21,8 @@
         ],
       "nwTeaserLimit": ["Anzahl", "1 bis 100 Einträge."],
       "nwTeaserLayout": ["Ansicht", "Raster, Liste oder Carousel."],
-      "nwTeaserLabel": ["Bezeichnung", "Zugänglicher Name der Liste."],
+      "nwTeaserLabel":
+        ["Bezeichnung", "Zugänglicher Name der Liste. Leer lassen für die Überschrift."],
       "nwTeaserColumns": ["Spalten", "Auf breiten Bildschirmen, 1 bis 6."],
       "nw_teaser_legend": "Teaser",
       "nwTeaserSortOptions":

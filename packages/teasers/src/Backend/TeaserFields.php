@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Nordwerk\TeasersBundle\Backend;
 
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 use Contao\DataContainer;
 use Doctrine\DBAL\Connection;
@@ -17,6 +18,29 @@ final class TeaserFields
         private readonly TranslatorInterface $translator,
         private readonly Connection $connection,
     ) {
+    }
+
+    /**
+     * Shows only the filters the chosen source knows: news categories need the
+     * Codefog extension, stars belong to testimonials.
+     */
+    #[AsCallback(table: 'tl_content', target: 'config.onload')]
+    #[AsCallback(table: 'tl_module', target: 'config.onload')]
+    public function adjustPalette(DataContainer $dc): void
+    {
+        if (!$dc->id || !isset($GLOBALS['TL_DCA'][$dc->table]['palettes']['nw_teaser'])) {
+            return;
+        }
+        $source = (string) ($this->connection->fetchOne('SELECT nwTeaserSource FROM '.$dc->table.' WHERE id = ?', [(int) $dc->id]) ?: '');
+        $palette = PaletteManipulator::create();
+
+        if ('news' !== $source || [] === $this->categories()) {
+            $palette->removeField('nwTeaserCategories');
+        }
+        if ('testimonials' !== $source) {
+            $palette->removeField('nwTeaserMinStars');
+        }
+        $palette->applyToPalette('nw_teaser', $dc->table);
     }
 
     /**

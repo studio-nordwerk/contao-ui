@@ -248,6 +248,10 @@ test("new templates and German teaser settings are available in the backend", as
     await expect(page.locator(`[name="nwTeaserSource"] option[value="${value}"]`)).toHaveCount(1);
   }
   await expect(page.locator(".tl_error")).toHaveCount(0);
+  // Filters follow the source: stars belong to testimonials only.
+  await expect(page.locator('[name="nwTeaserLimit"]')).toHaveCount(1);
+  await expect(page.locator('[name="nwTeaserMinStars"]')).toHaveCount(0);
+  await expect(page.locator('[name="nwTeaserLabel"]')).not.toHaveAttribute("required");
 });
 
 test("protected local images are omitted from public cards", async ({ page }) => {

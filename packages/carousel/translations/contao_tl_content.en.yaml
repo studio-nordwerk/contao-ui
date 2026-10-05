@@ -2,7 +2,7 @@ tl_content:
   nw_carousel_legend: Carousel
   nwCarouselLabel:
     - "Accessible name"
-    - "A short name describes this sequence."
+    - "A short name describes this sequence. Leave empty to use the element's headline."
   nwCarouselSmall:
     - "Slides · small"
     - "Count below 600 px container width; fractions allowed."

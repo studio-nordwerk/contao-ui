@@ -4,7 +4,7 @@
 
 Contaos responsive Bilder und Dateimetadaten als Raster, wechselnde Formate oder native Bilderleiste, ohne Swiper, jQuery oder JavaScript-Laufzeitabhängigkeiten. Die Sheet-Lightbox ergänzt Tastatur und Wischen; ohne JavaScript bleiben Bilder und Links nutzbar.
 
-Für Contao **^5.7 || ^6.0**. PHP 8.3+ für 5.7, PHP 8.4+ für 6.0. MIT. Version 0.1.0.
+Für Contao **^5.7 || ^6.0**. PHP 8.3+ für 5.7, PHP 8.4+ für 6.0. MIT. Version 0.1.1.
 
 ## Installation
 

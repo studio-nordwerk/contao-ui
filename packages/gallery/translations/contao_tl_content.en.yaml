@@ -1,6 +1,10 @@
 tl_content:
   nw_gallery_legend: Gallery
-  nwGalleryLabel: [Gallery label, Accessible name of the gallery and lightbox.]
+  nwGalleryLabel:
+    [
+      Gallery label,
+      "Accessible name of the gallery and lightbox. Leave empty to use the element's headline.",
+    ]
   nwGalleryLayout: [Layout, Grid or varied formats or horizontal rail.]
   nwGalleryOptions:
     grid: Grid

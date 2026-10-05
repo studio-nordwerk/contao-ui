@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 – 2026-10-05
+
+- Help texts for every field of the form module, the testimonial and the archive.
+
 ## 0.1.0 – 2026-10-02
 
 - Bind consent evidence to the issued token; retain base paths and query strings on POST/redirect.

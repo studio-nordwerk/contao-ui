@@ -1,10 +1,20 @@
 {
   "tl_module":
     {
-      "nwTestimonialArchive": ["Zielarchiv", ""],
-      "nwTestimonialRecipient": ["Benachrichtigung an", ""],
-      "nwTestimonialConsent": ["Einwilligungstext", ""],
-      "nwTestimonialPrivacy": ["Datenschutzseite", ""],
+      "nwTestimonialArchive":
+        ["Zielarchiv", "Archiv, in dem neue Einreichungen unveröffentlicht landen."],
+      "nwTestimonialRecipient":
+        [
+          "Benachrichtigung an",
+          "E-Mail-Adresse, die bei einer neuen Einreichung benachrichtigt wird.",
+        ],
+      "nwTestimonialConsent":
+        [
+          "Einwilligungstext",
+          "Text neben dem Pflicht-Häkchen. Er wird mit jeder Einreichung gespeichert.",
+        ],
+      "nwTestimonialPrivacy":
+        ["Datenschutzseite", "Seite mit den Datenschutzhinweisen, auf die das Formular verlinkt."],
       "nw_testimonial_legend": "Einreichung und Datenschutz",
     },
 }

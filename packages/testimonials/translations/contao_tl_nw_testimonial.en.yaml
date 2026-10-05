@@ -1,23 +1,24 @@
 {
   "tl_nw_testimonial":
     {
-      "name": ["Name", ""],
-      "role": ["Role / company", ""],
-      "text": ["Experience", ""],
-      "stars": ["Stars", ""],
-      "date": ["Date", ""],
-      "singleSRC": ["Image", ""],
-      "source": ["Source / occasion", ""],
-      "email": ["Email (private)", ""],
-      "consentedAt": ["Consent date", ""],
-      "consentText": ["Recorded consent", ""],
-      "provenance": ["Import provenance", ""],
+      "name": ["Name", "Shown publicly with the testimonial."],
+      "role": ["Role / company", "Optional, shown below the name."],
+      "text": ["Experience", "The published text, without formatting."],
+      "stars": ["Stars", "Optional, 1 to 5."],
+      "date": ["Date", "Defines the order “newest first”."],
+      "singleSRC": ["Image", "Optional, for example a portrait."],
+      "source":
+        ["Source / occasion", "Optional, for example “workshop in May”. Shown with the card."],
+      "email": ["Email (private)", "For questions. Never published."],
+      "consentedAt": ["Consent date", "Time of the consent given in the form."],
+      "consentText": ["Recorded consent", "Wording that was agreed to on submission."],
+      "provenance": ["Import provenance", "Technical details of an import, for traceability only."],
       "reviewNotes":
         [
           "Review notes",
           "Document origin, publication rights and review. These notes remain private.",
         ],
-      "published": ["Published", ""],
+      "published": ["Published", "Only then the testimonial appears on the website."],
       "title_legend": "Testimonial",
       "review_legend": "Review and privacy",
       "publish_legend": "Publication",
