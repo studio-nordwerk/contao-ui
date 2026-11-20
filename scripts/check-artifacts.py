@@ -39,6 +39,9 @@ with tempfile.TemporaryDirectory(prefix='contao-ui-artifacts-') as directory:
             assert manifest['version'] == '0.1.0-dev'
             assert manifest['type'] == 'contao-bundle' and manifest['license'] == 'MIT'
             assert manifest['require']['contao/core-bundle'] == '^5.7 || ^6.0'
+            # Contao standard: the manager plugin is only needed in the Manager edition, so require-dev plus conflict.
+            assert 'contao/manager-plugin' not in manifest['require'], f'{name}: contao/manager-plugin belongs in require-dev'
+            assert manifest['require-dev']['contao/manager-plugin'] == '^2.0' and manifest['conflict']['contao/manager-plugin'] == '<2.0 || >=3.0', name
             if name == 'gallery':
                 assert all(f'nordwerk/contao-{dependency}-bundle' in manifest['require'] for dependency in ('carousel', 'sheet'))
             elif name == 'sections':
