@@ -1,3 +1,10 @@
+> **Archiviert (20.11.2026).** Die Bundles werden im internen Monorepo von Studio Nordwerk entwickelt und als
+> schreibgeschützte Repos veröffentlicht: [contao-carousel](https://github.com/studio-nordwerk/contao-carousel),
+> [contao-sheet](https://github.com/studio-nordwerk/contao-sheet), [contao-gallery](https://github.com/studio-nordwerk/contao-gallery),
+> [contao-sections](https://github.com/studio-nordwerk/contao-sections), [contao-teasers](https://github.com/studio-nordwerk/contao-teasers),
+> [contao-testimonials](https://github.com/studio-nordwerk/contao-testimonials). Fehler und Wünsche:
+> [contao-pakete](https://github.com/studio-nordwerk/contao-pakete/issues).
+
 # Contao UI
 
 Native Bausteine für Contao: Carousel, Dialog / Sheet, Galerie, Abschnitte für Inhaltsseiten sowie Teaser und Kundenstimmen. CSS Scroll-Snap und `<dialog>`, ohne Swiper oder jQuery. Die veröffentlichten OSS-Assets liegen versioniert in den Paketen; Contao-Nutzer benötigen keinen Node-Build.
